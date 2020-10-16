@@ -1,0 +1,174 @@
+/* Navbar */
+.navbar-brand {
+    font-family: Viga;
+    font-size: 32px;
+}
+
+.tombol {
+    text-transform: uppercase;
+    border-radius: 40px;
+}
+
+.jumbotronhome {
+    background-image: url("/images/bg/Jumbotron.png");
+    background-size: cover;
+    height: 600px;
+}
+
+.jumbotronhome .display-4 {
+    color: #ffc178;
+    text-align: left;
+    font-weight: 200;
+    margin-top: 120px;
+}
+.jumbotronhome .display-4 span {
+    font-weight: 500;
+}
+
+.info-panelbiodata span {
+    font-weight: 600;
+    font-weight: bold;
+    font-style: italic;
+}
+.info-panelbiodata p {
+    color: black;
+    text-align: left;
+    font-weight: 200;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.jumbotronuser {
+    background-image: url("/images/bg/bgu.png");
+    background-size: cover;
+    height: 400px;
+    border-bottom-right-radius: 50px;
+}
+
+.info-panelfoto {
+    padding: 20px;
+    text-align: center;
+    margin-top: -150px;
+}
+.info-panelfoto img {
+    height: 200px;
+    width: 200px;
+    border-radius: 150px;
+}
+.viewall a {
+    color: #ffc178;
+    text-transform: uppercase;
+    text-align: center;
+}
+.modal-footer button {
+    border-radius: 40px;
+    font-family: Viga;
+    text-transform: uppercase;
+}
+
+.info-panelbiodata {
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: white;
+    padding: 20px;
+}
+
+.info-panelbiodata img {
+    height: 80px;
+    width: 80px;
+}
+.info-panel {
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: -110px;
+}
+.info-panel img {
+    height: 80px;
+    width: 80px;
+}
+.info-panel a {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    padding-top: 10px;
+}
+
+.info-panelview {
+    font-size: 16px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: -175px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.info-panelviewall {
+    font-size: 16px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+.info-panelview button {
+    color: black;
+    text-transform: uppercase;
+    text-align: right;
+    margin: 5px, 5px, 1px, 5px;
+    border-radius: 20px;
+}
+.kartubox {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border: 1px;
+    margin-top: 10px;
+    margin-left: 45px;
+    margin-right: 45px;
+}
+.warnaku {
+    background-color: #ffc178;
+}
+.kotakku {
+    font-size: 40px;
+}
+.kotakku span {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+/* Desktop Version */
+@media (min-width: 992px) {
+    .navku {
+        text-transform: uppercase;
+        margin-right: 30px;
+    }
+    .navkutombol {
+        text-transform: uppercase;
+        margin-right: 30px;
+    }
+
+    .navku:hover::after {
+        content: "";
+        display: block;
+        border-bottom: 3px solid #0b63dc;
+        width: 50%;
+        margin: auto;
+        padding-bottom: 5px;
+        margin-bottom: -8px;
+    }
+    .jumbotron {
+        margin-top: -75px;
+    }
+
+    .dropdownku {
+        text-transform: uppercase;
+        margin-right: 30px;
+    }
+
+    .gambar {
+        height: 200px;
+        width: 100%;
+    }
+}
