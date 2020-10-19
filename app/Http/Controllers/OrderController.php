@@ -16,10 +16,49 @@ class OrderController extends Controller
         $produk = Produk::all();
         return view('users.order', ['produk' => $produk]);
     }
+    public function orderbd()
+    {
+
+        $order = Order::where('status', '=', 'Menunggu Diproses')->get();
+        return view('admin.orderbd', ['order' => $order]);
+    }
+
+    public function updatetosd($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Sedang Diproses";
+        $order->save();
+        return redirect('/orderbd');
+    }
+
+    public function updatetops($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Pesanan Selesai";
+        $order->save();
+        return redirect('/ordersd');
+    }
+
+    public function ordersd()
+    {
+        $order = Order::where('status', '=', 'Sedang Diproses')->get();
+        return view('admin.ordersd', ['order' => $order]);
+    }
+
+    public function orderps()
+    {
+        $order = Order::where('status', '=', 'Pesanan Selesai')->get();
+        return view('admin.orderps', ['order' => $order]);
+    }
+
+    public function indexorder()
+    {
+        $order = Order::all();
+        return view('admin.indexorder', ['order' => $order]);
+    }
 
     public function addProductCart(Request $request, $id)
     {
-
         $produk = Produk::find($id);
     }
     public function create(Request $request)

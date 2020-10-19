@@ -15,7 +15,6 @@ class CartController extends Controller
     {
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-
         return view('users.cart', ['cart' => $cart], ['photo' => $photo]);
     }
 
@@ -45,11 +44,20 @@ class CartController extends Controller
         $order = new Order;
         $order->nomerpesanan = "#O" . date("Ymds") . auth()->user()->id;
         $order->users_id = auth()->user()->id;
-        $order->status = "Belum Diproses";
-        $order->save();
+        $order->status = "Menunggu Diproses";
 
         $jumlah_arr = $request->jumlah;
         $array_len = count($jumlah_arr);
+
+        $total = 0;
+        for ($i = 0; $i < $array_len; $i++) {
+            $produk = Produk::find($request->produk_id[$i]);
+            $total = $total + ($request->jumlah[$i] * $produk->harga);
+        }
+        echo $total;
+        $order->total = $total;
+
+        $order->save();
 
 
         for ($i = 0; $i < $array_len; $i++) {

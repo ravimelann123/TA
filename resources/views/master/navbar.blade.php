@@ -53,6 +53,7 @@
         <div class="navbar-nav ml-auto">
 
             <a class=" nav-item nav-link navku" href="/dashboard">Home</a>
+            <a class=" nav-item nav-link navku" href="/indexorder">Daftar Penjualan</a>
 
             <li class="nav-item dropdown dropdownku">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
