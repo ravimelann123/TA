@@ -1,7 +1,7 @@
 @extends('master.masterlayout')
 @section('content')
 
-<div class="row justify-content-center ">
+<div class="row justify-content-center">
 
     <div class="col-md-12">
         <div class="card" style="min-height:85vh">

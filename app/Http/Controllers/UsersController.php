@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Session;
 class UsersController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $datausers = Users::all();
+
+        if ($request->has('cari')) {
+            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->get();
+        } else {
+            $datausers = Users::all();
+        }
         return view('admin.users', ['datausers' => $datausers]);
     }
 
@@ -30,11 +35,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'username' => 'required|min:8',
             'password' => 'required|min:8',
-            'email' => 'required|unique:akun',
-            'nama' => 'required',
             'role' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|max:12|numeric',
         ]);
 
         $data = $request->all();
@@ -46,12 +47,9 @@ class UsersController extends Controller
 
         $akun = new Akun;
         $akun->users_id = $users->id;
-        $akun->nama = $data['nama'];
-        $akun->email = $data['email'];
-        $akun->nohp = $data['nohp'];
-        $akun->alamat = $data['alamat'];
+        $akun->nama = "Default";
         $akun->save();
-        return redirect('users');
+        return redirect('/users');
     }
 
     public function edit($id)

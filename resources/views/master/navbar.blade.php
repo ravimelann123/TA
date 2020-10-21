@@ -61,8 +61,8 @@
                     Master
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/akun">Akun</a>
-                    <a class="dropdown-item" href="/users">Users</a>
+                    <a class="dropdown-item" href="/akun">Biodata</a>
+                    <a class="dropdown-item" href="/users">Akun</a>
                     <a class="dropdown-item" href="/produk">Produk</a>
                     <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
 

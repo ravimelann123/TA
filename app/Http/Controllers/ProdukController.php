@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 class ProdukController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $produk = Produk::all();
+
+        if ($request->has('cari')) {
+            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
+        } else {
+            $produk = Produk::all();
+        }
+
         return view('admin.produk', ['produk' => $produk]);
     }
 

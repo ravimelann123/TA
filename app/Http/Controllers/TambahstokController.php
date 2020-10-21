@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 class TambahstokController extends Controller
 {
 
-    public function indextambahstok()
+    public function indextambahstok(Request $request)
     {
         $produk = Produk::all();
-        $tambahstok = Tambahstok::all();
+        if ($request->has('cari')) {
+            $tambahstok = Tambahstok::where('produk_id', 'LIKE', '%' . $request->cari . '%')->get();
+        } else {
+            $tambahstok = Tambahstok::all();
+        }
+
         return view('admin.tambah_stokproduk', ['produk' => $produk], ['tambahstok' => $tambahstok]);
     }
     public function index()
@@ -23,8 +28,6 @@ class TambahstokController extends Controller
 
     public function create(Request $request)
     {
-
-
         $data = $request->all();
         $tambahstok = new Tambahstok;
         $tambahstok->produk_id = $data['produk_id'];

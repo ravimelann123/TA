@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class AkunController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dataakun = Akun::all();
+
+        if ($request->has('cari')) {
+            $dataakun = Akun::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
+        } else {
+            $dataakun = Akun::all();
+        }
+
         return view('admin.Akun', ['dataakun' => $dataakun]);
     }
 
