@@ -6,22 +6,34 @@
             <form method="GET" action="/akun">
                 <div class="card-header bg-white">
                     <div class="row">
-                        <div class="col-md-1">
-
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                             <h3>Biodata</h3>
                         </div>
-                        <div class="col-md-4"><input type="text" name="cari" class="form-control" placeholder="Cari"
-                                style="border-radius: 20px">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary" style="border-radius: 20px">Cari</button>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="cari" placeholder="Cari"
+                                    style="border-bottom-left-radius: 20px;border-top-left-radius: 20px">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button"
+                                        style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Cari</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </form>
             <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Biodata</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -56,22 +68,11 @@
                     </div>
 
                 </div>
+                <div class="row mt-2">
+                    <div class="col">{{$dataakun->links()}}</div>
+                </div>
             </div>
-            <div class="card-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
         </div>
     </div>
 </div>

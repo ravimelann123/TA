@@ -7,24 +7,47 @@
                 <div class="card-header bg-white">
                     <div class="row">
                         <div class="col-md-1 text-right">
-                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i
-                                    class="lnr lnr-plus-circle"></i>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"
+                                style="border-radius: 15px"><i class="lnr lnr-plus-circle"></i>
                             </button>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-7">
                             <h3>Buat Akun</h3>
                         </div>
-                        <div class="col-md-4"><input type="text" name="cari" class="form-control" placeholder="Cari"
-                                style="border-radius: 20px">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="cari" placeholder="Cari"
+                                    style="border-bottom-left-radius: 20px;border-top-left-radius: 20px">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button"
+                                        style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Cari</button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary" style="border-radius: 20px">Cari</button>
-                        </div>
+
                     </div>
                 </div>
             </form>
             <div class="card-body">
-
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Akun</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                @if(session('sukses'))
+                <div class="alert alert-success" role="alert">
+                    {{session('sukses')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -45,8 +68,9 @@
                                     <td>
                                         <a href="/users/edit/{{ $p->id }}" class="btn btn-warning"
                                             style="border-radius: 15px"><i class="lnr lnr-pencil"></i></a>
-                                        <a href="/users/hapus/{{ $p->id }}" class="btn btn-danger"
+                                        <a href="#" class="btn btn-danger delete" users-id="{{$p->id}}"
                                             style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
+                                        {{-- /users/hapus/{{ $p->id }} --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -56,22 +80,11 @@
                     </div>
 
                 </div>
+                <div class="row mt-2">
+                    <div class="col">{{$datausers->links()}}</div>
+                </div>
             </div>
-            <div class="card-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
         </div>
     </div>
 </div>
@@ -140,4 +153,30 @@
 {{-- END MODAL --}}
 
 
-@endsection
+@stop
+
+@section('footer')
+<script>
+    $('.delete').click(function(){
+                var users_id = $(this).attr('users-id');
+                swal({
+        title: "Yakin?",
+        text: "Mau dihapus data user dengan id "+ users_id+"??",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            window.location = "/users/hapus/"+users_id+"";
+
+        } else {
+
+            window.location = "/users";
+
+        }
+        });
+
+    });
+</script>
+@stop

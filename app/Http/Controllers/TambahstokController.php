@@ -13,9 +13,9 @@ class TambahstokController extends Controller
     {
         $produk = Produk::all();
         if ($request->has('cari')) {
-            $tambahstok = Tambahstok::where('produk_id', 'LIKE', '%' . $request->cari . '%')->get();
+            $tambahstok = Tambahstok::where('produk_id', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $tambahstok = Tambahstok::all();
+            $tambahstok = Tambahstok::paginate(5);
         }
 
         return view('admin.tambah_stokproduk', ['produk' => $produk], ['tambahstok' => $tambahstok]);

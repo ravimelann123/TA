@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light">
 
-    <a class="navbar-brand" href="#">Bolu RM</a>
+    <a class="navbar-brand" href="/dashboard">Bolu RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@
 @if(auth()->user()->role=='admin')
 <nav class="navbar navbar-expand-lg navbar-light">
 
-    <a class="navbar-brand" href="#">Bolu RM</a>
+    <a class="navbar-brand" href="/dashboard">Bolu RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -53,11 +53,11 @@
         <div class="navbar-nav ml-auto">
 
             <a class=" nav-item nav-link navku" href="/dashboard">Home</a>
-            <a class=" nav-item nav-link navku" href="/indexorder">Daftar Penjualan</a>
+
 
             <li class="nav-item dropdown dropdownku">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle content-center" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Master
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,9 +65,9 @@
                     <a class="dropdown-item" href="/users">Akun</a>
                     <a class="dropdown-item" href="/produk">Produk</a>
                     <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
-
                 </div>
             </li>
+            <a class=" nav-item nav-link navku" href="/indexorder">Daftar Penjualan</a>
             <a class="nav-item  btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out</a>
 
         </div>

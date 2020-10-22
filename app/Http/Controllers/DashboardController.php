@@ -8,6 +8,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('master.masterlayout');
+
+        if (auth()->user()->role == "admin") {
+            return view('admin.dashboard');
+        } else {
+            return view('users.dashboard');
+        }
     }
 }

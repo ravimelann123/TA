@@ -13,9 +13,9 @@ class AkunController extends Controller
     {
 
         if ($request->has('cari')) {
-            $dataakun = Akun::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
+            $dataakun = Akun::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $dataakun = Akun::all();
+            $dataakun = Akun::paginate(5);
         }
 
         return view('admin.Akun', ['dataakun' => $dataakun]);

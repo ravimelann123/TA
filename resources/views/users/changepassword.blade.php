@@ -2,10 +2,11 @@
 @section('content')
 {{-- JUMBOTRON  --}}
 <div class="jumbotron jumbotron-fluid jumbotronuser">
-    <div class="container">
-    </div>
+
 </div>
 {{-- END JUMBOTRON --}}
+
+
 <div class="row justify-content-center">
     <div class="col-4 info-panel">
         <div class="row">
@@ -47,4 +48,6 @@
             </div>
         </div>
     </div>
-</div> @endsection
+</div>
+
+@endsection

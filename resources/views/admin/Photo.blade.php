@@ -6,27 +6,30 @@
             <form method="GET" action="/photoproduk">
                 <div class="card-header bg-white">
                     <div class="row">
-                        <div class="col-md-1 text-right">
-                            <a href="/produk" class="btn btn-danger"><i class="lnr lnr-chevron-left"></i>
-                            </a>
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md">
                             <h3>Detail Foto</h3>
                         </div>
-                        <div class="col-md-6">
-                        </div>
-
                     </div>
                 </div>
             </form>
             <div class="card-body">
-
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Photo Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
                             <thead class="thead-white">
                                 <tr>
-
+                                    <th>nama</th>
                                     <th>Image</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -34,7 +37,7 @@
                             <tbody>
                                 @foreach($photo as $p)
                                 <tr>
-
+                                    <td>{{$p->namafoto}}</td>
                                     <td><img src="/images/produk/{{$p->namafoto}}" width="125" height="125"></td>
                                     <td>
                                         <a href="" class="btn btn-warning" data-toggle="modal"
@@ -52,22 +55,11 @@
                     </div>
 
                 </div>
+                <div class="row mt-2">
+                    <div class="col">{{$photo->links()}}</div>
+                </div>
             </div>
-            <div class="card-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
         </div>
     </div>
 </div>

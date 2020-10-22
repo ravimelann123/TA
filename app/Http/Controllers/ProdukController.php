@@ -14,9 +14,9 @@ class ProdukController extends Controller
     {
 
         if ($request->has('cari')) {
-            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
+            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $produk = Produk::all();
+            $produk = Produk::paginate(5);
         }
 
         return view('admin.produk', ['produk' => $produk]);
@@ -25,7 +25,7 @@ class ProdukController extends Controller
     public function photoproduk($id)
     {
         //$produk_id = $id;
-        $photo = Photo::where('produk_id', '=', $id)->get();
+        $photo = Photo::where('produk_id', '=', $id)->paginate(5);
         return view('admin.Photo', ['photo' => $photo]);
     }
 

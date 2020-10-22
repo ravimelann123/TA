@@ -18,9 +18,9 @@ class UsersController extends Controller
     {
 
         if ($request->has('cari')) {
-            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->get();
+            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $datausers = Users::all();
+            $datausers = Users::paginate(5);
         }
         return view('admin.users', ['datausers' => $datausers]);
     }
@@ -106,6 +106,6 @@ class UsersController extends Controller
         $akun = Akun::find($users_id);
         $users->delete();
         $akun->delete();
-        return redirect('/users');
+        return redirect('/users')->with('sukses', 'Data Berhasil Dihapus');
     }
 }
