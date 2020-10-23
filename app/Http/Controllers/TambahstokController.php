@@ -38,7 +38,7 @@ class TambahstokController extends Controller
         $produk = Produk::find($request->produk_id);
         $produk->stok = $produk->stok + $request->stok;
         $produk->save();
-        return redirect('/tambahstok');
+        return redirect('/tambahstok')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
 
@@ -74,6 +74,6 @@ class TambahstokController extends Controller
         $produk->stok = $produk->stok - $tambahstok->stok;
         $produk->save();
         $tambahstok->delete();
-        return redirect('/tambahstok');
+        return redirect('/tambahstok')->with('sukses', 'Data Berhasil Dihapus');
     }
 }

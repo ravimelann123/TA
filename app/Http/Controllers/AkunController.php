@@ -44,7 +44,7 @@ class AkunController extends Controller
             $akun->avatar = $request->file('avatar')->getClientOriginalName();
             $akun->save();
         }
-        return redirect('/akun');
+        return redirect('/akun')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function indexmyprofile()

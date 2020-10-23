@@ -54,7 +54,7 @@ class PhotoController extends Controller
             $photo->namafoto = $nama->getClientOriginalName();
             echo $photo->namafoto;
             $photo->save();
-            return Redirect::back();
+            return Redirect::back()->with('sukses', 'Data Berhasil Dirubah');
         }
     }
 
@@ -63,6 +63,6 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($id);
         $photo->delete();
-        return Redirect::back();
+        return Redirect::back()->with('sukses', 'Data Berhasil Dihapus');
     }
 }

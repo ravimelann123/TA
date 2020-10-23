@@ -24,6 +24,14 @@
                         </nav>
                     </div>
                 </div>
+                @if(session('sukses'))
+                <div class="alert alert-success" role="alert">
+                    {{session('sukses')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -40,12 +48,9 @@
                                     <td>{{$p->namafoto}}</td>
                                     <td><img src="/images/produk/{{$p->namafoto}}" width="125" height="125"></td>
                                     <td>
-                                        <a href="" class="btn btn-warning" data-toggle="modal"
-                                            data-target="#exampleModal" style="border-radius: 15px"><i
-                                                class="lnr lnr-pencil"></i></a>
-                                        <a href="/photoproduk/hapus/{{$p->id}}" class="btn btn-danger"
-                                            style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
 
+                                        <a href="#" class="btn btn-danger delete" photo-id="{{$p->id}}"
+                                            style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -63,42 +68,32 @@
         </div>
     </div>
 </div>
-{{-- MODAL --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/photoproduk/edit/{{$p->id}}" method="POST" enctype="multipart/form-data">
-
-                    {{ csrf_field() }}
-
-                    <div class="form-group row {{$errors->has('namafoto') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Upload Image</label>
-                        <div class="col-sm-8">
-                            <input type="file" name="namafoto" class=" form-control-file">
-                            @if($errors->has('namafoto'))
-                            <span class="help-block">{{$errors->first('namafoto')}}</span>
-                            @endif
-                        </div>
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</div>
-{{-- END MODAL --}}
 
 
-@endsection
+@stop
+
+@section('footer')
+<script>
+    $('.delete').click(function(){
+                var photo_id = $(this).attr('photo-id');
+                swal({
+        title: "Yakin?",
+        text: "Mau dihapus data user dengan id "+ photo_id+"??",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            window.location = "/photoproduk/hapus/"+photo_id+"";
+
+        } else {
+
+            window.location = "/users";
+
+        }
+        });
+
+    });
+</script>
+@stop

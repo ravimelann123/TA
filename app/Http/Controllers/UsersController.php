@@ -49,7 +49,7 @@ class UsersController extends Controller
         $akun->users_id = $users->id;
         $akun->nama = "Default";
         $akun->save();
-        return redirect('/users');
+        return redirect('/users')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class UsersController extends Controller
         $users->password = bcrypt($request->password);
         $users->role = $request->role;
         $users->save();
-        return redirect('/users');
+        return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');;
     }
 
     public function UpdatePassword(Request $request)

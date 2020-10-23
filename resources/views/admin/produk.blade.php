@@ -23,7 +23,6 @@
                                         style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Cari</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -39,6 +38,14 @@
                         </nav>
                     </div>
                 </div>
+                @if(session('sukses'))
+                <div class="alert alert-success" role="alert">
+                    {{session('sukses')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -64,7 +71,7 @@
 
                                         <a href="/produk/edit/{{ $p->id }}" class="btn btn-warning"
                                             style="border-radius: 15px"><i class="lnr lnr-pencil"></i></a>
-                                        <a href="/produk/hapus/{{ $p->id }}" class="btn btn-danger"
+                                        <a href="#" produk-id="{{$p->id}}" class="btn btn-danger delete"
                                             style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
                                     </td>
                                 </tr>
@@ -147,12 +154,39 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+
             </div>
+            </form>
         </div>
 
     </div>
 </div>
 {{-- END MODAL --}}
 
-@endsection
+@stop
+
+@section('footer')
+<script>
+    $('.delete').click(function(){
+                var produk_id = $(this).attr('produk-id');
+                swal({
+        title: "Yakin?",
+        text: "Mau dihapus data user dengan id "+ produk_id+"??",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            window.location = "/produk/hapus/"+produk_id+"";
+
+        } else {
+
+            window.location = "/produk";
+
+        }
+        });
+
+    });
+</script>
+@stop
