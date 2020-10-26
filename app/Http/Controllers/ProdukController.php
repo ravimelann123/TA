@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Produk;
 use App\Photo;
+use App\Cart;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -20,6 +21,14 @@ class ProdukController extends Controller
         }
 
         return view('admin.produk', ['produk' => $produk]);
+    }
+
+    public function indexproduk(Request $request)
+    {
+
+        $photo = Photo::groupBy('produk_id')->get();
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        return view('users.produk', ['cart' => $cart], ['photo' => $photo]);
     }
 
     public function photoproduk($id)
@@ -47,7 +56,7 @@ class ProdukController extends Controller
                 $namafoto = $image_array[$i]->getClientOriginalName();
                 $image_array[$i]->move('images/produk/', $namafoto);
                 $photo = new Photo();
-                echo $namafoto;
+
                 $photo->namafoto = $namafoto;
                 $photo->produk_id = $produk->id;
                 $photo->save();

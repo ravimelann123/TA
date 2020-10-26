@@ -16,11 +16,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari"
-                                    style="border-bottom-left-radius: 20px;border-top-left-radius: 20px">
+                                <input type="text" class="form-control" name="cari" placeholder="Cari">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"
-                                        style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Cari</button>
+                                    <button class="btn btn-primary" type="button">Cari</button>
                                 </div>
                             </div>
 

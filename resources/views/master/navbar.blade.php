@@ -10,16 +10,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-            <a class=" nav-item nav-link navku" href="/dashboard">Home</a>
+
+            <a class=" nav-item nav-link navku" href="/cart"><i class="lnr lnr-cart">
+                </i><span class="badge badge-primary">{{auth()->user()->id}}</span>
+            </a>
             <li class="nav-item dropdown dropdownku">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Pesanan
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/cart">Pesan</a>
-                    <a class="dropdown-item" href="/changepassword">s</a>
-
+                    <a class="dropdown-item" href="/allproduk">Produk</a>
                 </div>
             </li>
             <li class="nav-item dropdown dropdownku">
@@ -28,10 +29,9 @@
                     Pengaturan
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/myprofile">My Profile</a>
-                    <a class="dropdown-item" href="/changepassword">Change Password</a>
+                    <a class="dropdown-item" href="/myprofile">Profil Saya</a>
+                    <a class="dropdown-item" href="/changepassword">Rubah Kata Sandi</a>
                     <a class="dropdown-item" href="/order">Pesan Langsung</a>
-
                 </div>
             </li>
             <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out</a>
@@ -74,5 +74,6 @@
     </div>
 
 </nav>
+
 @endif
 <!-- END NAVBAR -->

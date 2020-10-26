@@ -38,12 +38,14 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/changepassword', 'UsersController@IndexPassword');
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
     Route::get('/order', 'OrderController@index');
-    Route::post('/order/create', 'OrderController@create');
+    Route::get('/order', 'OrderController@index');
+    Route::get('/transaksi', 'OrderController@indextransaksi');
     Route::get('/cart', 'CartController@index');
     Route::post('/cart/addproduk/{id}', 'CartController@addprodukcart');
     Route::post('/ordercart/{id}', 'CartController@indexcart');
     Route::get('/clearcart', 'CartController@deletecart');
     Route::get('/clearcartitem/{id}', 'CartController@deletecartitem');
+    Route::get('/allproduk', 'ProdukController@indexproduk');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
@@ -56,6 +58,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     Route::get('/produk', 'ProdukController@index');
     Route::post('/produk/create', 'ProdukController@create');
+    Route::post('/photo/create', 'PhotoController@create');
 
     Route::get('/produk/edit/{id}', 'ProdukController@edit');
     Route::put('/produk/update/{id}', 'ProdukController@update');

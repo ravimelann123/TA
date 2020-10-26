@@ -23,31 +23,43 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Log In</h5>
+                <h5 class="modal-title">Log In</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="form-inline" action="/postlogin" method="POST">
+            <form class="form-inline" action="/postlogin" method="POST">
+                <div class="modal-body">
                     {{ csrf_field() }}
-                    <div class="input-group mx-auto">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text lnr lnr-user" id=""></span>
+                    <div class="row mb-2">
+                        <div class="col-md">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text lnr lnr-user" id=""></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="username" name="username">
+                            </div>
                         </div>
-                        <input type="text" class="form-control" placeholder="username" name="username">
                     </div>
-                    <div class="input-group mx-auto mt-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text lnr lnr-lock" id=""></span>
+                    <div class="row mb-2">
+                        <div class="col-md">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text lnr lnr-lock" id=""></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="password" name="password">
+                            </div>
                         </div>
-                        <input type="password" class="form-control" placeholder="password" name="password">
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Go</button>
-                </form>
-            </div>
+                    <div class="row">
+                        <div class="col-md text-right">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 20px">Go</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
         </div>
     </div>
 </div>

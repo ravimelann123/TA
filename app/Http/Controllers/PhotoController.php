@@ -25,10 +25,25 @@ class PhotoController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        //
+
+        if ($request->hasFile('namafoto')) {
+            $image_array = $request->file('namafoto');
+            $array_len = count($image_array);
+
+            for ($i = 0; $i < $array_len; $i++) {
+                $namafoto = $image_array[$i]->getClientOriginalName();
+                $image_array[$i]->move('images/produk/', $namafoto);
+                $photo = new Photo();
+                $photo->namafoto = $namafoto;
+                $photo->produk_id = $request->id;
+                $photo->save();
+            }
+            return redirect::back()->with('sukses', 'Data Berhasil Ditambahkan');
+        }
     }
+
 
 
     public function show(Photo $photo)

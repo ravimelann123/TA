@@ -93,9 +93,11 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function indextransaksi(Request $request)
     {
-        //
+        $order = Order::latest();
+        dd($order);
+        //return view('users.transaksi', ['order' => $order]);
     }
 
     /**

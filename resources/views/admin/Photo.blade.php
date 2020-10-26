@@ -6,6 +6,11 @@
             <form method="GET" action="/photoproduk">
                 <div class="card-header bg-white">
                     <div class="row">
+                        <div class="col-md-1 text-right">
+                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"
+                                style="border-radius: 15px"><i class="lnr lnr-plus-circle"></i>
+                            </button>
+                        </div>
                         <div class="col-md">
                             <h3>Detail Foto</h3>
                         </div>
@@ -69,7 +74,46 @@
     </div>
 </div>
 
+{{-- MODAL --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/photo/create" method="POST" enctype="multipart/form-data">
 
+                    {{ csrf_field() }}
+
+
+                    <div class="form-group row {{$errors->has('namafoto') ? 'has-error' : ''}}">
+                        <label class="col-4 col-form-label">Foto</label>
+                        <div class="col-sm-8">
+                            <input type="hidden" name="id" value="{{$p->produk_id}}">
+                            <input type="file" name="namafoto[]" class=" form-control-file" multiple>
+                            @if($errors->has('namafoto'))
+                            <span class="help-block">{{$errors->first('namafoto')}}</span>
+                            @endif
+                        </div>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{{-- END MODAL --}}
 @stop
 
 @section('footer')

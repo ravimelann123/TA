@@ -26,14 +26,14 @@ class CartController extends Controller
         $hasil = count($cart);
 
         if ($hasil == 1) {
-            return redirect('/cart');
+            return redirect('/dashboard')->with('sukses', 'Produk ini sudah ada di keranjang');
         } else {
             $cart = new Cart;
             $cart->produk_id = $id;
             $cart->jumlah = 1;
             $cart->users_id = auth()->user()->id;
             $cart->save();
-            return redirect('/cart');
+            return redirect('/dashboard')->with('sukses', 'Produk Berhasil Ditambahkan Ke Keranjang');
         }
     }
 
@@ -54,7 +54,7 @@ class CartController extends Controller
             $produk = Produk::find($request->produk_id[$i]);
             $total = $total + ($request->jumlah[$i] * $produk->harga);
         }
-        echo $total;
+
         $order->total = $total;
 
         $order->save();
@@ -67,13 +67,17 @@ class CartController extends Controller
             $orderdetail->jumlah = $request->jumlah[$i];
             $orderdetail->save();
             $produk = Produk::find($request->produk_id[$i]);
-            $produk->stok = $produk->stok - $request->jumlah[$i];
+            if ($request->jumlah[$i] == null) {
+                $produk->stok = $produk->stok - 1;
+            } else {
+                $produk->stok = $produk->stok - $request->jumlah[$i];
+            }
             $produk->save();
         }
 
         Cart::where('users_id', '=', auth()->user()->id)->delete();
 
-        return redirect('/cart');
+        return redirect('/transaksi');
     }
 
 

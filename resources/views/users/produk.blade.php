@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md">
             <div class="card">
                 <form method="GET" action="/dashboard">
@@ -13,11 +13,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="cari" placeholder="Cari"
-                                        style="border-bottom-left-radius: 20px;border-top-left-radius: 20px">
+                                    <input type="text" class="form-control" name="cari" placeholder="Cari">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button"
-                                            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Cari</button>
+                                        <button class="btn btn-primary" type="button">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -30,8 +28,8 @@
                         <div class="col">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-
-                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Produk</li>
                                 </ol>
                             </nav>
                         </div>

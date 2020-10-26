@@ -72,7 +72,7 @@ class UsersController extends Controller
         $users->password = bcrypt($request->password);
         $users->role = $request->role;
         $users->save();
-        return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');;
+        return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function UpdatePassword(Request $request)
@@ -89,7 +89,7 @@ class UsersController extends Controller
                 $users = Users::find(auth()->user()->id);
                 $users->password = bcrypt($data['passwordbaru']);
                 $users->save();
-                return redirect('/settings');
+                return redirect('/changepassword')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
                 return redirect()->back();
             }
