@@ -53,6 +53,7 @@
                             <thead class="thead-white">
                                 <tr>
                                     <th>Username</th>
+                                    {{-- <th>test</th> --}}
                                     {{-- <th>Pasword</th> --}}
                                     <th>Role</th>
                                     <th>OPSI</th>
@@ -62,6 +63,7 @@
                                 @foreach($datausers as $p)
                                 <tr>
                                     <td>{{ $p->username }}</td>
+                                    {{-- <td>{{ $p->akun->nama }}</td> --}}
                                     {{-- <td>{{ $p->password }}</td> --}}
                                     <td>{{ $p->role }}</td>
                                     <td>

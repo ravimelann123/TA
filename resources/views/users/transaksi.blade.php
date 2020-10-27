@@ -13,14 +13,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-
-                            @foreach($order as $p)
-                            {{$p->id}}
-                            @endforeach
-
+                            {{ $order->nomerpesanan }}
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col">
                             <table class="table table-sm">
@@ -32,12 +27,29 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
+
+                                @php
+                                $grandTotal = 0;
+                                $total = 0;
+                                @endphp
+                                @foreach($orderd as $p)
                                 <tbody>
+                                    <tr>
+                                        @php
+                                        $total = $p->jumlah * $p->produk->harga;
+                                        $grandTotal += $total;
+                                        @endphp
+                                        <td> {{$p->produk->nama}}</td>
+                                        <td>{{$p->jumlah}}</td>
+                                        <td>{{$p->produk->harga}}</td>
+                                        <td>{{$p->jumlah * $p->produk->harga}}</td>
+                                    </tr>
 
                                 </tbody>
+                                @endforeach
+                                {{ $grandTotal }}
                             </table>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col">

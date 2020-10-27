@@ -96,8 +96,9 @@ class OrderController extends Controller
     public function indextransaksi(Request $request)
     {
         $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
-        echo $order;
-        //return view('users.transaksi', ['order' => $order]);
+        $orderd = OrderDetail::where('order_id', '=', $order->id)->get();
+        $produk = Produk::all();
+        return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd]);
     }
 
     /**
