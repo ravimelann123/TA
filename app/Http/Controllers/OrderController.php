@@ -95,8 +95,8 @@ class OrderController extends Controller
      */
     public function indextransaksi(Request $request)
     {
-        $order = Order::latest();
-        dd($order);
+        $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
+        echo $order;
         //return view('users.transaksi', ['order' => $order]);
     }
 
