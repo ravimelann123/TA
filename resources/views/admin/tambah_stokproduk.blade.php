@@ -146,27 +146,46 @@
 @section('footer')
 <script>
     $('.delete').click(function(){
-                var tambahstok_id = $(this).attr('tambahstok-id');
-                swal({
+        var tambahstok_id = $(this).attr('tambahstok-id');
+        Swal.fire({
         title: "Yakin?",
         text: "Mau dihapus data user dengan id "+ tambahstok_id+"??",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
-                icon: "success",
-                buttons: false,
-            });
-            setTimeout(function(){ window.location = "/tambahstok/hapus/"+tambahstok_id+""; }, 1000);
-        } else {
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Batal'
+        }).then((result) => {
+        if (result.isConfirmed) {
 
-            window.location = "/tambahstok";
 
+
+
+        // toast
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-        });
+        })
+
+        Toast.fire({
+        icon: 'success',
+        title: "Data Berhasil Dihapus"
+        })
+
+        setTimeout(function(){ window.location = "/tambahstok/hapus/"+tambahstok_id+""; }, 250);
+
+        }else{
+            window.location = "/tambahstok";
+        }
+        })
 
     });
 </script>
