@@ -156,8 +156,11 @@
         })
         .then((willDelete) => {
         if (willDelete) {
-            window.location = "/tambahstok/hapus/"+tambahstok_id+"";
-
+            swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+                buttons: false,
+            });
+            setTimeout(function(){ window.location = "/tambahstok/hapus/"+tambahstok_id+""; }, 1000);
         } else {
 
             window.location = "/tambahstok";
