@@ -9,9 +9,3 @@
 </script>
 <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-{{-- toastr --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    $('.toast').toast('show');
-</script>

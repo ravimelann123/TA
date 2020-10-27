@@ -160,7 +160,7 @@
 
         } else {
 
-            window.location = "/users";
+            window.location = "/tambahstok";
 
         }
         });

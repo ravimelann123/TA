@@ -11,4 +11,3 @@
 {{-- toastr --}}
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 {{-- css sendiri --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
