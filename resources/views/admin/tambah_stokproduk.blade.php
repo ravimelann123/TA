@@ -37,51 +37,52 @@
                         </nav>
                     </div>
                 </div>
-                @if(session('sukses'))
+                {{-- @if(session('sukses'))
                 <div class="alert alert-success" role="alert">
                     {{session('sukses')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-                <div class="row">
-                    <div class="col table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Stok Bertambah</th>
-                                    <th>Penanggung jawab</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( $tambahstok as $p)
-                                <tr>
-
-                                    <td>{{$p->produk->nama}}</td>
-                                    <td>{{$p->stok}}</td>
-                                    <td>{{$p->users->akun->nama}}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger delete" tambahstok-id="{{$p->id}}"
-                                            style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-
-                </div>
-                <div class="row mt-2">
-                    <div class="col">{{$tambahstok->links()}}</div>
-                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
+            @endif --}}
+            <div class="row">
+                <div class="col table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Stok Bertambah</th>
+                                <th>Penanggung jawab</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach( $tambahstok as $p)
+                            <tr>
+
+                                <td>{{$p->produk->nama}}</td>
+                                <td>{{$p->stok}}</td>
+                                <td>{{$p->users->akun->nama}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-danger delete" tambahstok-id="{{$p->id}}"
+                                        style="border-radius: 15px"><i class="lnr lnr-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col">{{$tambahstok->links()}}</div>
+            </div>
         </div>
+
     </div>
+</div>
 </div>
 
 {{-- MODAL --}}
@@ -131,7 +132,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary tombol" data-dismiss="modal"
+                    datainfo="{{session('sukses')}}">Close</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
             </form>
@@ -144,12 +146,13 @@
 @stop
 
 @section('footer')
+
 <script>
     $('.delete').click(function(){
         var tambahstok_id = $(this).attr('tambahstok-id');
         Swal.fire({
         title: "Yakin?",
-        text: "Mau dihapus data user dengan id "+ tambahstok_id+"??",
+        text: "Mau dihapus data Tambahstok dengan id "+ tambahstok_id+"??",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -160,25 +163,23 @@
         if (result.isConfirmed) {
 
 
+        // // toast
+        // const Toast = Swal.mixin({
+        // toast: true,
+        // position: 'top-end',
+        // showConfirmButton: false,
+        // timer: 1000,
+        // timerProgressBar: true,
+        // didOpen: (toast) => {
+        //     toast.addEventListener('mouseenter', Swal.stopTimer)
+        //     toast.addEventListener('mouseleave', Swal.resumeTimer)
+        // }
+        // })
 
-
-        // toast
-        const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-        })
-
-        Toast.fire({
-        icon: 'success',
-        title: "Data Berhasil Dihapus"
-        })
+        // Toast.fire({
+        // icon: 'success',
+        // title: "Data Berhasil Dihapus"
+        // })
 
         setTimeout(function(){ window.location = "/tambahstok/hapus/"+tambahstok_id+""; }, 250);
 

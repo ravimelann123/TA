@@ -26,7 +26,7 @@ class CartController extends Controller
         $hasil = count($cart);
 
         if ($hasil == 1) {
-            return redirect('/dashboard')->with('sukses', 'Produk ini sudah ada di keranjang');
+            return redirect('/dashboard')->with('delete', 'Produk ini sudah ada di keranjang');
         } else {
             $cart = new Cart;
             $cart->produk_id = $id;
@@ -77,7 +77,7 @@ class CartController extends Controller
 
         Cart::where('users_id', '=', auth()->user()->id)->delete();
 
-        return redirect('/transaksi');
+        return redirect('/transaksi')->with('sukses', 'Order Berhasil');;
     }
 
 

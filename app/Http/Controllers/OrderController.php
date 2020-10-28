@@ -28,7 +28,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Sedang Diproses";
         $order->save();
-        return redirect('/orderbd');
+        return redirect('/orderbd')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function updatetops($id)
@@ -36,7 +36,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Pesanan Selesai";
         $order->save();
-        return redirect('/ordersd');
+        return redirect('/ordersd')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function ordersd()
@@ -84,7 +84,7 @@ class OrderController extends Controller
             $produk->save();
         }
 
-        return redirect('/order');
+        return redirect('/order')->with('sukses', 'Data Berhasil Disimpan');
     }
 
     /**

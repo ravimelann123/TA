@@ -28,66 +28,67 @@
                         </nav>
                     </div>
                 </div>
-                @if(session('sukses'))
-                <div class="alert alert-success" role="alert">
-                    {{session('sukses')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-                <div class="row">
-                    <div class="col-2">
-                        <div class="row">
-                            <div class="col">
-                                <img src="{{auth()->user()->akun->getAvatar()}}">
-                                <h5>{{auth()->user()->username}}</h5>
+
+                <div class="row ml-1 mr-1">
+                    <div class="col-6">
+                        <div class="row" style="background-color: #e9ecef">
+
+                            <div class="col text-center mt-2">
+                                <img src="{{auth()->user()->akun->getAvatar()}}"
+                                    style="border-radius: 100px; width: 200px; height: 200px;">
+                                <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
                             </div>
                         </div>
+                        <div class="row pt-2 pb-3" style="background-color: #00A0F0;">
 
+                            <div class="col-md text-center">
+                                45 <br><span>My Order</span>
+                            </div>
+                            <div class="col-md text-center">
+                                15 <br><span>
+                                    order complete</span>
+                            </div>
+
+
+
+                        </div>
                     </div>
-                    <div class="col-10">
 
-                        <div class="row mb-3 mt-3">
+
+                    <div class="col-6" style="background-color: #e9ecef">
+                        <div class="row">
                             <div class="col">
-                                <div class="row">
-                                    <div class="col-md">
-                                        45 <br><span>My Order</span>
-                                    </div>
-                                    <div class="col-md">
-                                        15 <br><span>
-                                            order complete</span>
-                                    </div>
-                                </div>
+                                <h4 style="border-bottom: 2px solid gray;">
+                                    Biodata
+                                </h4>
                             </div>
                         </div>
-
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-3">
                                 Nama
                             </div>
-                            <div class="col-10">
+                            <div class="col-9">
                                 {{auth()->user()->akun->nama}}
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 Email
                             </div>
-                            <div class="col-10">
+                            <div class="col-9">
                                 {{auth()->user()->akun->email}}
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 Nomer HP
                             </div>
-                            <div class="col-10">
+                            <div class="col-9">
                                 {{auth()->user()->akun->nohp}}
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 Alamat
                             </div>
-                            <div class="col-10">
+                            <div class="col-9">
                                 {{auth()->user()->akun->alamat}}
                             </div>
                         </div>

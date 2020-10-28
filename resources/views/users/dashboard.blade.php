@@ -36,14 +36,7 @@
                             </nav>
                         </div>
                     </div>
-                    @if(session('sukses'))
-                    <div class="alert alert-success" role="alert">
-                        {{session('sukses')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
+
                     <div class="row">
                         <div class="card-deck">
                             @foreach ( $photo as $p)

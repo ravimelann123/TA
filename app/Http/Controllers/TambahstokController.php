@@ -74,6 +74,6 @@ class TambahstokController extends Controller
         $produk->stok = $produk->stok - $tambahstok->stok;
         $produk->save();
         $tambahstok->delete();
-        return redirect('/tambahstok')->with('sukses', 'Data Berhasil Dihapus');
+        return redirect('/tambahstok')->with('delete', 'Data Berhasil Dihapus');
     }
 }

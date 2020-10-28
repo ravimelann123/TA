@@ -78,6 +78,6 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($id);
         $photo->delete();
-        return Redirect::back()->with('sukses', 'Data Berhasil Dihapus');
+        return Redirect::back()->with('delete', 'Data Berhasil Dihapus');
     }
 }

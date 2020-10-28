@@ -106,6 +106,6 @@ class UsersController extends Controller
         $akun = Akun::find($users_id);
         $users->delete();
         $akun->delete();
-        return redirect('/users')->with('sukses', 'Data Berhasil Dihapus');
+        return redirect('/users')->with('delete', 'Data Berhasil Dihapus');
     }
 }

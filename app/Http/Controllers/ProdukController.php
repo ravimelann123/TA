@@ -102,6 +102,6 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->delete();
         $photo = Photo::where('produk_id', '=', $id)->delete();
-        return redirect('/produk')->with('sukses', 'Data Berhasil Dihapus');
+        return redirect('/produk')->with('delete', 'Data Berhasil Dihapus');
     }
 }

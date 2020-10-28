@@ -39,14 +39,7 @@
                         </nav>
                     </div>
                 </div>
-                @if(session('sukses'))
-                <div class="alert alert-success" role="alert">
-                    {{session('sukses')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
+
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -157,26 +150,29 @@
 @stop
 
 @section('footer')
+
 <script>
     $('.delete').click(function(){
-                var users_id = $(this).attr('users-id');
-                swal({
+        var users_id = $(this).attr('users-id');
+        Swal.fire({
         title: "Yakin?",
         text: "Mau dihapus data user dengan id "+ users_id+"??",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-            window.location = "/users/hapus/"+users_id+"";
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Batal'
+        }).then((result) => {
+        if (result.isConfirmed) {
 
-        } else {
 
+        setTimeout(function(){ window.location = "/users/hapus/"+users_id+""; }, 250);
+
+        }else{
             window.location = "/users";
-
         }
-        });
+        })
 
     });
 </script>

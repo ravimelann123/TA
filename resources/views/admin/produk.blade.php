@@ -36,14 +36,7 @@
                         </nav>
                     </div>
                 </div>
-                @if(session('sukses'))
-                <div class="alert alert-success" role="alert">
-                    {{session('sukses')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
+
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover">
@@ -166,24 +159,25 @@
 @section('footer')
 <script>
     $('.delete').click(function(){
-                var produk_id = $(this).attr('produk-id');
-                swal({
+        var produk_id = $(this).attr('produk-id');
+        Swal.fire({
         title: "Yakin?",
-        text: "Mau dihapus data user dengan id "+ produk_id+"??",
+        text: "Mau dihapus data produk dengan id "+ produk_id+"??",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-            window.location = "/produk/hapus/"+produk_id+"";
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Batal'
+        }).then((result) => {
+        if (result.isConfirmed) {
 
-        } else {
+        setTimeout(function(){ window.location = "/produk/hapus/"+produk_id+""; }, 250);
 
+        }else{
             window.location = "/produk";
-
         }
-        });
+        })
 
     });
 </script>
