@@ -13,7 +13,7 @@ class PhotoController extends Controller
     {
 
 
-        $photo = Photo::take(3)->groupBy('produk_id')->get();
+        $photo = Photo::take(6)->groupBy('produk_id')->get();
 
         return view('auths.login', ['photo' => $photo]);
     }

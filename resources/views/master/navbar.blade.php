@@ -1,7 +1,7 @@
 {{-- NAVBAR USER--}}
 @if(auth()->user()->role=='user')
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <a class="navbar-brand" href="/dashboard">Bolu RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -12,7 +12,7 @@
         <div class="navbar-nav ml-auto">
 
             <a class=" nav-item nav-link navku" href="/cart"><i class="lnr lnr-cart">
-                </i><span class="badge badge-primary">{{auth()->user()->id}}</span>
+                </i><span class="badge badge-primary">{{$totalcart}}</span>
             </a>
             <li class="nav-item dropdown dropdownku">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -42,7 +42,7 @@
 @endif
 {{-- NAVBAR ADMIN--}}
 @if(auth()->user()->role=='admin')
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <a class="navbar-brand" href="/dashboard">Bolu RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"

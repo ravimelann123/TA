@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use App\Produk;
-
+use App\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +14,10 @@ class OrderController extends Controller
     public function index()
     {
         $produk = Produk::all();
-        return view('users.order', ['produk' => $produk]);
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+
+        $totalcart = count($cart);
+        return view('users.order', ['produk' => $produk, 'totalcart' => $totalcart]);
     }
     public function orderbd()
     {
@@ -54,13 +57,11 @@ class OrderController extends Controller
     public function indexorder()
     {
         $order = Order::all();
+
         return view('admin.indexorder', ['order' => $order]);
     }
 
-    public function addProductCart(Request $request, $id)
-    {
-        $produk = Produk::find($id);
-    }
+
     public function create(Request $request)
     {
         $order = new Order;
@@ -98,7 +99,10 @@ class OrderController extends Controller
         $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
         $orderd = OrderDetail::where('order_id', '=', $order->id)->get();
         $produk = Produk::all();
-        return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd]);
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+
+        $totalcart = count($cart);
+        return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd, 'totalcart' => $totalcart]);
     }
 
     /**

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Akun;
+use App\Order;
 use App\Users;
+use App\Cart;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -79,6 +81,13 @@ class AkunController extends Controller
 
     public function myprofile()
     {
-        return view('users.profileuser');
+        $order = Order::where('users_id', '=', auth()->user()->id)->where('status', '!=', 'Pesanan Selesai')->get();
+        $totalorder = count($order);
+        $order1 = Order::where('users_id', '=', auth()->user()->id)->where('status', '=', 'Pesanan Selesai')->get();
+        $selesai = count($order1);
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+
+        $totalcart = count($cart);
+        return view('users.profileuser', ['totalorder' => $totalorder, 'selesai' => $selesai, 'totalcart' => $totalcart]);
     }
 }

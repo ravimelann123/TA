@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Crypt;
 use App\Users;
 use App\Akun;
+use App\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,12 +23,17 @@ class UsersController extends Controller
         } else {
             $datausers = Users::paginate(5);
         }
-        return view('admin.users', ['datausers' => $datausers]);
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+
+        $totalcart = count($cart);
+        return view('admin.users', ['datausers' => $datausers, 'totalcart' => $totalcart]);
     }
 
     public function indexpassword()
     {
-        return view('users.changepassword');
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $totalcart = count($cart);
+        return view('users.changepassword', ['totalcart' => $totalcart]);
     }
 
     public function create(Request $request)

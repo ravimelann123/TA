@@ -19,8 +19,9 @@ class ProdukController extends Controller
         } else {
             $produk = Produk::paginate(5);
         }
-
-        return view('admin.produk', ['produk' => $produk]);
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $totalcart = count($cart);
+        return view('admin.produk', ['produk' => $produk, 'totalcart' => $totalcart]);
     }
 
     public function indexproduk(Request $request)
@@ -28,7 +29,8 @@ class ProdukController extends Controller
 
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        return view('users.produk', ['cart' => $cart], ['photo' => $photo]);
+        $totalcart = count($cart);
+        return view('users.produk', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart]);
     }
 
     public function photoproduk($id)

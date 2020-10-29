@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-3">
         <div class="col-md">
             <div class="card">
                 <form method="GET" action="/dashboard">
@@ -65,6 +65,7 @@
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>

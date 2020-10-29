@@ -18,7 +18,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cari" placeholder="Cari">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">Cari</button>
+                                    <button class="btn btn-primary" type=" button"><i
+                                            class="fas fa-search"></i></button>
                                 </div>
                             </div>
 
@@ -161,25 +162,6 @@
         cancelButtonText: 'Batal'
         }).then((result) => {
         if (result.isConfirmed) {
-
-
-        // // toast
-        // const Toast = Swal.mixin({
-        // toast: true,
-        // position: 'top-end',
-        // showConfirmButton: false,
-        // timer: 1000,
-        // timerProgressBar: true,
-        // didOpen: (toast) => {
-        //     toast.addEventListener('mouseenter', Swal.stopTimer)
-        //     toast.addEventListener('mouseleave', Swal.resumeTimer)
-        // }
-        // })
-
-        // Toast.fire({
-        // icon: 'success',
-        // title: "Data Berhasil Dihapus"
-        // })
 
         setTimeout(function(){ window.location = "/tambahstok/hapus/"+tambahstok_id+""; }, 250);
 

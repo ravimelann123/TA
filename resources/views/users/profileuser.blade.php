@@ -42,11 +42,11 @@
                         <div class="row pt-2 pb-3" style="background-color: #00A0F0;">
 
                             <div class="col-md text-center">
-                                45 <br><span>My Order</span>
+                                {{$totalorder}}<br><span>Pesanan Saya</span>
                             </div>
                             <div class="col-md text-center">
-                                15 <br><span>
-                                    order complete</span>
+                                {{$selesai}}<br><span>
+                                    Pesanan Selesai</span>
                             </div>
 
 

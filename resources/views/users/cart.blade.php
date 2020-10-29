@@ -50,11 +50,11 @@
                                         <tr>
                                             <td>{{$c->produk->nama}} <input type="hidden" name="produk_id[]"
                                                     value="{{$c->produk_id}}" class="form-control"></td>
-                                            <td><input type="number" name="jumlah[]" style="width:100px;"
+                                            <td><input type="text" name="jumlah[]" style="width:100px;"
                                                     placeholder=" {{$c->jumlah}}" class="form-control"></td>
                                             <td>Rp. {{$c->produk->harga}}</td>
-                                            <td class="text-right"> <a href="/clearcartitem/{{$c->id}}"
-                                                    class="btn btn-danger" style="border-radius: 15px">
+                                            <td class="text-right"> <a href="/clearcartitem/{{$c->id}}" class="btn"
+                                                    style="border-radius: 15px; color: red;">
                                                     <i class="lnr lnr-cross"></i></a></td>
                                         </tr>
                                         @endforeach
@@ -68,7 +68,7 @@
                     <div class="row">
                         <div class="col text-right">
                             <button class="btn btn-primary" style="border-radius: 15px">
-                                Pay</button>
+                                Pesan</button>
                         </div>
                     </div>
                     </form>

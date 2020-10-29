@@ -1,5 +1,5 @@
 {{-- NAVBAR LOGIN--}}
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <a class="navbar-brand" href="#">Bolu RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"

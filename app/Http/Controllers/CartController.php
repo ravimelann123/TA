@@ -15,7 +15,9 @@ class CartController extends Controller
     {
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        return view('users.cart', ['cart' => $cart], ['photo' => $photo]);
+
+        $totalcart = count($cart);
+        return view('users.cart', ['cart' => $cart], ['photo' => $photo, 'totalcart' => $totalcart]);
     }
 
 
@@ -64,7 +66,12 @@ class CartController extends Controller
             $orderdetail = new OrderDetail;
             $orderdetail->order_id = $order->id;
             $orderdetail->produk_id = $request->produk_id[$i];
-            $orderdetail->jumlah = $request->jumlah[$i];
+            if ($request->jumlah[$i] == null) {
+                $orderdetail->jumlah = 1;
+            } else {
+                $orderdetail->jumlah = $request->jumlah[$i];
+            }
+
             $orderdetail->save();
             $produk = Produk::find($request->produk_id[$i]);
             if ($request->jumlah[$i] == null) {
@@ -77,7 +84,7 @@ class CartController extends Controller
 
         Cart::where('users_id', '=', auth()->user()->id)->delete();
 
-        return redirect('/transaksi')->with('sukses', 'Order Berhasil');;
+        return redirect('/transaksi')->with('sukses', 'Order Berhasil');
     }
 
 

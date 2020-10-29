@@ -10,3 +10,5 @@
 {{-- toastr --}}
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 {{-- css sendiri --}}
+
+</head>
