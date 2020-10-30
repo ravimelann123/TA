@@ -156,11 +156,11 @@
 @media (min-width: 992px) {
     .navku {
         text-transform: uppercase;
-        margin-right: 30px;
     }
     .navkutombol {
         text-transform: uppercase;
         margin-right: 30px;
+        margin-left: 60px;
     }
 
     .navku:hover::after {

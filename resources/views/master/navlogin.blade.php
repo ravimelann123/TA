@@ -11,7 +11,7 @@
             <a class=" nav-item nav-link navku" href="#">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link navku" href="">Contact Us</a>
             <a class="nav-item  btn btn-primary navkutombol tombol" type="submit" data-toggle="modal"
-                data-target="#exampleModal">Log in</a>
+                data-target="#exampleModal"><i class="fas fa-sign-out-alt"></i></a>
 
         </div>
     </div>

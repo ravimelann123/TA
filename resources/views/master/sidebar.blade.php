@@ -1,16 +1,21 @@
-<div id="sidebar-nav" class="sidebar">
-    <div class="sidebar-scroll">
-        <nav class="bg-dark">
-            <a href="#subPages" data-toggle="collapse" class="collapsed">
-                <span>Master</span> <i class="lnr lnr-chevron-left"></i></a>
-            <div id="subPages" class="collapse ">
-                <ul>
-                    <li><a href="/akun" class="">Edit Data User</a></li>
-                </ul>
-                <ul>
-                    <li><a href="/users" class="">Buat Acount</a></li>
-                </ul>
+<div class="col-md-3 mb-3">
+    <div class="card" style="min-height:85vh">
+        {{-- <div class="card-header bg-white">
+        </div> --}}
+        <div class="card-body">
+            <div class="sidebar">
+                <a href="/dashboard" class="btn">Home</a>
+                <a class="dropdown-btn btn">Master
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-container">
+                    <a class="dropdown-item" href="/users">Akun</a>
+                    <a class="dropdown-item" href="/akun">Biodata</a>
+                    <a class="dropdown-item" href="/produk">Produk</a>
+                    <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
+                </div>
+                <a href="/indexorder" class="btn">Pesanan</a>
             </div>
-        </nav>
+        </div>
     </div>
 </div>

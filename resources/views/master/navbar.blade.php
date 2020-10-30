@@ -52,23 +52,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
 
-            <a class=" nav-item nav-link navku" href="/dashboard">Home</a>
+            <a class=" nav-item nav-link navku" href="/dashboard"><i class="fas fa-bell"></i></a>
+            <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
 
-
-            <li class="nav-item dropdown dropdownku">
-                <a class="nav-link dropdown-toggle content-center" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Master
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/akun">Biodata</a>
-                    <a class="dropdown-item" href="/users">Akun</a>
-                    <a class="dropdown-item" href="/produk">Produk</a>
-                    <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
-                </div>
-            </li>
-            <a class=" nav-item nav-link navku" href="/indexorder">Daftar Penjualan</a>
-            <a class="nav-item  btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out</a>
+            <a class="nav-item  btn btn-danger navkutombol tombol" type="submit" href="/logout"><i
+                    class="fas fa-sign-out-alt"></i></a>
 
         </div>
     </div>
