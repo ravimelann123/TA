@@ -64,7 +64,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::put('/produk/update/{id}', 'ProdukController@update');
     Route::get('/produk/hapus/{id}', 'ProdukController@delete');
     Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
-
     Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
 
     Route::get('/akun', 'AkunController@index');
@@ -73,6 +72,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');
+    Route::get('/detailpesanan/{id}', 'OrderController@orderdetailpesanan');
     Route::get('/indexorder', 'OrderController@indexorder');
     Route::get('/orderbd', 'OrderController@orderbd');
     Route::get('/ordersd', 'OrderController@ordersd');

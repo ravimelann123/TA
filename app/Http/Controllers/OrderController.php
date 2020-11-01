@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
+    public function orderdetailpesanan($id)
+    {
+        $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
+        return view('admin.orderdetail', ['orderdetail' => $orderdetail]);
+    }
     public function index()
     {
         $produk = Produk::all();
@@ -19,10 +23,15 @@ class OrderController extends Controller
         $totalcart = count($cart);
         return view('users.order', ['produk' => $produk, 'totalcart' => $totalcart]);
     }
-    public function orderbd()
+    public function orderbd(Request $request)
     {
 
-        $order = Order::where('status', '=', 'Menunggu Diproses')->get();
+        if ($request->has('cari')) {
+            $order = Order::where('status', '=', 'Menunggu Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+        } else {
+            $order = Order::where('status', '=', 'Menunggu Diproses')->paginate(5);
+        }
+
         return view('admin.orderbd', ['order' => $order]);
     }
 
@@ -42,21 +51,40 @@ class OrderController extends Controller
         return redirect('/ordersd')->with('sukses', 'Data Berhasil Dirubah');
     }
 
-    public function ordersd()
+    public function ordersd(Request $request)
     {
-        $order = Order::where('status', '=', 'Sedang Diproses')->get();
+
+        if ($request->has('cari')) {
+            $order = Order::where('status', '=', 'Sedang Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+        } else {
+            $order = Order::where('status', '=', 'Sedang Diproses')->paginate(5);
+        }
+
         return view('admin.ordersd', ['order' => $order]);
     }
 
-    public function orderps()
+    public function orderps(Request $request)
     {
-        $order = Order::where('status', '=', 'Pesanan Selesai')->get();
+
+        if ($request->has('cari')) {
+            $order = Order::where('status', '=', 'Pesanan Selesai')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+        } else {
+            $order = Order::where('status', '=', 'Pesanan Selesai')->paginate(5);
+        }
+
         return view('admin.orderps', ['order' => $order]);
     }
 
-    public function indexorder()
+    public function indexorder(Request $request)
     {
-        $order = Order::all();
+
+
+        if ($request->has('cari')) {
+            $order = Order::where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+        } else {
+            $order = Order::paginate(5);
+        }
+
 
         return view('admin.indexorder', ['order' => $order]);
     }

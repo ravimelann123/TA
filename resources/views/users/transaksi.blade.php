@@ -51,12 +51,6 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-
-                        </div>
-                    </div>
-
 
                     </form>
                 </div>

@@ -3,18 +3,35 @@
         {{-- <div class="card-header bg-white">
         </div> --}}
         <div class="card-body">
-            <div class="sidebar">
-                <a href="/dashboard" class="btn">Home</a>
-                <a class="dropdown-btn btn">Master
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <div class="dropdown-container">
-                    <a class="dropdown-item" href="/users">Akun</a>
-                    <a class="dropdown-item" href="/akun">Biodata</a>
-                    <a class="dropdown-item" href="/produk">Produk</a>
-                    <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
+            <div class="sidebar" style="background-color:#007bff; border-radius: 10px">
+                <div class="row">
+                    <div class="col">
+                        <a href="/dashboard" class="btn" style="color: white">Home</a>
+                    </div>
+
                 </div>
-                <a href="/indexorder" class="btn">Pesanan</a>
+                <div class="row">
+                    <div class="col">
+                        <a class="dropdown-btn btn" style="color: white">Master
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-container mb-2 mt-2 ml-2 mr-2" style="background-color: white;">
+                            <a class="dropdown-item" href="/users">Akun</a>
+                            <a class="dropdown-item" href="/akun">Biodata</a>
+                            <a class="dropdown-item" href="/produk">Produk</a>
+                            <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="/indexorder" class="btn" style="color: white">Pesanan</a>
+                    </div>
+
+                </div>
+
+
             </div>
         </div>
     </div>

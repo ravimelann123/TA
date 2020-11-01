@@ -105,6 +105,9 @@
     background-color: white;
     border-radius: 15px;
 }
+.card {
+    border: none;
+}
 
 .info-panelviewall {
     font-size: 16px;
