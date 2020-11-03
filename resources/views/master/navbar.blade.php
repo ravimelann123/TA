@@ -14,26 +14,9 @@
             <a class=" nav-item nav-link navku" href="/cart"><i class="lnr lnr-cart">
                 </i><span class="badge badge-primary">{{$totalcart}}</span>
             </a>
-            <li class="nav-item dropdown dropdownku">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Pesanan
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/allproduk">Produk</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown dropdownku">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Pengaturan
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/myprofile">Profil Saya</a>
-                    <a class="dropdown-item" href="/changepassword">Rubah Kata Sandi</a>
-                    <a class="dropdown-item" href="/order">Pesan Langsung</a>
-                </div>
-            </li>
+            <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
+            <a class=" nav-item nav-link navku" href="/chatbot"><i class="fas fa-comments"></i></a>
+            <a class=" nav-item nav-link navku" href="/myprofile"><i class="fas fa-cog"></i></a>
             <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out</a>
         </div>
     </div>

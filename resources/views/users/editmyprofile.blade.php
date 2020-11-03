@@ -1,22 +1,10 @@
 @extends('master.masterlayout')
 @section('content')
 
-<div class="row justify-content-center">
-    <div class="col-md-12">
-        <div class="card">
-            <form method="GET" action="/akun">
-                <div class="card-header bg-white">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="/myprofile" type="button" class="btn btn-primary">Profile Saya</a>
-                                <a href="/changepassword" type="button" class="btn btn-primary">Ganti Kata Sandi</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
+<div class="row">
+    @include('master.sidebar')
+    <div class="col-md-9">
+        <div class="card" style="min-height:85vh">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
@@ -29,7 +17,11 @@
                         </nav>
                     </div>
                 </div>
-
+                <div class="row mb-3">
+                    <div class="col">
+                        <h3>Rubah Profil</h3>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <form method="post" action="/changemyprofile/update" enctype="multipart/form-data">
@@ -38,8 +30,8 @@
                             {{ method_field('PUT') }}
 
                             <div class="form-group row {{$errors->has('username') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Username</label>
+                                <div class="col-md-8">
                                     <input type="text" name="username" class="form-control"
                                         value="{{ auth()->user()->username}}">
                                     @if($errors->has('username'))
@@ -49,8 +41,8 @@
                             </div>
 
                             <div class="form-group row {{$errors->has('nama') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Nama</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Nama</label>
+                                <div class="col-md-8">
                                     <input type="text" name="nama" class="form-control"
                                         value="{{auth()->user()->akun->nama}}">
                                     @if($errors->has('nama'))
@@ -60,8 +52,8 @@
                             </div>
 
                             <div class="form-group row {{$errors->has('email') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Email</label>
+                                <div class="col-md-8">
                                     <input type="email" name="email" class="form-control"
                                         value="{{auth()->user()->akun->email}}">
                                     @if($errors->has('email'))
@@ -71,8 +63,8 @@
                             </div>
 
                             <div class="form-group row {{$errors->has('nohp') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Nomer Hp</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Nomer Hp</label>
+                                <div class="col-md-8">
                                     <input type="text" name="nohp" class="form-control"
                                         value="{{auth()->user()->akun->nohp}}">
                                     @if($errors->has('nohp'))
@@ -84,8 +76,8 @@
 
 
                             <div class="form-group row {{$errors->has('alamat') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Alamat</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Alamat</label>
+                                <div class="col-md-8">
                                     <textarea name="alamat"
                                         class="form-control">{{auth()->user()->akun->alamat  }}</textarea>
                                     @if($errors->has('alamat'))
@@ -97,8 +89,8 @@
                             </div>
 
                             <div class="form-group row{{$errors->has('avatar') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Foto Profil</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Foto Profil</label>
+                                <div class="col-md-8">
                                     <input type="file" name="avatar" class=" form-control-file">
                                     @if($errors->has('avatar'))
                                     <span class="help-block">{{$errors->first('avatar')}}</span>
@@ -107,7 +99,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm text-right">
-                                    <input type="submit" class="btn warnaku " value="Simpan"
+                                    <input type="submit" class="btn btn-warning" value="Simpan"
                                         style="border-radius: 20px">
                                 </div>
                             </div>

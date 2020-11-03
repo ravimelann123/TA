@@ -7,6 +7,7 @@ use App\OrderDetail;
 use App\Produk;
 use App\Cart;
 use Illuminate\Http\Request;
+use \Sastrawi\Stemmer\StemmerFactory;
 
 class OrderController extends Controller
 {
@@ -27,9 +28,9 @@ class OrderController extends Controller
     {
 
         if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Menunggu Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $order = Order::where('status', '=', 'Menunggu Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $order = Order::where('status', '=', 'Menunggu Diproses')->paginate(5);
+            $order = Order::where('status', '=', 'Menunggu Diproses')->paginate(4);
         }
 
         return view('admin.orderbd', ['order' => $order]);
@@ -55,9 +56,9 @@ class OrderController extends Controller
     {
 
         if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Sedang Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $order = Order::where('status', '=', 'Sedang Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $order = Order::where('status', '=', 'Sedang Diproses')->paginate(5);
+            $order = Order::where('status', '=', 'Sedang Diproses')->paginate(4);
         }
 
         return view('admin.ordersd', ['order' => $order]);
@@ -67,9 +68,9 @@ class OrderController extends Controller
     {
 
         if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Pesanan Selesai')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $order = Order::where('status', '=', 'Pesanan Selesai')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $order = Order::where('status', '=', 'Pesanan Selesai')->paginate(5);
+            $order = Order::where('status', '=', 'Pesanan Selesai')->paginate(4);
         }
 
         return view('admin.orderps', ['order' => $order]);
@@ -80,9 +81,9 @@ class OrderController extends Controller
 
 
         if ($request->has('cari')) {
-            $order = Order::where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $order = Order::where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $order = Order::paginate(5);
+            $order = Order::paginate(4);
         }
 
 
@@ -143,6 +144,55 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function chatbot()
+    {
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+
+        $totalcart = count($cart);
+        return view('users.chatbot', ['totalcart' => $totalcart]);
+    }
+
+    public function chatbotchat(Request $request)
+    {
+        $chat = $request->chat;
+        echo $chat . "<br>";
+        $chat = strtolower($chat);
+        echo $chat . "<br>";
+        // $chat = strtok($chat, " ");
+
+        // while ($chat !== false) {
+        //     echo $chat . "<br>";
+        //     $chat = strtok(" ");
+        // }
+
+        // include composer autoloader
+        // require_once __DIR__ . '/vendor/autoload.php';
+
+        // create stemmer
+        // $stemmerFactory = new \Sastrawi\Stemmer\StemmerFactory();
+        // $stemmer  = $stemmerFactory->createStemmer();
+
+        // // stem
+
+        $regex = "/[^a-zA-Z0-9]+/i";
+        $chat = preg_replace($regex, " ", $chat);
+        // $chat   = $stemmer->stem($chat);
+        $chat = trim($chat);
+        echo $chat . "<br>";
+        // Tokenisi
+        $tokenisasi = explode(" ", $chat);
+        $hasil = count($tokenisasi);
+        echo $hasil . "<br>";
+        print_r($tokenisasi);
+
+
+        // Tokenisi
+        //   $tokenisasi = explode(" ", $string);
+        //   foreach ($tokenisasi as $key => $value) {
+        //       $string_dataBersih['isi_text'][] = $value;
+    }
+
 
     /**
      * Show the form for editing the specified resource.

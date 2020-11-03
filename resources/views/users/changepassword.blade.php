@@ -1,22 +1,26 @@
 @extends('master.masterlayout')
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-12">
-        <div class="card">
-            <form method="GET" action="/akun">
-                <div class="card-header bg-white">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="/myprofile" type="button" class="btn btn-primary">Profile Saya</a>
-                                <a href="/changepassword" type="button" class="btn btn-primary">Ganti Kata Sandi</a>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-            </form>
+<div class="row">
+    @include('master.sidebar')
+    <div class="col-md-9">
+        <div class="card" style="min-height:85vh">
             <div class="card-body">
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link " href="/myprofile">Profile Saya</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/changepassword">Rubah Kata Sandi</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
                 <div class="row">
                     <div class="col">
                         <nav aria-label="breadcrumb">
@@ -36,8 +40,8 @@
                             {{ method_field('PUT') }}
 
                             <div class="form-group row {{$errors->has('passwordlama') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Kata Sandi Lama</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Kata Sandi Lama</label>
+                                <div class="col-md-8">
                                     <input type="password" name="passwordlama" class="form-control" value="">
 
                                     @if($errors->has('passwordlama'))
@@ -46,8 +50,8 @@
                                 </div>
                             </div>
                             <div class="form-group row {{$errors->has('passwordbaru') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Kata Sandi Baru</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Kata Sandi Baru</label>
+                                <div class="col-md-8">
                                     <input type="password" name="passwordbaru" class="form-control" value="">
 
                                     @if($errors->has('passwordbaru'))
@@ -56,8 +60,8 @@
                                 </div>
                             </div>
                             <div class="form-group row {{$errors->has('konfirmasipassword') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Konfirmasi Kata Sandi</label>
-                                <div class="col-sm-10">
+                                <label class="col-md-4 col-form-label">Konfirmasi Kata Sandi</label>
+                                <div class="col-md-8">
                                     <input type="password" name="konfirmasipassword" class="form-control" value="">
 
                                     @if($errors->has('konfirmasipassword'))
@@ -77,5 +81,6 @@
             </div>
         </div>
     </div>
+</div>
 
-    @endsection
+@endsection

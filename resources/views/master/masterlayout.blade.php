@@ -13,7 +13,6 @@
 
     @if(auth()->user()->role=='admin')
     <div class="container mt-3">
-
         @yield('content')
     </div>
     @endif

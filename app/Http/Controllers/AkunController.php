@@ -51,7 +51,9 @@ class AkunController extends Controller
 
     public function indexmyprofile()
     {
-        return view('users.editmyprofile');
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $totalcart = count($cart);
+        return view('users.editmyprofile', ['totalcart' => $totalcart]);
     }
 
     public function updatemyprofile(Request $request)
