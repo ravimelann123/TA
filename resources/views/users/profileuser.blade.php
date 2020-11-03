@@ -10,7 +10,7 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/myprofile">Profile Saya</a>
+                                <a class="nav-link active" href="/myprofile">Profil Saya</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="/changepassword">Rubah Kata Sandi</a>
@@ -26,7 +26,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile Saya</li>
+                                <li class="breadcrumb-item active" aria-current="page">Profil Saya</li>
                             </ol>
                         </nav>
                     </div>

@@ -23,7 +23,6 @@ Route::get('/', function () {
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
-Route::get('/viewall', 'PhotoController@viewall');
 
 Route::get('/login', 'PhotoController@indexlogin')->name('login');
 
@@ -37,8 +36,6 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::put('/changemyprofile/update', 'AkunController@updatemyprofile');
     Route::get('/changepassword', 'UsersController@IndexPassword');
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
-    Route::get('/order', 'OrderController@index');
-    Route::get('/order', 'OrderController@index');
     Route::get('/transaksi', 'OrderController@indextransaksi');
     Route::get('/cart', 'CartController@index');
     Route::post('/cart/addproduk/{id}', 'CartController@addprodukcart');

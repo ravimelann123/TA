@@ -17,7 +17,8 @@
             <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
             <a class=" nav-item nav-link navku" href="/chatbot"><i class="fas fa-comments"></i></a>
             <a class=" nav-item nav-link navku" href="/myprofile"><i class="fas fa-cog"></i></a>
-            <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out</a>
+            <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout"><i
+                    class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
 

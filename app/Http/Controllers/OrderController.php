@@ -18,11 +18,6 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $produk = Produk::all();
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-
-        $totalcart = count($cart);
-        return view('users.order', ['produk' => $produk, 'totalcart' => $totalcart]);
     }
     public function orderbd(Request $request)
     {
@@ -114,7 +109,7 @@ class OrderController extends Controller
             $produk->save();
         }
 
-        return redirect('/order')->with('sukses', 'Data Berhasil Disimpan');
+        return redirect('/transaksi')->with('sukses', 'Data Berhasil Disimpan');
     }
 
     /**

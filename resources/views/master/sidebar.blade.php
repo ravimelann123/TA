@@ -51,16 +51,10 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a class="dropdown-btn btn" style="color: white">Pengaturan
-                            <i class="fa fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-container mb-2 mt-2 ml-2 mr-2" style="background-color: white;">
-                            <a class="dropdown-item" href="/myprofile">Profil Saya</a>
-                            <a class="dropdown-item" href="/changepassword">Ganti Kata Sandi</a>
-                        </div>
-
+                        <a href="/chatbot" class="btn" style="color: white">Chatbot</a>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
                         <a href="#" class="btn" style="color: white">Pesanan</a>
@@ -71,6 +65,7 @@
                         <a href="/allproduk" class="btn" style="color: white">Produk</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

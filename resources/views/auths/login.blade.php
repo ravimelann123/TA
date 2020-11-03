@@ -22,10 +22,7 @@
     <div class="container">
 
         <div class="row justify-content-center mb-3">
-            <div class="col-md-12 viewall info-panelview">
-                <div class="row">
-                    <div class="col-12 text-center mb-2 mt-2 mr-2"><a href="/viewall">View ALL</a></div>
-                </div>
+            <div class="col-md-12 info-panelview">
                 @include('master.grid')
             </div>
         </div>
