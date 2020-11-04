@@ -140,13 +140,7 @@ class OrderController extends Controller
         //
     }
 
-    public function chatbot()
-    {
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
 
-        $totalcart = count($cart);
-        return view('users.chatbot', ['totalcart' => $totalcart]);
-    }
 
     public function chatbotchat(Request $request)
     {
