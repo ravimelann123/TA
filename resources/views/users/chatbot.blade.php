@@ -46,19 +46,21 @@
 <script>
     $(document).ready(function(){
     $("#send-btn").on("click",function(){
-       $value= $("#data").val();
-       $msg = '<div class="user-inbox inbox"><div class="msg-header"><p>'+$value+'</p></div></div>';
+        var value = $("#data").val();
+
+       $msg = '<div class="user-inbox inbox"><div class="msg-header"><p>'+value+'</p></div></div>';
        $(".form").append($msg);
        $("#data").val('');
-    $.ajax({
-        url:'/chatbot/chat',
-        type:'POST',
-        data:'text='+$value,
-        success:function(result){
-            $replay=' <div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i> </div><div class="msg-header"><p>'+result+'</p> </div></div>';
-            $(".form").append($replay);
-            $(".form").scrollTop($(".form")[0].scrollheight);
-            }
+            $.ajax({
+            type: "POST",
+            url: '/chatbot/chat',
+            data: { pesan:value,  _token: '{{csrf_token()}}' },
+            success: function(Response) {
+                console.log(Response);
+                $replay =' <div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+Response+'</p> </div>';
+                $(".form").append($replay);
+                $(".form").scrollTop($(".form")[0].scrollHeight);
+            },
         });
     });
 });

@@ -16,16 +16,18 @@ class ChatbotController extends Controller
         return view('users.chatbot', ['totalcart' => $totalcart]);
     }
 
+    public function index1()
+    {
+        $msg = "siapa nama kamu";
+        $dataakun = Chatbot::where('chat', 'LIKE', '%' . $msg . '%')->get();
+        dd($dataakun);
+    }
+
 
     public function chatbotchat(Request $request)
     {
-
-        $data = $request->all();
-        #create or update your data here
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return response()->json(['success' => 'Ajax request submitted successfully']);
-        return view('users.chatbot', ['totalcart' => $totalcart]);
+        $chat = Chatbot::where('chat', 'LIKE', '%' . $request->pesan . '%')->get();
+        return response()->json(['pesan' => $chat], 200);
     }
 
     public function store(Request $request)
