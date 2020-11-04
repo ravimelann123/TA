@@ -16,13 +16,6 @@ class ChatbotController extends Controller
         return view('users.chatbot', ['totalcart' => $totalcart]);
     }
 
-    public function index1()
-    {
-        $msg = "siapa nama kamu";
-        $dataakun = Chatbot::where('chat', 'LIKE', '%' . $msg . '%')->get();
-        dd($dataakun);
-    }
-
 
     public function chatbotchat(Request $request)
     {

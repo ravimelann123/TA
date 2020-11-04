@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/clearcartitem/{id}', 'CartController@deletecartitem');
     Route::get('/allproduk', 'ProdukController@indexproduk');
     Route::get('/chatbot', 'ChatbotController@index');
-    Route::get('/chatbot1', 'ChatbotController@index1');
+
     Route::post('/chatbot/chat', 'ChatbotController@chatbotchat');
 });
 
@@ -54,7 +54,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/users/edit/{id}', 'UsersController@edit');
     Route::put('/users/update/{id}', 'UsersController@update');
     Route::get('/users/hapus/{id}', 'UsersController@delete');
-
 
     Route::get('/produk', 'ProdukController@index');
     Route::post('/produk/create', 'ProdukController@create');
