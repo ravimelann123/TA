@@ -10,7 +10,7 @@
                         Simpel Chatbot
                     </div>
                     <div class="form">
-                        <div class="bot-inbox inbox">
+                        {{-- <div class="bot-inbox inbox">
                             <div class="icon">
                                 <i class="fas fa-user"></i>
                             </div>
@@ -24,7 +24,7 @@
                                 <p>asd</p>
 
                             </div>
-                        </div>
+                        </div> --}}
 
 
                     </div>
@@ -56,8 +56,8 @@
             url: '/chatbot/chat',
             data: { pesan:value,  _token: '{{csrf_token()}}' },
             success: function(Response) {
-                console.log(Response);
-                $replay =' <div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+Response+'</p> </div>';
+               var msg = Response.pesan.balas
+                $replay =' <div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+msg+'</p> </div>';
                 $(".form").append($replay);
                 $(".form").scrollTop($(".form")[0].scrollHeight);
             },

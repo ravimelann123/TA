@@ -26,7 +26,7 @@ class ChatbotController extends Controller
 
     public function chatbotchat(Request $request)
     {
-        $chat = Chatbot::where('chat', 'LIKE', '%' . $request->pesan . '%')->get();
+        $chat = Chatbot::where('chat', 'LIKE', '%' . $request->pesan . '%')->first();
         return response()->json(['pesan' => $chat], 200);
     }
 
