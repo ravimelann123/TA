@@ -15,7 +15,6 @@ class CartController extends Controller
     {
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-
         $totalcart = count($cart);
         return view('users.cart', ['cart' => $cart], ['photo' => $photo, 'totalcart' => $totalcart]);
     }
@@ -24,18 +23,19 @@ class CartController extends Controller
     public function addprodukcart(Request $request, $id)
     {
 
-        $cart = Cart::where('produk_id', '=', $id)->get();
+        $cart = Cart::where('produk_id', '=', $request->id)->get();
         $hasil = count($cart);
-
         if ($hasil == 1) {
-            return redirect('/dashboard')->with('delete', 'Produk ini sudah ada di keranjang');
+            //return redirect('/dashboard')->with('delete', 'Produk ini sudah ada di keranjang');
+            return response()->json(['gagal' => 'ok'], 404);
         } else {
             $cart = new Cart;
-            $cart->produk_id = $id;
+            $cart->produk_id = $request->id;
             $cart->jumlah = 1;
             $cart->users_id = auth()->user()->id;
             $cart->save();
-            return redirect('/dashboard')->with('sukses', 'Produk Berhasil Ditambahkan Ke Keranjang');
+            return response()->json(['berhasil' => 'ok'], 200);
+            //return redirect('/dashboard')->with('sukses', 'Berhasil Ditambahkan');
         }
     }
 

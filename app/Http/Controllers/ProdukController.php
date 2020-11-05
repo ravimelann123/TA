@@ -30,6 +30,7 @@ class ProdukController extends Controller
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
         $totalcart = count($cart);
+
         return view('users.produk', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart]);
     }
 

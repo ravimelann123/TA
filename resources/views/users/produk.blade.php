@@ -37,37 +37,86 @@
                     <div class="card-deck">
                         @foreach ( $photo as $p)
                         <div class="col-md-4">
-                            <form action="/cart/addproduk/{{$p->produk->id}}" method="POST">
-                                {{ csrf_field() }}
-                                {{-- <label class="card-text text-center" style="text-transform: capitalize;"> --}}
-                                <div class="card mb-3">
-                                    <img src="images/produk/{{$p->namafoto}}" class="card-img-top gambar"
-                                        alt="Card image cap">
-                                    <div class="card-body">
-                                        <a href="#">
-                                            <h5 class="card-title">{{$p->produk->nama}}</h5>
-                                        </a>
-                                        <p class="card-text">{{$p->produk->deskripsi}}</p>
-                                        <div class="row">
-                                            <div class="col text-left mt-2"> Rp.{{$p->produk->harga}}</div>
-                                            <div class="col text-right mb-1 mt-1 "> <button class="btn btn-primary">
-                                                    <i class="lnr lnr-cart"></i></button>
-                                            </div>
+                            {{-- <form action="/cart/addproduk/{{$p->produk->id}}" method="POST"> --}}
+                            {{ csrf_field() }}
+                            {{-- <label class="card-text text-center" style="text-transform: capitalize;"> --}}
+                            <div class="card mb-3">
+                                <img src="images/produk/{{$p->namafoto}}" class="card-img-top gambar"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <input id="data" type="hidden" value="{{$p->produk->id}}">
+                                    <a href="#">
+                                        <h5 class="card-title">{{$p->produk->nama}}</h5>
+                                    </a>
+                                    <p class="card-text">{{$p->produk->deskripsi}}</p>
+                                    <div class="row">
+                                        <div class="col text-left mt-2"> Rp.{{$p->produk->harga}}</div>
+                                        <div class="col text-right mb-1 mt-1 "> <button data-id="{{$p->produk->id}}"
+                                                class="btn btn-primary send-btn">
+                                                <i class="lnr lnr-cart"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            {{-- </form> --}}
                         </div>
                         @endforeach
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
+</div>
+@stop
+@section('footer')
+<script>
+    $(document).ready(function(){
+    $(".send-btn").on("click",function(){
+    var id = $(this).attr('data-id');
+        // Swal.fire(id);
+    $.ajax({
+        type: "POST",
+        url: '/cart/addproduk/'+id+'',
+        data: { _token: '{{csrf_token()}}' },
+            success: function(Response) {
 
-</div>
-</div>
-@endsection
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: "Berhasil Ditambahkan"
+                });
+
+
+            },
+            error: function(Response) {
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: "Produk Sudah ada di keranjang"
+                });
+            },
+        });
+    });
+});
+</script>
+@stop
