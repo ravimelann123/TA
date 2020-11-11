@@ -53,8 +53,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cari" placeholder="Cari">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type=" button"><i
-                                            class="fas fa-search"></i></button>
+                                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>

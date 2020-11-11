@@ -26,12 +26,28 @@ class ProdukController extends Controller
 
     public function indexproduk(Request $request)
     {
+        if ($request->has('cari')) {
+            if ($request->cari == "") {
+                $photo = Photo::groupBy('produk_id')->get();
+            } else {
+                $produk = Produk::where('nama', '=', $request->cari)->get();
+                $flag = count($produk);
+                if ($flag == 1) {
+                    foreach ($produk as $p) {
+                        $id = $p->id;
+                        $photo = Photo::where('produk_id', '=', $id)->groupBy('produk_id')->get();
+                    }
+                } else {
+                    $photo = Photo::groupBy('produk_id')->get();
+                }
+            }
+        } else {
+            $photo = Photo::groupBy('produk_id')->get();
+        }
 
-        $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
         $totalcart = count($cart);
-
-        return view('users.produk', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart]);
+        return view('users.produk', ['photo' => $photo, 'totalcart' => $totalcart]);
     }
 
     public function photoproduk($id)

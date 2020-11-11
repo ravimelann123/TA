@@ -43,9 +43,10 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/clearcart', 'CartController@deletecart');
     Route::get('/clearcartitem/{id}', 'CartController@deletecartitem');
     Route::get('/allproduk', 'ProdukController@indexproduk');
+    Route::get('/pesanan', 'OrderController@indexpesanan');
     Route::get('/chatbot', 'ChatbotController@index');
-
     Route::post('/chatbot/chat', 'ChatbotController@chatbotchat');
+    Route::get('/Dpesanan/{id}', 'OrderController@Dpesanan');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {

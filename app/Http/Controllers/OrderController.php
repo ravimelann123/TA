@@ -112,12 +112,7 @@ class OrderController extends Controller
         return redirect('/transaksi')->with('sukses', 'Data Berhasil Disimpan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function indextransaksi(Request $request)
     {
         $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
@@ -129,15 +124,17 @@ class OrderController extends Controller
         return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd, 'totalcart' => $totalcart]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+
+    public function indexpesanan(Request $request)
     {
-        //
+        if ($request->has('cari')) {
+            $order = Order::where('status', '=',  $request->cari)->where('users_id', '=', auth()->user()->id)->paginate(5);
+        } else {
+            $order = Order::where('users_id', '=', auth()->user()->id)->paginate(5);
+        }
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $totalcart = count($cart);
+        return view('users.pesanan', ['order' => $order, 'totalcart' => $totalcart]);
     }
 
 
@@ -183,35 +180,22 @@ class OrderController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+
+    public function Dpesanan($id)
     {
-        //
+        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $totalcart = count($cart);
+        $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
+        return view('users.Dpesanan', ['orderdetail' => $orderdetail, 'totalcart' => $totalcart]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Order $order)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Order $order)
     {
         //

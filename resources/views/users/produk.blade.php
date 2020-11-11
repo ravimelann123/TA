@@ -26,42 +26,41 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cari" placeholder="Cari">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                                    <button class="btn btn-primary" type=" button"><i
+                                            class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </form>
                 <div class="row">
-                    <div class="card-deck">
-                        @foreach ( $photo as $p)
-                        <div class="col-md-4">
-                            {{-- <form action="/cart/addproduk/{{$p->produk->id}}" method="POST"> --}}
-                            {{ csrf_field() }}
-                            {{-- <label class="card-text text-center" style="text-transform: capitalize;"> --}}
-                            <div class="card mb-3">
-                                <img src="images/produk/{{$p->namafoto}}" class="card-img-top gambar"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <input id="data" type="hidden" value="{{$p->produk->id}}">
-                                    <a href="#">
-                                        <h5 class="card-title">{{$p->produk->nama}}</h5>
-                                    </a>
-                                    <p class="card-text">{{$p->produk->deskripsi}}</p>
-                                    <div class="row">
-                                        <div class="col text-left mt-2"> Rp.{{$p->produk->harga}}</div>
-                                        <div class="col text-right mb-1 mt-1 "> <button data-id="{{$p->produk->id}}"
-                                                class="btn btn-primary send-btn">
-                                                <i class="lnr lnr-cart"></i></button>
-                                        </div>
+
+                    @foreach ( $photo as $p)
+                    <div class="col-md-4">
+                        {{-- <form action="/cart/addproduk/{{$p->produk->id}}" method="POST"> --}}
+                        {{ csrf_field() }}
+                        {{-- <label class="card-text text-center" style="text-transform: capitalize;"> --}}
+                        <div class="card mb-3">
+                            <img src="images/produk/{{$p->namafoto}}" class="card-img-top gambar" alt="Card image cap">
+                            <div class="card-body">
+                                <input id="data" type="hidden" value="{{$p->produk->id}}">
+                                <a href="#">
+                                    <h5 class="card-title">{{$p->produk->nama}}</h5>
+                                </a>
+                                <p class="card-text">{{$p->produk->deskripsi}}</p>
+                                <div class="row">
+                                    <div class="col text-left mt-2"> Rp.{{$p->produk->harga}}</div>
+                                    <div class="col text-right mb-1 mt-1 "> <button data-id="{{$p->produk->id}}"
+                                            class="btn btn-primary send-btn">
+                                            <i class="lnr lnr-cart"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            {{-- </form> --}}
                         </div>
-                        @endforeach
+                        {{-- </form> --}}
                     </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>

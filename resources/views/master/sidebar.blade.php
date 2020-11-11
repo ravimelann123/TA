@@ -57,7 +57,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <a href="#" class="btn" style="color: white">Pesanan</a>
+                        <a href="/pesanan" class="btn" style="color: white">Pesanan</a>
                     </div>
                 </div>
                 <div class="row">
