@@ -11,13 +11,26 @@ class TambahstokController extends Controller
 
     public function indextambahstok(Request $request)
     {
+
         $produk = Produk::all();
         if ($request->has('cari')) {
-            $tambahstok = Tambahstok::where('produk_id', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            if ($request->cari == "") {
+                $tambahstok = Tambahstok::paginate(5);
+            } else {
+                $data = Produk::where('nama', '=', $request->cari)->get();
+                $flag = count($data);
+                if ($flag == 1) {
+                    foreach ($data as $p) {
+                        $id = $p->id;
+                    }
+                    $tambahstok = Tambahstok::where('produk_id', '=', $id)->paginate(5);
+                } else {
+                    $tambahstok = Tambahstok::paginate(5);
+                }
+            }
         } else {
             $tambahstok = Tambahstok::paginate(5);
         }
-
         return view('admin.tambah_stokproduk', ['produk' => $produk], ['tambahstok' => $tambahstok]);
     }
     public function index()
