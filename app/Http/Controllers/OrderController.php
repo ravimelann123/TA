@@ -139,45 +139,6 @@ class OrderController extends Controller
 
 
 
-    public function chatbotchat(Request $request)
-    {
-        $chat = $request->chat;
-        echo $chat . "<br>";
-        $chat = strtolower($chat);
-        echo $chat . "<br>";
-        // $chat = strtok($chat, " ");
-
-        // while ($chat !== false) {
-        //     echo $chat . "<br>";
-        //     $chat = strtok(" ");
-        // }
-
-        // include composer autoloader
-        // require_once __DIR__ . '/vendor/autoload.php';
-
-        // create stemmer
-        // $stemmerFactory = new \Sastrawi\Stemmer\StemmerFactory();
-        // $stemmer  = $stemmerFactory->createStemmer();
-
-        // // stem
-
-        $regex = "/[^a-zA-Z0-9]+/i";
-        $chat = preg_replace($regex, " ", $chat);
-        // $chat   = $stemmer->stem($chat);
-        $chat = trim($chat);
-        echo $chat . "<br>";
-        // Tokenisi
-        $tokenisasi = explode(" ", $chat);
-        $hasil = count($tokenisasi);
-        echo $hasil . "<br>";
-        print_r($tokenisasi);
-
-
-        // Tokenisi
-        //   $tokenisasi = explode(" ", $string);
-        //   foreach ($tokenisasi as $key => $value) {
-        //       $string_dataBersih['isi_text'][] = $value;
-    }
 
 
 

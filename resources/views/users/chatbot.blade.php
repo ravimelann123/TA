@@ -54,7 +54,7 @@
             url: '/chatbot/chat',
             data: { pesan:value,  _token: '{{csrf_token()}}' },
             success: function(Response) {
-               var msg = Response.pesan.balas
+               var msg = Response.pesan
                 $replay =' <div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+msg+'</p> </div>';
                 $(".form").append($replay);
                 $(".form").scrollTop($(".form")[0].scrollHeight);
