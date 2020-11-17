@@ -8,5 +8,5 @@ class Similarity extends Model
 {
 
     protected $table = 'similaritytable';
-    protected $fillable = ['pesan', 'balas', 'similarity'];
+    protected $fillable = ['pesan', 'users_id', 'balas', 'similarity'];
 }
