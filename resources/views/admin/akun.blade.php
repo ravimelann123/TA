@@ -11,16 +11,16 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="/users">Akun</a>
+                                <a class="nav-link" href="/users">Account</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link active" href="/akun">Biodata</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/produk">Produk</a>
+                                <a class="nav-link" href="/produk">Product</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/tambahstok">Tambah Stok</a>
+                                <a class="nav-link" href="/tambahstok">Add Stock</a>
                             </li>
 
                         </ul>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type=" button"><i
                                             class="fas fa-search"></i></button>
@@ -61,12 +61,12 @@
                         <table class="table table-hover">
                             <thead class="thead-white">
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>No. Hp</th>
-                                    <th>Alamat</th>
-                                    <th>Avatar</th>
-                                    <th>OPSI</th>
+                                    <th>Name</th>
+                                    <th>E-mail</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                    <th>Profile Picture</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>

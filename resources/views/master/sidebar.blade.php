@@ -17,17 +17,17 @@
                             <i class="fa fa-caret-down"></i>
                         </a>
                         <div class="dropdown-container mb-2 mt-2 ml-2 mr-2" style="background-color: white;">
-                            <a class="dropdown-item" href="/users">Akun</a>
+                            <a class="dropdown-item" href="/users">Account</a>
                             <a class="dropdown-item" href="/akun">Biodata</a>
-                            <a class="dropdown-item" href="/produk">Produk</a>
-                            <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
+                            <a class="dropdown-item" href="/produk">Product</a>
+                            <a class="dropdown-item" href="/tambahstok">Add Stock</a>
                         </div>
 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a href="/indexorder" class="btn" style="color: white">Pesanan</a>
+                        <a href="/indexorder" class="btn" style="color: white">Order</a>
                     </div>
                 </div>
             </div>
@@ -57,14 +57,14 @@
 
                 <div class="row">
                     <div class="col">
-                        <a href="/pesanan" class="btn" style="color: white">Pesanan</a>
+                        <a href="/pesanan" class="btn" style="color: white">My Order</a>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col">
                         <a href="/allproduk" class="btn" style="color: white">Produk</a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

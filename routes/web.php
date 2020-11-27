@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
     Route::get('/transaksi', 'OrderController@indextransaksi');
     Route::get('/cart', 'CartController@index');
-    Route::post('/cart/addproduk/{id}', 'CartController@addprodukcart');
+    Route::post('/cart/addproduk', 'CartController@addprodukcart');
     Route::post('/ordercart/{id}', 'CartController@indexcart');
     Route::get('/clearcart', 'CartController@deletecart');
     Route::get('/clearcartitem/{id}', 'CartController@deletecartitem');

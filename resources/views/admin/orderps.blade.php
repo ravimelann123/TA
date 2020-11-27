@@ -11,16 +11,16 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="indexorder">Semua</a>
+                                <a class="nav-link " href="indexorder">All</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="/orderbd">Belum Diproses</a>
+                                <a class="nav-link" href="/orderbd">Waiting to be processed</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/ordersd">Sedang Diproses</a>
+                                <a class="nav-link" href="/ordersd">Being Processed</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/orderps">Pesanan Selesai</a>
+                                <a class="nav-link active" href="/orderps">Order Complete</a>
                             </li>
 
                         </ul>
@@ -31,7 +31,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
+                                <li class="breadcrumb-item active" aria-current="page">Order</li>
                             </ol>
                         </nav>
                     </div>
@@ -40,11 +40,11 @@
                     <div class="row mb-3">
 
                         <div class="col-md-8">
-                            <h3>Pesanan</h3>
+                            <h3>Order</h3>
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type=" button"><i
                                             class="fas fa-search"></i></button>
@@ -59,10 +59,10 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nomer Pesanan</th>
+                                        <th scope="col">Order Number</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Total Harga</th>
-                                        <th scope="col" class="text-center">Detail Pesanan</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col" class="text-center">Order Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -11,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
+                                <li class="breadcrumb-item active" aria-current="page">My Order</li>
                             </ol>
                         </nav>
                     </div>
@@ -20,16 +20,18 @@
                 <form method="GET" action="/pesanan">
                     <div class="row mb-3">
                         <div class="col-md-8">
-                            <h3>Pesanan</h3>
+                            <h3>My Orders</h3>
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <select class="custom-select" name="cari">
-                                    <option value="">Pilih Status Pesanan</option>
+                                    <option>
+                                        Select Order Status</option>
 
-                                    <option value="Menunggu Diproses">Menunggu Diproses</option>
-                                    <option value="Sedang Diproses">Sedang Diproses</option>
-                                    <option value="Pesanan Selesai">Pesanan Selesai</option>
+                                    <option value="Menunggu Diproses">
+                                        Waiting to be Processed</option>
+                                    <option value="Sedang Diproses">Being Processed</option>
+                                    <option value="Pesanan Selesai">Order Complete</option>
                                 </select>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type=" button"><i
@@ -45,10 +47,10 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nomer Pesanan</th>
+                                        <th scope="col">Order Number</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Total Harga</th>
-                                        <th scope="col" class="text-center">Detail Pesanan</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col" class="text-center">Order Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>

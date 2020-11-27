@@ -10,10 +10,10 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/myprofile">Profil Saya</a>
+                                <a class="nav-link active" href="/myprofile">My Profile</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="/changepassword">Rubah Kata Sandi</a>
+                                <a class="nav-link " href="/changepassword">Change Password</a>
                             </li>
 
                         </ul>
@@ -26,7 +26,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profil Saya</li>
+                                <li class="breadcrumb-item active" aria-current="page">My Profile</li>
                             </ol>
                         </nav>
                     </div>
@@ -50,7 +50,7 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col-3">
-                                        Nama
+                                        Name
                                     </div>
                                     <div class="col-9">
                                         {{auth()->user()->akun->nama}}
@@ -59,7 +59,7 @@
 
                                 <div class="row">
                                     <div class="col-3">
-                                        Email
+                                        E-mail
                                     </div>
                                     <div class="col-9">
                                         {{auth()->user()->akun->email}}
@@ -68,7 +68,7 @@
 
                                 <div class="row">
                                     <div class="col-3">
-                                        Nomer HP
+                                        Phone Number
                                     </div>
                                     <div class="col-9">
                                         {{auth()->user()->akun->nohp}}
@@ -77,7 +77,7 @@
 
                                 <div class="row">
                                     <div class="col-3">
-                                        Alamat
+                                        Address
                                     </div>
                                     <div class="col-9">
                                         {{auth()->user()->akun->alamat}}

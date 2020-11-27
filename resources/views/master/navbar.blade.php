@@ -11,14 +11,16 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
 
-            <a class=" nav-item nav-link navku" href="/cart"><i class="lnr lnr-cart">
-                </i><span class="badge badge-primary">{{$totalcart}}</span>
-            </a>
-            <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
-            <a class=" nav-item nav-link navku" href="/chatbot"><i class="fas fa-comments"></i></a>
-            <a class=" nav-item nav-link navku" href="/myprofile"><i class="fas fa-cog"></i></a>
-            <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout"><i
-                    class="fas fa-sign-out-alt"></i></a>
+            <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"
+                    style="margin-right: 5px"></i></a>
+            <a class=" nav-item nav-link navku" href="/cart"><i class="fas fa-shopping-basket"
+                    style="margin-right: 5px"></i></a>
+            <a class=" nav-item nav-link navku" href="/chatbot"><i class="fas fa-comments"
+                    style="margin-right: 5px"></i></a>
+            <a class=" nav-item nav-link navku" href="/myprofile"><i class="fas fa-cog"
+                    style="margin-right: 5px"></i></a>
+            <a class="nav-item btn btn-danger navkutombol tombol" type="submit" href="/logout">Log out<i
+                    class="fas fa-sign-out-alt" style="margin-left: 5px"></i></a>
         </div>
     </div>
 
@@ -36,11 +38,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
 
-            <a class=" nav-item nav-link navku" href="/dashboard"><i class="fas fa-bell"></i></a>
+            {{-- <a class=" nav-item nav-link navku" href="/dashboard"><i class="fas fa-bell"></i></a> --}}
             <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
 
-            <a class="nav-item  btn btn-danger navkutombol tombol" type="submit" href="/logout"><i
-                    class="fas fa-sign-out-alt"></i></a>
+            <a class="nav-item  btn btn-danger navkutombol tombol" type="submit" href="/logout">Log Out<i
+                    class="fas fa-sign-out-alt" style="margin-left: 5px"></i></a>
 
         </div>
     </div>

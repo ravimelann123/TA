@@ -12,8 +12,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Detail Foto</li>
+                                <li class="breadcrumb-item"><a href="/produk">Product</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Picture</li>
                             </ol>
                         </nav>
                     </div>
@@ -27,7 +27,7 @@
                             </button>
                         </div>
                         <div class="col">
-                            <h3>Detail Foto</h3>
+                            <h3>Picture</h3>
                         </div>
                     </div>
                 </form>
@@ -41,8 +41,8 @@
                         <table class="table table-hover">
                             <thead class="thead-white">
                                 <tr>
-                                    <th>nama</th>
-                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Picture</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>

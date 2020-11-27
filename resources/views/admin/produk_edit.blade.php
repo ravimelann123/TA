@@ -1,7 +1,7 @@
 @extends('master.masterlayout')
 @section('content')
 
-<div class="rowr">
+<div class="row">
     @include('master.sidebar')
     <div class="col-md-9">
         <div class="card" style="min-height:85vh">
@@ -12,19 +12,17 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/produk">Produk </a> </li>
-                                <li class="breadcrumb-item active" aria-current=" page">Rubah Data Produk</li>
+                                <li class="breadcrumb-item"><a href="/produk">Product</a> </li>
+                                <li class="breadcrumb-item active" aria-current=" page">Change Product Data</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <h3>Rubah Data Produk</h3>
+                        <h3>Change Product Data</h3>
                     </div>
                 </div>
-
-
 
                 <div class="row">
                     <div class="col">
@@ -33,7 +31,7 @@
                             {{ method_field('PUT') }}
 
                             <div class="form-group row {{$errors->has('nama') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Nama</label>
+                                <label class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="nama" class="form-control" value=" {{ $produk->nama }}">
 
@@ -44,7 +42,7 @@
                             </div>
 
                             <div class="form-group row {{$errors->has('deskripsi') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Deskripsi</label>
+                                <label class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="deskripsi" class="form-control"
                                         value=" {{ $produk->deskripsi }}">
@@ -56,7 +54,7 @@
                             </div>
 
                             <div class="form-group row {{$errors->has('harga') ? 'has-error' : ''}}">
-                                <label class="col-sm-2 col-form-label">Harga</label>
+                                <label class="col-sm-2 col-form-label">Price</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="harga" class="form-control" value=" {{ $produk->harga }}">
 
@@ -68,7 +66,7 @@
 
                             <div class="form-group row">
                                 <div class="col text-right">
-                                    <input type="submit" class="btn btn-warning" value="Simpan"
+                                    <input type="submit" class="btn btn-warning" value="Save"
                                         style="border-radius: 20px">
                                 </div>
                             </div>

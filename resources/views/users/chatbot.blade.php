@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="wrapper">
                     <div class="title">
-                        Simpel Chatbot
+                        Chatbot
                     </div>
                     <div class="form">
                         {{-- <div class="bot-inbox inbox">

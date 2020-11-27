@@ -14,7 +14,7 @@
                                 <a class="nav-link " href="/myprofile">Profil Saya</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="/changepassword">Rubah Kata Sandi</a>
+                                <a class="nav-link active" href="/changepassword">Change Password</a>
                             </li>
 
                         </ul>
@@ -26,7 +26,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Rubah Kata Sandi</li>
+                                <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                             </ol>
                         </nav>
                     </div>
@@ -40,7 +40,7 @@
                             {{ method_field('PUT') }}
 
                             <div class="form-group row {{$errors->has('passwordlama') ? 'has-error' : ''}}">
-                                <label class="col-md-4 col-form-label">Kata Sandi Lama</label>
+                                <label class="col-md-4 col-form-label">Old Password</label>
                                 <div class="col-md-8">
                                     <input type="password" name="passwordlama" class="form-control" value="">
 
@@ -50,7 +50,8 @@
                                 </div>
                             </div>
                             <div class="form-group row {{$errors->has('passwordbaru') ? 'has-error' : ''}}">
-                                <label class="col-md-4 col-form-label">Kata Sandi Baru</label>
+                                <label class="col-md-4 col-form-label">
+                                    New Password</label>
                                 <div class="col-md-8">
                                     <input type="password" name="passwordbaru" class="form-control" value="">
 
@@ -60,7 +61,8 @@
                                 </div>
                             </div>
                             <div class="form-group row {{$errors->has('konfirmasipassword') ? 'has-error' : ''}}">
-                                <label class="col-md-4 col-form-label">Konfirmasi Kata Sandi</label>
+                                <label class="col-md-4 col-form-label">
+                                    Confirm Password</label>
                                 <div class="col-md-8">
                                     <input type="password" name="konfirmasipassword" class="form-control" value="">
 

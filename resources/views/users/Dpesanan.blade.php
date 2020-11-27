@@ -11,8 +11,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/pesanan">Pesanan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Detail Pesanan</li>
+                                <li class="breadcrumb-item"><a href="/pesanan">Order</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,9 +32,9 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">jumlah</th>
-                                        <th scope="col">Harga</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
                                         <th scope="col">Total</th>
                                     </tr>
                                 </thead>

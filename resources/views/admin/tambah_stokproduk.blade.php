@@ -10,16 +10,16 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="/users">Akun</a>
+                                <a class="nav-link" href="/users">Account</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="/akun">Biodata</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/produk">Produk</a>
+                                <a class="nav-link " href="/produk">Product</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/tambahstok">Tambah Stok</a>
+                                <a class="nav-link active" href="/tambahstok">Add Stock</a>
                             </li>
 
                         </ul>
@@ -30,7 +30,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tambah Stok</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Stock</li>
                             </ol>
                         </nav>
                     </div>
@@ -45,11 +45,11 @@
                             </button>
                         </div>
                         <div class="col-md-7">
-                            <h3>Tambah Stok</h3>
+                            <h3>Add Stock</h3>
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type=" button"><i
                                             class="fas fa-search"></i></button>
@@ -66,9 +66,9 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Stok Bertambah</th>
-                                    <th>Penanggung jawab</th>
+                                    <th>Name</th>
+                                    <th>Amount of Stock Added</th>
+                                    {{-- <th>Penanggung jawab</th> --}}
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -78,7 +78,7 @@
 
                                     <td>{{$p->produk->nama}}</td>
                                     <td>{{$p->stok}}</td>
-                                    <td>{{$p->users->akun->nama}}</td>
+                                    {{-- <td>{{$p->users->akun->nama}}</td> --}}
                                     <td>
                                         <a href="#" class="delete" tambahstok-id="{{$p->id}}" style="color: red;"><i
                                                 class="fas fa-trash-alt"></i></a>

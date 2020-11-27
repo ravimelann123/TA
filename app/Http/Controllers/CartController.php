@@ -15,27 +15,28 @@ class CartController extends Controller
     {
         $photo = Photo::groupBy('produk_id')->get();
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $produk = Produk::all();
         $totalcart = count($cart);
-        return view('users.cart', ['cart' => $cart], ['photo' => $photo, 'totalcart' => $totalcart]);
+        return view('users.cart', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart, 'produk' => $produk]);
     }
 
 
-    public function addprodukcart(Request $request, $id)
+    public function addprodukcart(Request $request)
     {
 
-        $cart = Cart::where('produk_id', '=', $request->id)->get();
+        $cart = Cart::where('produk_id', '=', $request->produk)->get();
         $hasil = count($cart);
         if ($hasil == 1) {
-            //return redirect('/dashboard')->with('delete', 'Produk ini sudah ada di keranjang');
-            return response()->json(['gagal' => 'ok'], 404);
+            return redirect('/cart')->with('delete', 'Produk ini sudah ada di keranjang');
+            //return response()->json(['gagal' => 'ok'], 404);
         } else {
             $cart = new Cart;
-            $cart->produk_id = $request->id;
+            $cart->produk_id = $request->produk;
             $cart->jumlah = 1;
             $cart->users_id = auth()->user()->id;
             $cart->save();
-            return response()->json(['berhasil' => 'ok'], 200);
-            //return redirect('/dashboard')->with('sukses', 'Berhasil Ditambahkan');
+            //return response()->json(['berhasil' => 'ok'], 200);
+            return redirect('/cart')->with('sukses', 'Berhasil Ditambahkan');
         }
     }
 

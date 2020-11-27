@@ -12,29 +12,47 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Keranjang</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cart</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col">
-                        Hapus Semua Produk
+                        Clear All Product
                     </div>
                     <div class="col text-right">
-                        <a href="/clearcart" class="btn" style="border-radius: 15px">
+                        <a href="/clearcart" class="btn" style="border-radius: 15px; color: red;">
                             <i class="lnr lnr-trash"></i></a>
                     </div>
                 </div>
+                <form action="/cart/addproduk" method="post">
+                    {{ csrf_field() }}
+                    <div class="row mb-3">
+                        <div class="col">
+                            Product
+                            <select name="produk" class="selectpicker w-50" data-live-search="true">
+                                @foreach($produk as $p)
+                                <option value="{{$p->id}}">{{$p->nama ." | Rp. ".$p->harga}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col text-right">
+                            <button class="btn" type="submit" style="border-radius: 15px"><i
+                                    class="fas fa-plus-square"></i></button>
+                        </div>
+
+                    </div>
+                </form>
                 <div class="row">
                     <div class="col">
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>Nama Produk</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
                                     <th>Opsi</th>
 
                                 </tr>
@@ -73,5 +91,4 @@
     </div>
 
 </div>
-
 @endsection

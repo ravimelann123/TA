@@ -11,16 +11,16 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/users">Akun</a>
+                                <a class="nav-link active" href="/users">Account</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="/akun">Biodata</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/produk">Produk</a>
+                                <a class="nav-link" href="/produk">Product</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/tambahstok">Tambah Stok</a>
+                                <a class="nav-link" href="/tambahstok">Add Stock</a>
                             </li>
 
                         </ul>
@@ -33,7 +33,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Akun</li>
+                                <li class="breadcrumb-item active" aria-current="page">Account</li>
                             </ol>
                         </nav>
                     </div>
@@ -47,11 +47,11 @@
                             </button>
                         </div>
                         <div class="col-md-7">
-                            <h3>Buat Akun</h3>
+                            <h3>Create Account</h3>
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                                 </div>
@@ -66,7 +66,7 @@
                                 <tr>
                                     <th>Username</th>
                                     <th>Role</th>
-                                    <th>OPSI</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,7 +103,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Buat Akun </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Account </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Pilih Role</label>
+                        <label class="col-sm-4 col-form-label">Select Role</label>
                         <div class="col-sm-8">
                             <select name="role" class="form-control">
                                 <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
@@ -152,8 +152,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create</button>
                 </form>
             </div>
         </div>

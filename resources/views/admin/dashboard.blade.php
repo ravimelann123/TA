@@ -23,38 +23,50 @@
                     <div class="col">
                         <h4>Dashboard</h4>
                     </div>
-                    <div class="col text-right" style="color: gray; font-size: 14px">Selamat datang.
+                    <div class="col text-right" style="color: gray; font-size: 14px">Welcome.
                         {{auth()->user()->username}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md mb-3">
-                        <div class=" card bg-primary" style=" color: white; border-radius: 10px">
+                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
-                                <h5>{{$akun}}</h5>
-                            </div>
-                            <div class="card-footer">
-                                Data Akun Pelanggan
+                                <div class="row  align-items-center">
+                                    <div class="col mr-2">
+                                        <div class=" text-primary text-uppercase mb-1">
+                                            Account
+                                        </div>
+                                        {{$akun}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md mb-3">
-                        <div class="card bg-primary" style=" color: white; border-radius: 10px">
+                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
-                                <h5>{{$order}}</h5>
-                            </div>
-                            <div class="card-footer">
-                                Pesanan
+                                <div class="row align-items-center">
+                                    <div class="col mr-2">
+                                        <div class=" text-primary text-uppercase mb-1">
+                                            Order
+                                        </div>
+                                        {{$order}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md mb-3">
-                        <div class="card bg-primary" style=" color: white; border-radius: 10px">
+                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
-                                <h5>{{$produk}}</h5>
-                            </div>
-                            <div class="card-footer">
-                                Data Produk
+                                <div class="row  align-items-center">
+                                    <div class="col mr-2">
+                                        <div class=" text-primary text-uppercase mb-1">
+                                            Product
+                                        </div>
+                                        {{$produk}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
