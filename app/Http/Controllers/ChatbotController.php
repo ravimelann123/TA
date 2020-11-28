@@ -105,6 +105,33 @@ class ChatbotController extends Controller
         $datakalimat2->parsing = $parser;
         $datakalimat2->save();
 
+        $datakalimat3 = Kalimat::find($idkalimat);
+
+
+
+        if ($datakalimat3->parsing == "aturan1") {
+            return response()->json(['pesan' => "aturan1"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan2") {
+            return response()->json(['pesan' => "aturan2"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan3") {
+            return response()->json(['pesan' => "aturan3"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan4") {
+            return response()->json(['pesan' => "aturan4"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan5") {
+            return response()->json(['pesan' => "aturan5"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan6") {
+            return response()->json(['pesan' => "aturan6"], 200);
+        }
+        if ($datakalimat3->parsing == "aturan7") {
+            return response()->json(['pesan' => "aturan7"], 200);
+        }
+
+
 
         //PROSES JACCARD SIMILARITY
         // $data = Similarity::where('users_id', '=', auth()->user()->id)->latest()->first();
@@ -177,9 +204,9 @@ class ChatbotController extends Controller
         // foreach ($test as $a) {
         //     $pesan = $pesan . $a->id . " " . $a->nomerpesanan . " " . "<br>";
         // }
-        $berhasil = "berhasil";
+        //$berhasil = "berhasil";
         //$chat = Chatbot::where('chat', 'LIKE', '%' . $request->pesan . '%')->first();
-        return response()->json(['pesan' => $berhasil], 200);
+        // return response()->json(['pesan' => $berhasil], 200);
     }
 
     public function store(Request $request)
