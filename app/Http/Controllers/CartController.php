@@ -45,7 +45,7 @@ class CartController extends Controller
     {
 
         $order = new Order;
-        $order->nomerpesanan = "#O" . date("Ymds") . auth()->user()->id;
+        $order->nomerpesanan = "o" . date("Ymds") . auth()->user()->id;
         $order->users_id = auth()->user()->id;
         $order->status = "Menunggu Diproses";
 

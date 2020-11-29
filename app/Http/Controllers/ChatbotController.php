@@ -8,6 +8,8 @@ use App\Cart;
 use App\Kalimat;
 use App\Kata;
 use App\Order;
+use App\OrderDetail;
+use App\Produk;
 use App\Prosesnlp;
 use App\Similarity;
 use Illuminate\Http\Request;
@@ -108,15 +110,80 @@ class ChatbotController extends Controller
         $datakalimat3 = Kalimat::find($idkalimat);
 
 
-
+        $prsnlp = Prosesnlp::where('kalimat_id', '=', $idkalimat)->get();
         if ($datakalimat3->parsing == "aturan1") {
             return response()->json(['pesan' => "aturan1"], 200);
         }
+
+
         if ($datakalimat3->parsing == "aturan2") {
-            return response()->json(['pesan' => "aturan2"], 200);
+            $flag = 0;
+            foreach ($prsnlp as $p) {
+                if ($p->kata == "pesan") {
+                    $flag = 1;
+                }
+            }
+
+            if ($flag == 1) {
+                $order = new Order;
+                $order->nomerpesanan = "o" . date("Ymds") . auth()->user()->id;
+                $order->users_id = auth()->user()->id;
+                $order->status = "Menunggu Diproses";
+                $order->save();
+                $dataproduk = Produk::all();
+                $pesan = "Pesanan Dengan Nomer " . $order->nomerpesanan . " isi kue :";
+                $totalharga = 0;
+                for ($i = 0; $i < $arr_pesandipecah; $i++) {
+
+                    foreach ($dataproduk as $produk) {
+                        if ($pesandipecah[$i] == $produk->nama) {
+                            $pesan = $pesan . " <br> Kue " . $produk->nama;
+                            $pesan = $pesan . " jumlah " . $pesandipecah[$i + 1];
+                            $jumlahharga = $pesandipecah[$i + 1] * $produk->harga;
+                            $totalharga = $totalharga + $jumlahharga;
+                            $orderdetail = new OrderDetail;
+                            $orderdetail->order_id = $order->id;
+                            $orderdetail->produk_id = $produk->id;
+                            $orderdetail->jumlah = $pesandipecah[$i + 1];
+                            $orderdetail->save();
+                        }
+                    }
+                }
+
+                $order->total = $totalharga;
+                $order->save();
+                $pesan = $pesan . "<br>Berhasil dibuat, terima kasih sudah memesan melalui layanan chatbot.";
+                return response()->json(['pesan' => $pesan], 200);
+            }
         }
+
+
+
         if ($datakalimat3->parsing == "aturan3") {
-            return response()->json(['pesan' => "aturan3"], 200);
+            $flag = 0;
+            foreach ($prsnlp as $p) {
+                if ($p->kata == "batalkan") {
+                    $flag = 1;
+                }
+            }
+            if ($flag == 1) {
+
+                $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->get();
+                for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                    $nomer = "";
+                    foreach ($getdtorder as $order) {
+                        if ($pesandipecah[$i] == $order->nomerpesanan) {
+                            $nomer = $nomer . $order->nomerpesanan;
+                            $findorder = Order::find($order->id);
+
+                            OrderDetail::where('order_id', '=', $order->id)->delete();
+                            $findorder->delete();
+                        }
+                    }
+                }
+                $pesan = "Pesanan dengan Nomer Pesanan " . $nomer . " Berhasil Dibatalkan";
+                return response()->json(['pesan' => $pesan], 200);
+            }
         }
         if ($datakalimat3->parsing == "aturan4") {
             return response()->json(['pesan' => "aturan4"], 200);
