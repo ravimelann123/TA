@@ -5,7 +5,7 @@
         {{-- <div class="card-header bg-white">
         </div> --}}
         <div class="card-body">
-            <div class="sidebar" style="background-color:#007bff; border-radius: 10px">
+            <div class="sidebar" style="background-color:#075e54; border-radius: 10px">
                 <div class="row">
                     <div class="col">
                         <a href="/dashboard" class="btn" style="color: white">Home</a>
@@ -43,7 +43,7 @@
         {{-- <div class="card-header bg-white">
         </div> --}}
         <div class="card-body">
-            <div class="sidebar" style="background-color:#007bff; border-radius: 10px">
+            <div class="sidebar" style="background-color:#075e54; border-radius: 10px">
                 <div class="row">
                     <div class="col">
                         <a href="/dashboard" class="btn" style="color: white">Home</a>

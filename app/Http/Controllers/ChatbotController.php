@@ -87,31 +87,42 @@ class ChatbotController extends Controller
             $token = 0;
         }
 
-        $dataprosesnlp = Prosesnlp::where('users_id', '=', auth()->user()->id)->where('kalimat_id', '=', $idkalimat)->where('token', '=', 1)->get();
+        $dataprosesnlp_token = Prosesnlp::where('users_id', '=', auth()->user()->id)->where('kalimat_id', '=', $idkalimat)->where('token', '=', 1)->get();
 
-        $aa = "";
-        foreach ($dataprosesnlp as $dpnlp) {
-            $aa = $aa . $dpnlp->kata . " ";
+        $kalimat = "";
+        foreach ($dataprosesnlp_token as $dpnlp) {
+            $kalimat = $kalimat . $dpnlp->kata . " ";
         }
+        $kalimat = trim(preg_replace('/\s+/', ' ', $kalimat));
 
+        //parser
         $dataaturan = Aturan::all();
-
         $parser = "";
         foreach ($dataaturan as $da) {
-            if ($aa == $da->aturanproduksi) {
+            if ($kalimat == $da->aturanproduksi) {
                 $parser = $da->tag;
             }
         }
 
-        $datakalimat2 = Kalimat::find($idkalimat);
-        $datakalimat2->parsing = $parser;
-        $datakalimat2->save();
+        $datakalimat1 = Kalimat::find($idkalimat);
+        $datakalimat1->parsing = $parser;
+        $datakalimat1->save();
 
-        $datakalimat3 = Kalimat::find($idkalimat);
-
-
-        $prsnlp = Prosesnlp::where('kalimat_id', '=', $idkalimat)->get();
-
+        // create variabel
+        $pesan = "";
+        $flag = 0;
+        $nama = 0;
+        $harga = 0;
+        $status = 0;
+        $seluruh = 0;
+        $nomer = "";
+        $id = 0;
+        $jumlah = 0;
+        //get data tabel
+        $dataprodukall = Produk::all();
+        $dataorder_users_id = Order::Where('users_id', '=', auth()->user()->id)->get();
+        $dataorder_satu_terbaru = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
+        $dataprosesnlpall = Prosesnlp::where('users_id', '=', auth()->user()->id)->where('kalimat_id', '=', $idkalimat)->get();
         //aturan 1
         //         tampilkan
         // - tampilkan seluruh daftar pesanan saya
@@ -119,16 +130,61 @@ class ChatbotController extends Controller
         // - tampilakn nama produk, harga
         // - tampilkan status pesanan nomer NMT13929
 
-        if ($datakalimat3->parsing == "aturan1") {
-            return response()->json(['pesan' => "aturan1"], 200);
+        if ($datakalimat1->parsing == "aturan1") {
+
+            foreach ($dataprosesnlp_token as $p) {
+                if ($p->kata == "tampilkan") {
+                    $flag = 1;
+                }
+                if ($p->kata == "nama") {
+                    $nama = 1;
+                }
+                if ($p->kata == "harga") {
+                    $harga = 1;
+                }
+                if ($p->kata == "status") {
+                    $status = 1;
+                }
+                if ($p->kata == "seluruh") {
+                    $seluruh = 1;
+                }
+            }
+
+            if ($flag == 1) {
+                if ($kalimat == "tampilkan seluruh produk" || $kalimat == "tampilkan nama harga produk" || $kalimat == "tampilkan nama produk" || $kalimat == "tampilkan harga produk") {
+                    foreach ($dataprodukall as $p) {
+                        if ($seluruh == 1) {
+                            $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga . " Deskripsi " . $p->deskripsi . "<br>";
+                        } elseif ($harga == 1 && $seluruh != 1 && $nama == 1) {
+                            $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga .  "<br>";
+                        } elseif ($nama == 1 && $seluruh != 1) {
+                            $pesan = $pesan . "Nama Produk " . $p->nama .  "<br>";
+                        } elseif ($harga == 1 && $seluruh != 1) {
+                            $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga .  "<br>";
+                        }
+                    }
+                    return response()->json(['pesan' => $pesan], 200);
+                } elseif ($kalimat == "tampilkan seluruh pesanan" || $kalimat == "tampilkan status pesanan") {
+
+                    foreach ($dataorder_users_id as $p) {
+                        if ($seluruh == 1) {
+                            $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Total Biaya Rp. " . $p->total . " Status " . $p->status . "<br>";
+                        } elseif ($status == 1 && $seluruh != 1) {
+                            $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Status " . $p->status . "<br>";
+                        }
+                    }
+                    return response()->json(['pesan' => $pesan], 200);
+                } else {
+                }
+            }
         }
 
         //aturan 2
         // pesan
         // - saya mau pesan kue b10 :10, b5 : 5...
-        if ($datakalimat3->parsing == "aturan2") {
-            $flag = 0;
-            foreach ($prsnlp as $p) {
+        if ($datakalimat1->parsing == "aturan2") {
+
+            foreach ($dataprosesnlp_token as $p) {
                 if ($p->kata == "pesan") {
                     $flag = 1;
                 }
@@ -140,12 +196,11 @@ class ChatbotController extends Controller
                 $order->users_id = auth()->user()->id;
                 $order->status = "Menunggu Diproses";
                 $order->save();
-                $dataproduk = Produk::all();
                 $pesan = "Pesanan Dengan Nomer " . $order->nomerpesanan . " isi kue :";
                 $totalharga = 0;
                 for ($i = 0; $i < $arr_pesandipecah; $i++) {
 
-                    foreach ($dataproduk as $produk) {
+                    foreach ($dataprodukall as $produk) {
                         if ($pesandipecah[$i] == $produk->nama) {
                             $pesan = $pesan . " <br> Kue " . $produk->nama;
                             $pesan = $pesan . " jumlah " . $pesandipecah[$i + 1];
@@ -170,23 +225,21 @@ class ChatbotController extends Controller
         //aturan 3
         // batalkan
         // - batalkan pesanan bernomor NMT13929
-        if ($datakalimat3->parsing == "aturan3") {
-            $flag = 0;
-            foreach ($prsnlp as $p) {
+        if ($datakalimat1->parsing == "aturan3") {
+
+            foreach ($dataprosesnlp_token as $p) {
                 if ($p->kata == "batalkan") {
                     $flag = 1;
                 }
             }
             if ($flag == 1) {
 
-                $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->get();
                 for ($i = 0; $i < $arr_pesandipecah; $i++) {
-                    $nomer = "";
-                    foreach ($getdtorder as $order) {
+
+                    foreach ($dataorder_users_id as $order) {
                         if ($pesandipecah[$i] == $order->nomerpesanan) {
                             $nomer = $nomer . $order->nomerpesanan;
                             $findorder = Order::find($order->id);
-
                             OrderDetail::where('order_id', '=', $order->id)->delete();
                             $findorder->delete();
                         }
@@ -200,36 +253,53 @@ class ChatbotController extends Controller
         //aturan 4
         // ubah
         // - ubah pesanan hari ini kue b10:5,b5:10...
-        if ($datakalimat3->parsing == "aturan4") {
-            return response()->json(['pesan' => "aturan4"], 200);
+        if ($datakalimat1->parsing == "aturan4") {
+
+            foreach ($dataprosesnlp_token as $p) {
+                if ($p->kata == "ubah") {
+                    $flag = 1;
+                }
+            }
+            if ($flag == 1) {
+                $id = $dataorder_satu_terbaru->id;
+                if ($id != 0) {
+                    $getddorder = OrderDetail::Where('order_id', '=', $id)->get();
+                } else {
+                }
+                $id = 0;
+                for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                    foreach ($getddorder as $order) {
+                        if ($pesandipecah[$i] == $order->produk->nama) {
+                            $id = $order->id;
+                            $update = OrderDetail::find($id);
+                            $update->jumlah = $pesandipecah[$i + 1];
+                            $update->save();
+                        }
+                    }
+                }
+                $pesan = "Pesanan Berhasil Diubah";
+
+                return response()->json(['pesan' => $pesan], 200);
+            }
         }
 
         //aturan 5
         // berapa
         // - berapa jumlah pesanan hari ini
         // - berapa jumlah biaya pesanan hari ini
-        if ($datakalimat3->parsing == "aturan5") {
-            $kalimat = "";
-            foreach ($prsnlp as $p) {
-                if ($p->token == 1) {
-                    $kalimat = $kalimat . $p->kata . " ";
-                }
-            }
+        if ($datakalimat1->parsing == "aturan5") {
 
-            $pesan = "";
-            if ($kalimat == "berapa jumlah pesanan ") {
-                $jumlah = 0;
-                $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
-                $id = $getdtorder->id;
-                $getddorder = OrderDetail::where('order_id', '=', $id)->get();
-                foreach ($getddorder as $gddo) {
+            if ($kalimat == "berapa jumlah pesanan") {
+                $id = $dataorder_satu_terbaru->id;
+                $datadetailorder = OrderDetail::where('order_id', '=', $id)->get();
+                foreach ($datadetailorder as $gddo) {
                     $jumlah = $jumlah + $gddo->jumlah;
                 }
                 $pesan = $pesan . "Jumlah Pesanan Terbaru adalah " . $jumlah;
                 return response()->json(['pesan' => $pesan], 200);
-            } elseif ($kalimat == "berapa jumlah biaya pesanan ") {
-                $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
-                $pesan = $pesan . "Jumlah Biaya pesanan Terbaru adalah Rp." . $getdtorder->total;
+            } elseif ($kalimat == "berapa jumlah biaya pesanan") {
+
+                $pesan = $pesan . "Jumlah Biaya pesanan Terbaru adalah Rp." . $dataorder_satu_terbaru->total;
                 return response()->json(['pesan' => $pesan], 200);
             } else {
             }
@@ -238,23 +308,18 @@ class ChatbotController extends Controller
         //aturan 6
         // kapan
         // - kapan pesanan nomer NMT13929 terjadi
-        if ($datakalimat3->parsing == "aturan6") {
-            $kalimat = "";
-            $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->get();
-            foreach ($prsnlp as $p) {
-                foreach ($getdtorder as $pp) {
+        if ($datakalimat1->parsing == "aturan6") {
+
+            foreach ($dataprosesnlpall as $p) {
+                foreach ($dataorder_users_id as $pp) {
                     if ($p->kata == $pp->nomerpesanan) {
                         $id = $pp->id;
                         $nomer = $pp->nomerpesanan;
                     }
                 }
-                if ($p->token == 1) {
-                    $kalimat = $kalimat . $p->kata . " ";
-                }
             }
 
-            $pesan = "";
-            if ($kalimat == "kapan pesanan nomer ") {
+            if ($kalimat == "kapan pesanan nomer") {
                 $getddorder = Order::where('id', '=', $id)->get();
                 $pesan = $pesan . " pesanan bernomer pesanan " . $nomer . "<br>terjadi pada ";
                 foreach ($getddorder as $p) {
@@ -269,35 +334,29 @@ class ChatbotController extends Controller
         //         apa
         // - apa saja isi pesanan nomer NMT13929
         // - apa saja produk yang di tawarkan
-        if ($datakalimat3->parsing == "aturan7") {
-            $kalimat = "";
+        if ($datakalimat1->parsing == "aturan7") {
 
-
-            $getdtorder = Order::Where('users_id', '=', auth()->user()->id)->get();
-            foreach ($prsnlp as $p) {
-                foreach ($getdtorder as $pp) {
+            foreach ($dataprosesnlpall as $p) {
+                foreach ($dataorder_users_id as $pp) {
                     if ($p->kata == $pp->nomerpesanan) {
                         $id = $pp->id;
                         $nomer = $pp->nomerpesanan;
                     }
                 }
-                if ($p->token == 1) {
-                    $kalimat = $kalimat . $p->kata . " ";
-                }
             }
 
             $pesan = "";
-            if ($kalimat == "apa pesanan nomer ") {
+            if ($kalimat == "apa pesanan nomer") {
                 $getddorder = OrderDetail::where('order_id', '=', $id)->get();
                 $pesan = $pesan . "Isi pesanan bernomer pesanan " . $nomer . " adalah <br>";
                 foreach ($getddorder as $p) {
                     $pesan = $pesan . "nama kue " . $p->produk->nama . " jumlah " . $p->jumlah . "<br>";
                 }
                 return response()->json(['pesan' => $pesan], 200);
-            } elseif ($kalimat == "apa produk ditawarkan ") {
-                $getdtproduk = Produk::all();
+            } elseif ($kalimat == "apa produk ditawarkan") {
+
                 $pesan = $pesan . "Produk yang kami tawarkan adalah<br>";
-                foreach ($getdtproduk as $p) {
+                foreach ($dataprodukall as $p) {
                     $pesan = $pesan . "nama kue " . $p->nama . " harga " . $p->harga . "<br>";
                 }
                 return response()->json(['pesan' => $pesan], 200);

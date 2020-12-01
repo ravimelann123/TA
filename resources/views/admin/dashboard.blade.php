@@ -29,11 +29,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md mb-3">
-                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
+                        <div class="card " style="border-left: 5px solid #075e54; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
                                 <div class="row  align-items-center">
                                     <div class="col mr-2">
-                                        <div class=" text-primary text-uppercase mb-1">
+                                        <div class="  text-uppercase mb-1">
                                             Account
                                         </div>
                                         {{$akun}}
@@ -43,11 +43,11 @@
                         </div>
                     </div>
                     <div class="col-md mb-3">
-                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
+                        <div class="card " style="border-left: 5px solid #075e54; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col mr-2">
-                                        <div class=" text-primary text-uppercase mb-1">
+                                        <div class="text-uppercase mb-1">
                                             Order
                                         </div>
                                         {{$order}}
@@ -57,11 +57,11 @@
                         </div>
                     </div>
                     <div class="col-md mb-3">
-                        <div class="card " style="border-left: 5px solid #007bff; box-shadow: 3px 4px 5px #b6b6b6;">
+                        <div class="card " style="border-left: 5px solid #075e54; box-shadow: 3px 4px 5px #b6b6b6;">
                             <div class="card-body">
                                 <div class="row  align-items-center">
                                     <div class="col mr-2">
-                                        <div class=" text-primary text-uppercase mb-1">
+                                        <div class=" text-uppercase mb-1">
                                             Product
                                         </div>
                                         {{$produk}}
