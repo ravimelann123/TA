@@ -95,5 +95,4 @@ Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
     Route::get('/superadmin_produk', 'ProdukController@indexsuperadmin');
     Route::get('/superadmin_tambahstok', 'TambahstokController@indexsuperadmin');
     Route::get('/superadmin_Prosess_NLP', 'KalimatController@IndexProsessNLP');
-    Route::get('/superadmin_Prosess_NLP/{id}', 'KalimatController@IndexProsessNLPdetail');
 });

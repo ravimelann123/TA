@@ -186,6 +186,10 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #ccc;
 }
+.scrollable {
+    height: 150px;
+    overflow: scroll;
+}
 
 .wrapper {
     width: 100%;

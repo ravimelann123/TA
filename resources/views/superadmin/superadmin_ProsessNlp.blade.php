@@ -46,43 +46,59 @@
                     </div>
                 </form>
 
-                <div class="row ">
-                    <div class="col table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Kalimat Input</th>
-                                    <th>Detail</th>
-                                    <th>Parsing</th>
 
+                @foreach($data as $d)
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card " style="border-top: 5px solid #075e54; box-shadow: 3px 4px 5px #b6b6b6;">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div> Nama User : {{$d->users->akun->nama}}</div>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data as $d)
-                                <tr>
-                                    <td>{{$d->users->akun->nama}}</td>
-                                    <td>{{$d->kalimat}}</td>
-                                    <td><a href="superadmin_Prosess_NLP/{{$d->id}}">Tampilkan Detail</a></td>
-                                    <td> @if($d->parsing == null)
-                                        Null
-                                        @else
-                                        {{$d->parsing}}
-                                        @endif</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        <div> Kalimat Input: {{$d->kalimat}}</div>
+
+                                        <div class="row">
+                                            <div class="col table-responsive">
+                                                <div class="scrollable">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Kata</th>
+                                                                <th>Token</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($data1 as $p)
+                                                            @if($p->kalimat_id == $d->id)
+                                                            <tr>
+                                                                <td>{{$p->kata}}</td>
+                                                                <td>{{$p->token}}
+                                                                </td>
+
+                                                            </tr>
+                                                            @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            Parsing : @if($d->parsing == null)
+                                            Null
+                                            @else
+                                            {{$d->parsing}}
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row mt-2">
-                    <div class="col">{{$data->links()}}
-                    </div>
-
-                </div>
-
+                @endforeach
             </div>
         </div>
     </div>
