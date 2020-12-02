@@ -11,13 +11,13 @@
                     <div class="col">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/users">Account</a>
+                                <a class="nav-link active" href="/superadmin_users">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/produk">Product</a>
+                                <a class="nav-link" href="/superadmin_produk">Product</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/tambahstok">Add Stock</a>
+                                <a class="nav-link" href="/superadmin_tambahstok">Add Stock</a>
                             </li>
 
                         </ul>
@@ -35,8 +35,7 @@
                         </nav>
                     </div>
                 </div>
-
-                <form method="GET" action="/users">
+                <form method="GET" action="/superadmin_users">
 
                     <div class="row mb-3">
                         <div class="col-md-1 text-right">
@@ -57,6 +56,7 @@
                             </div>
                         </div>
                     </div>
+
                 </form>
                 <div class="row">
                     <div class="col table-responsive">
@@ -65,6 +65,10 @@
                                 <tr>
                                     <th>Username</th>
                                     <th>Biodata</th>
+                                    <th>Role</th>
+                                    <th>Created_at</th>
+                                    <th>Updated_at</th>
+
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -73,10 +77,14 @@
                                 <tr>
                                     <td>{{ $p->username }}</td>
                                     {{-- <td>{{ $p->role }}</td> --}}
-                                    <td><a href="/biodata/{{$p->id}}" name="id" value="">View Detail
+                                    <td><a href="/superadmin_biodata/{{$p->id}}" name="id" value="">View Detail
                                         </a></td>
+
+                                    <td>{{$p->role}}</td>
+                                    <td>{{$p->created_at}}</td>
+                                    <td>{{$p->updated_at}}</td>
                                     <td>
-                                        <a href="/users/edit/{{ $p->id }}" style=" color: orange;"><i
+                                        <a href="/superadmin_users/edit/{{ $p->id }}" style=" color: orange;"><i
                                                 class="fas fa-edit"></i></a>
                                         <a href="#" class=" delete" users-id="{{$p->id}}" style="color: red;"><i
                                                 class="fas fa-trash-alt"></i></a>
@@ -110,7 +118,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/users/create" method="POST">
+                <form action="/superadmin_users/create" method="POST">
 
                     {{ csrf_field() }}
 
@@ -132,6 +140,24 @@
 
                             @if($errors->has('password'))
                             <span class="help-block">{{$errors->first('password')}}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Select Role</label>
+                        <div class="col-sm-8">
+                            <select name="role" class="form-control">
+                                <option value="superadmin" {{(old('role') == 'superadmin' ) ? ' selected' : ''}}>Super
+                                    Admin
+                                </option>
+                                <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
+                                </option>
+                                <option value="user" {{(old('role') == 'user' ) ? ' selected' :''}}>User</option>
+                            </select>
+
+                            @if($errors->has('role'))
+                            <span class="help-block">{{$errors->first('role')}}</span>
                             @endif
                         </div>
                     </div>
@@ -169,7 +195,7 @@
         if (result.isConfirmed) {
 
 
-        setTimeout(function(){ window.location = "/users/hapus/"+users_id+""; }, 250);
+        setTimeout(function(){ window.location = "/superadmin_users/hapus/"+users_id+""; }, 250);
 
         }else{
             window.location = "/users";

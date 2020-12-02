@@ -11,16 +11,29 @@ use Illuminate\Http\Request;
 
 class AkunController extends Controller
 {
-    public function index(Request $request)
+    // public function index(Request $request)
+    // {
+
+    //     if ($request->has('cari')) {
+    //         $dataakun = Akun::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+    //     } else {
+    //         $dataakun = Akun::paginate(5);
+    //     }
+
+    //     return view('admin.Akun', ['dataakun' => $dataakun]);
+    // }
+
+    public function biodata(Request $request, $id)
     {
-
-        if ($request->has('cari')) {
-            $dataakun = Akun::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
-        } else {
-            $dataakun = Akun::paginate(5);
-        }
-
-        return view('admin.Akun', ['dataakun' => $dataakun]);
+        $dataakun = Akun::where('users_id', '=', $id)->get();
+        //dd($dataakun);
+        return view('admin.biodata', ['dataakun' => $dataakun]);
+    }
+    public function biodatasuperadmin(Request $request, $id)
+    {
+        $dataakun = Akun::where('users_id', '=', $id)->get();
+        //dd($dataakun);
+        return view('superadmin.superadmin_biodata', ['dataakun' => $dataakun]);
     }
 
     public function edit($id)
@@ -28,6 +41,33 @@ class AkunController extends Controller
         $akun = Akun::find($id);
         return view('admin.akun_edit', ['akun' => $akun]);
     }
+
+    public function editsuperadmin($id)
+    {
+        $akun = Akun::find($id);
+        return view('superadmin.superadmin_biodata_edit', ['akun' => $akun]);
+    }
+    public function updatesuperadmin(Request $request, $id)
+    {
+        //dd($request->all());
+        $this->validate($request, [
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png',
+        ]);
+        $akun = Akun::find($id);
+        $akun->update($request->all());
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $akun->avatar = $request->file('avatar')->getClientOriginalName();
+            $akun->save();
+        }
+        return redirect('/superadmin_users')->with('sukses', 'Data Berhasil Dirubah');
+    }
+
+
 
     public function update(Request $request, $id)
     {
@@ -46,7 +86,7 @@ class AkunController extends Controller
             $akun->avatar = $request->file('avatar')->getClientOriginalName();
             $akun->save();
         }
-        return redirect('/akun')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function indexmyprofile()
@@ -83,13 +123,7 @@ class AkunController extends Controller
 
     public function myprofile()
     {
-        $order = Order::where('users_id', '=', auth()->user()->id)->where('status', '!=', 'Pesanan Selesai')->get();
-        $totalorder = count($order);
-        $order1 = Order::where('users_id', '=', auth()->user()->id)->where('status', '=', 'Pesanan Selesai')->get();
-        $selesai = count($order1);
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
 
-        $totalcart = count($cart);
-        return view('users.profileuser', ['totalorder' => $totalorder, 'selesai' => $selesai, 'totalcart' => $totalcart]);
+        return view('users.profileuser');
     }
 }

@@ -18,9 +18,7 @@
 
                         </ul>
                     </div>
-
                 </div>
-
                 <div class="row mb-3">
                     <div class="col">
                         <nav aria-label="breadcrumb">
@@ -35,7 +33,7 @@
 
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        <img src="{{auth()->user()->akun->getAvatar()}}">
+                        <img width="150" height="150" src="{{auth()->user()->akun->getAvatar()}}">
                         <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
                     </div>
                     <div class="col-md-8">

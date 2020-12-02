@@ -26,7 +26,7 @@ Route::get('/logout', 'AuthController@logout');
 
 Route::get('/login', 'PhotoController@indexlogin')->name('login');
 
-Route::group(['middleware' => ['auth', 'checkRole:user,admin']], function () {
+Route::group(['middleware' => ['auth', 'checkRole:user,admin,superadmin']], function () {
     Route::get('/dashboard', 'DashboardController@index');
 });
 
@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
     Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
 
-    Route::get('/akun', 'AkunController@index');
-    Route::get('/akun/edit/{id}', 'AkunController@edit');
+    Route::get('/biodata/{id}', 'AkunController@biodata');
+    Route::get('/biodata/{id}/edit', 'AkunController@edit');
     Route::put('/akun/update/{id}', 'AkunController@update');
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
@@ -79,4 +79,19 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/orderps', 'OrderController@orderps');
     Route::get('/updatetosd/{id}', 'OrderController@updatetosd');
     Route::get('/updatetops/{id}', 'OrderController@updatetops');
+});
+
+Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
+    Route::get('/superadmin_users', 'UsersController@indexsuperadmin');
+    Route::post('/superadmin_users/create', 'UsersController@createsuperadmin');
+    Route::get('/superadmin_users/edit/{id}', 'UsersController@editsuperadmin');
+    Route::put('/superadmin_users/update/{id}', 'UsersController@updatesuperadmin');
+    Route::get('/superadmin_users/hapus/{id}', 'UsersController@deletesuperadmin');
+
+    Route::get('/superadmin_biodata/{id}', 'AkunController@biodatasuperadmin');
+    Route::get('/superadmin_biodata/{id}/edit', 'AkunController@editsuperadmin');
+    Route::put('/superadmin_biodata/{id}/update', 'AkunController@updatesuperadmin');
+
+    Route::get('/superadmin_produk', 'ProdukController@indexsuperadmin');
+    Route::get('/superadmin_tambahstok', 'TambahstokController@indexsuperadmin');
 });

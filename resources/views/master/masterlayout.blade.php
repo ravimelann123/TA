@@ -20,6 +20,12 @@
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up"></i></button>
     </div>
     @endif
+    @if(auth()->user()->role=='superadmin')
+    <div class="container mt-3">
+        @yield('content')
+        <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    @endif
 
 
     {{-- JS --}}

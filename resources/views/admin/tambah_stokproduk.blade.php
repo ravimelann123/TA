@@ -12,9 +12,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/users">Account</a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="/akun">Biodata</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link " href="/produk">Product</a>
                             </li>

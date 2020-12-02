@@ -12,7 +12,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current=" page">Biodata </li>
+                                <li class="breadcrumb-item"><a href="/superadmin_users">Account</a></li>
                                 <li class="breadcrumb-item active" aria-current=" page">Change Biodata Data</li>
                             </ol>
                         </nav>
@@ -28,7 +28,8 @@
 
                 <div class="row">
                     <div class="col">
-                        <form method="post" action="/akun/update/{{ $akun->id }}" enctype="multipart/form-data">
+                        <form method="post" action="/superadmin_biodata/{{ $akun->id }}/update"
+                            enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 

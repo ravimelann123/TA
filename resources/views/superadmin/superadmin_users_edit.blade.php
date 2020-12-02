@@ -12,7 +12,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/users">Account</a></li>
+                                <li class="breadcrumb-item"><a href="/superadmin_users">Account</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Change Account Data</li>
                             </ol>
                         </nav>
@@ -26,7 +26,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <form method="post" action="/users/update/{{ $users->id }}">
+                        <form method="post" action="/superadmin_users/update/{{ $users->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -55,17 +55,20 @@
                             </div>
 
 
-                            {{-- <div class="form-group row">
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Select Role</label>
                                 <div class="col-sm-10">
                                     <select name="role" class="form-control">
+                                        <option value="superadmin" @if($users->role == 'superadmin') selected
+                                            @endif>Super Admin
+                                        </option>
                                         <option value="admin" @if($users->role == 'admin') selected @endif>Admin
                                         </option>
                                         <option value="user" @if($users->role == 'user') selected @endif>User
                                         </option>
                                     </select>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col text-right">

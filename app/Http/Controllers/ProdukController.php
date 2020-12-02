@@ -24,6 +24,16 @@ class ProdukController extends Controller
         return view('admin.produk', ['produk' => $produk, 'totalcart' => $totalcart]);
     }
 
+    public function indexsuperadmin(Request $request)
+    {
+
+        if ($request->has('cari')) {
+            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+        } else {
+            $produk = Produk::paginate(5);
+        }
+        return view('superadmin.superadmin_produk', ['produk' => $produk]);
+    }
     public function indexproduk(Request $request)
     {
         if ($request->has('cari')) {

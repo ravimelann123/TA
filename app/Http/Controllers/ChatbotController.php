@@ -182,7 +182,7 @@ class ChatbotController extends Controller
         //aturan 2
         // pesan
         // - saya mau pesan kue b10 :10, b5 : 5...
-        if ($datakalimat1->parsing == "aturan2") {
+        elseif ($datakalimat1->parsing == "aturan2") {
 
             foreach ($dataprosesnlp_token as $p) {
                 if ($p->kata == "pesan") {
@@ -225,7 +225,7 @@ class ChatbotController extends Controller
         //aturan 3
         // batalkan
         // - batalkan pesanan bernomor NMT13929
-        if ($datakalimat1->parsing == "aturan3") {
+        elseif ($datakalimat1->parsing == "aturan3") {
 
             foreach ($dataprosesnlp_token as $p) {
                 if ($p->kata == "batalkan") {
@@ -253,7 +253,7 @@ class ChatbotController extends Controller
         //aturan 4
         // ubah
         // - ubah pesanan hari ini kue b10:5,b5:10...
-        if ($datakalimat1->parsing == "aturan4") {
+        elseif ($datakalimat1->parsing == "aturan4") {
 
             foreach ($dataprosesnlp_token as $p) {
                 if ($p->kata == "ubah") {
@@ -287,7 +287,7 @@ class ChatbotController extends Controller
         // berapa
         // - berapa jumlah pesanan hari ini
         // - berapa jumlah biaya pesanan hari ini
-        if ($datakalimat1->parsing == "aturan5") {
+        elseif ($datakalimat1->parsing == "aturan5") {
 
             if ($kalimat == "berapa jumlah pesanan") {
                 $id = $dataorder_satu_terbaru->id;
@@ -308,7 +308,7 @@ class ChatbotController extends Controller
         //aturan 6
         // kapan
         // - kapan pesanan nomer NMT13929 terjadi
-        if ($datakalimat1->parsing == "aturan6") {
+        elseif ($datakalimat1->parsing == "aturan6") {
 
             foreach ($dataprosesnlpall as $p) {
                 foreach ($dataorder_users_id as $pp) {
@@ -334,7 +334,7 @@ class ChatbotController extends Controller
         //         apa
         // - apa saja isi pesanan nomer NMT13929
         // - apa saja produk yang di tawarkan
-        if ($datakalimat1->parsing == "aturan7") {
+        elseif ($datakalimat1->parsing == "aturan7") {
 
             foreach ($dataprosesnlpall as $p) {
                 foreach ($dataorder_users_id as $pp) {
@@ -362,6 +362,11 @@ class ChatbotController extends Controller
                 return response()->json(['pesan' => $pesan], 200);
             } else {
             }
+        }
+        //jika tidak ada kondisi dari 7 aturan produksi
+        else {
+            $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
+            return response()->json(['pesan' => $pesan], 200);
         }
 
 

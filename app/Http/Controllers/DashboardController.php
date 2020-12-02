@@ -22,11 +22,12 @@ class DashboardController extends Controller
             $produk = Produk::all();
             $produk = count($produk);
             return view('admin.dashboard', ['akun' => $akun, 'order' => $order, 'produk' => $produk]);
+        } elseif (auth()->user()->role == "superadmin") {
+            return view('superadmin.dashboard');
         } else {
             $photo = Photo::groupBy('produk_id')->get();
             $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
             $totalcart = count($cart);
-
             return view('users.dashboard', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart]);
         }
     }
