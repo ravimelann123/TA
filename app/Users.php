@@ -17,12 +17,19 @@ class Users extends Authenticatable
     {
         return $this->hasOne(Akun::class);
     }
+
     public function tambahstok()
     {
         return $this->hasOne(Tambahstok::class);
     }
+
     public function cart()
     {
         return $this->hasOne(cart::class);
+    }
+
+    public function kalimat()
+    {
+        return $this->hasOne(Kalimat::class);
     }
 }
