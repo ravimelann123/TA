@@ -32,8 +32,6 @@
 
     @include('master.s')
     @yield('footer')
-
-
 </body>
 
 

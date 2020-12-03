@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Aturan extends Model
 {
     protected $table = 'aturan';
-    protected $fillable = ['aturanproduksi'];
+    protected $fillable = ['aturanproduksi', 'tag'];
 }

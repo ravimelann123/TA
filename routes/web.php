@@ -94,5 +94,11 @@ Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
 
     Route::get('/superadmin_produk', 'ProdukController@indexsuperadmin');
     Route::get('/superadmin_tambahstok', 'TambahstokController@indexsuperadmin');
-    Route::get('/superadmin_Prosess_NLP', 'KalimatController@IndexProsessNLP');
+    Route::get('/superadmin_Prosess_NLP', 'KalimatController@indexProsessNLP');
+
+    Route::get('/superadmin_aturan', 'AturanController@index');
+    Route::post('/superadmin_aturan/create', 'AturanController@create');
+    Route::get('/superadmin_aturan/{id}', 'AturanController@getdatabyid')->name('aturan.getbyid');
+    Route::put('/superadmin_aturan/update', 'AturanController@update');
+    Route::get('/superadmin_aturan/{id}/delete', 'AturanController@delete');
 });

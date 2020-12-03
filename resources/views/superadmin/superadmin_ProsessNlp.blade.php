@@ -6,17 +6,7 @@
     <div class="col-md-9">
         <div class="card" style="min-height:85vh">
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col">
-                        <ul class="nav nav-tabs">
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/superadmin_tambahstok">Proses NLP </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col">
                         <nav aria-label="breadcrumb">
@@ -54,9 +44,45 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <div> Nama User : {{$d->users->akun->nama}}</div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" style="width: 45px"><i
+                                                                class="fas fa-user"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control"
+                                                        value="{{$d->users->akun->nama}}" disabled>
+                                                </div>
+                                                <div> </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Parsing</span>
+                                                    </div>
+                                                    @if($d->parsing == null)
+                                                    @php $value= "Bukan Termasuk Aturan Produksi"; @endphp
+                                                    @else
+                                                    @php $value = $d->parsing; @endphp
+                                                    @endif
+                                                    <input type="text" class="form-control" value="{{$value}}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" style="width: 45px"><i
+                                                                class="fas fa-comments"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{$d->kalimat}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
 
-                                        <div> Kalimat Input: {{$d->kalimat}}</div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col table-responsive">
@@ -85,13 +111,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            Parsing : @if($d->parsing == null)
-                                            Null
-                                            @else
-                                            {{$d->parsing}}
-                                            @endif
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

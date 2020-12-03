@@ -105,6 +105,7 @@
                         </a>
                         <div class="dropdown-container mb-2 mt-2 ml-2 mr-2" style="background-color: white;">
                             <a class="dropdown-item" href="/superadmin_Prosess_NLP">Proses NLP</a>
+                            <a class="dropdown-item" href="/superadmin_aturan">Aturan</a>
                         </div>
                     </div>
                 </div>
