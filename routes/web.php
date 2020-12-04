@@ -84,9 +84,9 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
     Route::get('/superadmin_users', 'UsersController@indexsuperadmin');
     Route::post('/superadmin_users/create', 'UsersController@createsuperadmin');
-    Route::get('/superadmin_users/edit/{id}', 'UsersController@editsuperadmin');
-    Route::put('/superadmin_users/update/{id}', 'UsersController@updatesuperadmin');
-    Route::get('/superadmin_users/hapus/{id}', 'UsersController@deletesuperadmin');
+    Route::get('/superadmin_users/{id}', 'UsersController@getdatabyid');
+    Route::put('/superadmin_users/update', 'UsersController@updatesuperadmin');
+    Route::get('/superadmin_users/{id}/delete', 'UsersController@deletesuperadmin');
 
     Route::get('/superadmin_biodata/{id}', 'AkunController@biodatasuperadmin');
     Route::get('/superadmin_biodata/{id}/edit', 'AkunController@editsuperadmin');
@@ -98,7 +98,19 @@ Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
 
     Route::get('/superadmin_aturan', 'AturanController@index');
     Route::post('/superadmin_aturan/create', 'AturanController@create');
-    Route::get('/superadmin_aturan/{id}', 'AturanController@getdatabyid')->name('aturan.getbyid');
+    Route::get('/superadmin_aturan/{id}', 'AturanController@getdatabyid');
     Route::put('/superadmin_aturan/update', 'AturanController@update');
     Route::get('/superadmin_aturan/{id}/delete', 'AturanController@delete');
+
+    Route::get('/superadmin_bahasaalami', 'BahasaalamiController@index');
+    Route::post('/superadmin_bahasaalami/create', 'BahasaalamiController@create');
+    Route::get('/superadmin_bahasaalami/{id}', 'BahasaalamiController@getdatabyid');
+    Route::put('/superadmin_bahasaalami/update', 'BahasaalamiController@update');
+    Route::get('/superadmin_bahasaalami/{id}/delete', 'BahasaalamiController@delete');
+
+    Route::get('/superadmin_datasetchatbot', 'ChatbotController@indexsuperadmin');
+    Route::post('/superadmin_datasetchatbot/create', 'ChatbotController@create');
+    Route::get('/superadmin_datasetchatbot/{id}', 'ChatbotController@getdatabyid');
+    Route::put('/superadmin_datasetchatbot/update', 'ChatbotController@update');
+    Route::get('/superadmin_datasetchatbot/{id}/delete', 'ChatbotController@delete');
 });

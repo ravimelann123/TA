@@ -20,9 +20,7 @@ class ChatbotController extends Controller
 
     public function index()
     {
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('users.chatbot', ['totalcart' => $totalcart]);
+        return view('users.chatbot');
     }
 
 
@@ -447,30 +445,48 @@ class ChatbotController extends Controller
         // return response()->json(['pesan' => $berhasil], 200);
     }
 
-    public function store(Request $request)
+
+
+    public function indexsuperadmin(Request $request)
     {
-        //
+        if ($request->has('cari')) {
+            $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(4);
+        } else {
+
+            $data = Chatbot::paginate(4);
+        }
+        return view('superadmin.superadmin_datasetchatbot', ['data' => $data]);
     }
 
-    public function show(Chatbot $chatbot)
+    public function create(Request $request)
     {
-        //
+        $data = new Chatbot();
+        $data->chat = $request->chat;
+        $data->balas = $request->balas;
+        $data->save();
+        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit(Chatbot $chatbot)
+    public function getdatabyid($id)
     {
-        //
+        $data = Chatbot::find($id);
+        return response()->json($data);
     }
 
-
-    public function update(Request $request, Chatbot $chatbot)
+    public function update(Request $request)
     {
-        //
+        //dd($request->all());
+        $data = Chatbot::find($request->id);
+        $data->chat = $request->chat;
+        $data->balas = $request->balas;
+        $data->save();
+        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Dirubah');
     }
 
-
-    public function destroy(Chatbot $chatbot)
+    public function delete($id)
     {
-        //
+        $data = Chatbot::find($id);
+        $data->delete();
+        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Dihapus');
     }
 }

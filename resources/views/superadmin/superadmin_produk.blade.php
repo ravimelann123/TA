@@ -2,91 +2,86 @@
 @section('content')
 
 <div class="row">
-    @include('master.sidebar')
-    <div class="col-md-9">
+    <div class="col">
         <div class="card" style="min-height:85vh">
             <div class="card-body">
-                <div class="row mb-3">
-
-                    <div class="col">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/superadmin_users">Account</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/superadmin_produk">Product</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/superadmin_tambahstok">Add Stock</a>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
                 <div class="row">
                     <div class="col">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Product</li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Produk</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <a href="/superadmin_produk" class="btn btn-info">
+                            Produk <i class="fas fa-sync"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="GET" action="/superadmin_produk">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-info" type=" button"><i
+                                                            class="fas fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <form method="GET" action="/superadmin_produk">
 
-                    <div class="row mb-3">
+                                </form>
+                                <div class="row">
+                                    <div class="col table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="thead-white">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Stok</th>
+                                                    <th>Create</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach( $data as $no=>$p)
+                                                <tr>
+                                                    <td>{{$data->firstItem()+$no}}</td>
+                                                    <td>{{$p->nama}}</td>
+                                                    <td>{{ $p->stok }}</td>
+                                                    <td>{{$p->created_at}}</td>
+                                                    <td>{{$p->updated_at}}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
 
-                        <div class="col-md-8">
-                            <h3>Product</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="cari" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type=" button"><i
-                                            class="fas fa-search"></i></button>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">{{$data->links()}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </form>
-
-
-
-                <div class="row">
-                    <div class="col table-responsive">
-                        <table class="table table-hover">
-                            <thead class="thead-white">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Stock</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( $produk as $p)
-                                <tr>
-                                    <td>{{$p->nama}}</td>
-
-                                    <td>{{ $p->stok }}</td>
-                                    <td>{{$p->created_at}}</td>
-                                    <td>{{$p->updated_at}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-
                 </div>
-                <div class="row mt-2">
-                    <div class="col">{{$produk->links()}}</div>
-                </div>
+
+
+
+
+
+
             </div>
 
         </div>

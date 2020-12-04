@@ -27,11 +27,11 @@ class UsersController extends Controller
     public function indexsuperadmin(Request $request)
     {
         if ($request->has('cari')) {
-            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Users::where('username', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $datausers = Users::paginate(5);
+            $data = Users::paginate(4);
         }
-        return view('superadmin.superadmin_users', ['datausers' => $datausers]);
+        return view('superadmin.superadmin_users', ['data' => $data]);
     }
 
     public function indexpassword()
@@ -86,11 +86,12 @@ class UsersController extends Controller
         return redirect('/users')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit($id)
+    public function getdatabyid($id)
     {
-        $users = Users::find($id);
-        return view('admin.users_edit', ['users' => $users]);
+        $data = Users::find($id);
+        return response()->json($data);
     }
+
     public function editsuperadmin($id)
     {
         $users = Users::find($id);
@@ -112,7 +113,7 @@ class UsersController extends Controller
         return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');
     }
 
-    public function updatesuperadmin($id, Request $request)
+    public function updatesuperadmin(Request $request)
     {
         $this->validate($request, [
             'username' => 'required|min:8',
@@ -121,7 +122,7 @@ class UsersController extends Controller
 
         ]);
 
-        $users = Users::find($id);
+        $users = Users::find($request->id);
         $users->username = $request->username;
         $users->password = bcrypt($request->password);
         $users->role = $request->role;

@@ -9,15 +9,15 @@
                         <nav>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Aturan Produksi</li>
+                                <li class="breadcrumb-item active" aria-current="page">Bahasa Alami</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <a href="/superadmin_aturan" class="btn btn-info">
-                            Aturan Produksi <i class="fas fa-sync"></i>
+                        <a href="/superadmin_bahasaalami" class="btn btn-info">
+                            Bahasa Alami <i class="fas fa-sync"></i>
                         </a>
 
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#aturanModal"
@@ -29,7 +29,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <form method="GET" action="/superadmin_aturan">
+                                <form method="GET" action="/superadmin_bahasaalami">
                                     <div class="row mb-2">
                                         <div class="col">
                                             <div class="input-group">
@@ -50,7 +50,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Tag</th>
-                                                    <th>Aturan Produksi</th>
+                                                    <th>Kata</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
@@ -59,10 +59,10 @@
                                                 <tr>
                                                     <td>{{$data->firstItem()+$no}}</td>
                                                     <td>{{$p->tag}}</td>
-                                                    <td>{{ $p->aturanproduksi}}</td>
+                                                    <td>{{ $p->kata}}</td>
                                                     <td> <a href="javascript:void(0)" onclick="editAturan({{$p->id}})"
                                                             style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" aturan-id="{{$p->id}}" class="delete"
+                                                        <a href="#" bahasaalami-id="{{$p->id}}" class="delete"
                                                             style="color: red;"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr>
@@ -72,7 +72,8 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">{{$data->links()}}</div>
+                                    <div class="col">{{$data->links()}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +90,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Aturan Produksi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Bahasa Alami</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/superadmin_aturan/create" method="POST">
+                <form action="/superadmin_bahasaalami/create" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group row {{$errors->has('tag') ? 'has-error' : ''}}">
                         <label class="col-sm-4 col-form-label">Tag</label>
@@ -108,14 +109,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('aturanproduksi') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Aturan Produksi</label>
+                    <div class="form-group row {{$errors->has('kata') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Kata</label>
                         <div class="col-sm-8">
-                            <input type="text" name="aturanproduksi" class="form-control"
-                                value="{{old('aturanproduksi')}}">
+                            <input type="text" name="kata" class="form-control" value="{{old('kata')}}">
 
-                            @if($errors->has('aturanproduksi'))
-                            <span class="help-block">{{$errors->first('aturanproduksi')}}</span>
+                            @if($errors->has('kata'))
+                            <span class="help-block">{{$errors->first('kata')}}</span>
                             @endif
                         </div>
                     </div>
@@ -139,13 +139,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Aturan Produksi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Bahasa Alami</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="aturaneditform" action="/superadmin_aturan/update" method="POST">
+                <form id="aturaneditform" action="/superadmin_bahasaalami/update" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
@@ -162,12 +162,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('aturanproduksi') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Aturan Produksi</label>
+                    <div class="form-group row {{$errors->has('kata') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">kata</label>
                         <div class="col-sm-8">
-                            <input type="text" id="aturanproduksi" name="aturanproduksi" class="form-control">
-                            @if($errors->has('aturanproduksi'))
-                            <span class="help-block">{{$errors->first('aturanproduksi')}}</span>
+                            <input type="text" id="kata" name="kata" class="form-control">
+                            @if($errors->has('kata'))
+                            <span class="help-block">{{$errors->first('kata')}}</span>
                             @endif
                         </div>
                     </div>
@@ -187,18 +187,18 @@
 @section('footer')
 <script>
     function editAturan(id){
-    $.get('/superadmin_aturan/'+id,function(d){
+    $.get('/superadmin_bahasaalami/'+id,function(d){
         $("#id").val(d.id);
         $("#tag").val(d.tag);
-        $("#aturanproduksi").val(d.aturanproduksi);
+        $("#kata").val(d.kata);
         $("#aturaneditModal").modal("toggle");
     });
 }
     $('.delete').click(function(){
-        var users_id = $(this).attr('aturan-id');
+        var bahasaalami_id = $(this).attr('bahasaalami-id');
         Swal.fire({
         title: "Yakin?",
-        text: "Mau dihapus data user dengan id "+ users_id+"??",
+        text: "Mau dihapus data user dengan id "+ bahasaalami_id+"??",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -208,9 +208,9 @@
         }).then((result) => {
 
         if (result.isConfirmed) {
-        setTimeout(function(){ window.location = "/superadmin_aturan/"+users_id+"/delete"; }, 250);
+        setTimeout(function(){ window.location = "/superadmin_bahasaalami/"+bahasaalami_id+"/delete"; }, 250);
         }else{
-            window.location = "/superadmin_aturan";
+            window.location = "/superadmin_bahasaalami";
         }
         })
     });

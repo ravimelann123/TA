@@ -2,9 +2,7 @@
 @section('content')
 
 <div class="row justify-content-center">
-
-    @include('master.sidebar')
-    <div class="col-md-9">
+    <div class="col">
         <div class="card" style="min-height:85vh">
             {{-- <div class="card-header bg-white">
                 </div> --}}
@@ -14,7 +12,7 @@
                     <div class="col">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page">Home
+                                <li class="breadcrumb-item active" aria-current="page">Halaman Utama
                             </ol>
                         </nav>
                     </div>
@@ -27,7 +25,6 @@
                         {{auth()->user()->username}}
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

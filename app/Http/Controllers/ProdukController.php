@@ -28,11 +28,11 @@ class ProdukController extends Controller
     {
 
         if ($request->has('cari')) {
-            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $produk = Produk::paginate(5);
+            $data = Produk::paginate(4);
         }
-        return view('superadmin.superadmin_produk', ['produk' => $produk]);
+        return view('superadmin.superadmin_produk', ['data' => $data]);
     }
     public function indexproduk(Request $request)
     {
@@ -54,10 +54,7 @@ class ProdukController extends Controller
         } else {
             $photo = Photo::groupBy('produk_id')->get();
         }
-
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('users.produk', ['photo' => $photo, 'totalcart' => $totalcart]);
+        return view('users.produk', ['photo' => $photo]);
     }
 
     public function photoproduk($id)

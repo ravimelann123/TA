@@ -31,9 +31,9 @@ class AkunController extends Controller
     }
     public function biodatasuperadmin(Request $request, $id)
     {
-        $dataakun = Akun::where('users_id', '=', $id)->get();
+        $data = Akun::where('users_id', '=', $id)->get();
         //dd($dataakun);
-        return view('superadmin.superadmin_biodata', ['dataakun' => $dataakun]);
+        return view('superadmin.superadmin_biodata', ['data' => $data]);
     }
 
     public function edit($id)

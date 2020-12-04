@@ -35,10 +35,10 @@ class TambahstokController extends Controller
     }
     public function indexsuperadmin(Request $request)
     {
-        $produk = Produk::all();
+
         if ($request->has('cari')) {
             if ($request->cari == "") {
-                $tambahstok = Tambahstok::paginate(5);
+                $data = Tambahstok::paginate(4);
             } else {
                 $data = Produk::where('nama', '=', $request->cari)->get();
                 $flag = count($data);
@@ -46,15 +46,15 @@ class TambahstokController extends Controller
                     foreach ($data as $p) {
                         $id = $p->id;
                     }
-                    $tambahstok = Tambahstok::where('produk_id', '=', $id)->paginate(5);
+                    $data = Tambahstok::where('produk_id', '=', $id)->paginate(4);
                 } else {
-                    $tambahstok = Tambahstok::paginate(5);
+                    $data = Tambahstok::paginate(4);
                 }
             }
         } else {
-            $tambahstok = Tambahstok::paginate(5);
+            $data = Tambahstok::paginate(4);
         }
-        return view('superadmin.superadmin_tambah_stok', ['produk' => $produk], ['tambahstok' => $tambahstok]);
+        return view('superadmin.superadmin_tambah_stok',  ['data' => $data]);
     }
 
 
