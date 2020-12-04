@@ -27,7 +27,6 @@
                                 <select class="custom-select" name="cari">
                                     <option>
                                         Select Order Status</option>
-
                                     <option value="Menunggu Diproses">
                                         Waiting to be Processed</option>
                                     <option value="Sedang Diproses">Being Processed</option>

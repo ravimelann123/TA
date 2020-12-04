@@ -11,15 +11,11 @@ class PhotoController extends Controller
 
     public function indexlogin()
     {
-
-
         $photo = Photo::take(6)->groupBy('produk_id')->get();
-
         return view('auths.login', ['photo' => $photo]);
     }
     public function viewall()
     {
-
         $photo = Photo::groupBy('produk_id')->get();
         return view('master.viewall', ['photo' => $photo]);
     }
@@ -27,7 +23,6 @@ class PhotoController extends Controller
 
     public function create(Request $request)
     {
-
         if ($request->hasFile('namafoto')) {
             $image_array = $request->file('namafoto');
             $array_len = count($image_array);

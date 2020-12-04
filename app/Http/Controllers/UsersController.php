@@ -92,20 +92,25 @@ class UsersController extends Controller
         return response()->json($data);
     }
 
+    public function edit($id)
+    {
+        $data = Users::find($id);
+        return response()->json($data);
+    }
     public function editsuperadmin($id)
     {
         $users = Users::find($id);
         return view('superadmin.superadmin_users_edit', ['users' => $users]);
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'username' => 'required|min:8',
             'password' => 'required|min:8'
         ]);
 
-        $users = Users::find($id);
+        $users = Users::find($request->id);
         $users->username = $request->username;
         $users->password = bcrypt($request->password);
         $users->role = "user";

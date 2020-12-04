@@ -19,7 +19,6 @@
                         <a href="/superadmin_bahasaalami" class="btn btn-info">
                             Bahasa Alami <i class="fas fa-sync"></i>
                         </a>
-
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#aturanModal"
                             style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
                         </button>

@@ -16,27 +16,13 @@ class OrderController extends Controller
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
         return view('admin.orderdetail', ['orderdetail' => $orderdetail]);
     }
-    public function index()
-    {
-    }
-    public function orderbd(Request $request)
-    {
-
-        if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Menunggu Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
-        } else {
-            $order = Order::where('status', '=', 'Menunggu Diproses')->paginate(4);
-        }
-
-        return view('admin.orderbd', ['order' => $order]);
-    }
 
     public function updatetosd($id)
     {
         $order = Order::find($id);
         $order->status = "Sedang Diproses";
         $order->save();
-        return redirect('/orderbd')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/indexorder')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function updatetops($id)
@@ -44,45 +30,18 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Pesanan Selesai";
         $order->save();
-        return redirect('/ordersd')->with('sukses', 'Data Berhasil Dirubah');
-    }
-
-    public function ordersd(Request $request)
-    {
-
-        if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Sedang Diproses')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
-        } else {
-            $order = Order::where('status', '=', 'Sedang Diproses')->paginate(4);
-        }
-
-        return view('admin.ordersd', ['order' => $order]);
-    }
-
-    public function orderps(Request $request)
-    {
-
-        if ($request->has('cari')) {
-            $order = Order::where('status', '=', 'Pesanan Selesai')->where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
-        } else {
-            $order = Order::where('status', '=', 'Pesanan Selesai')->paginate(4);
-        }
-
-        return view('admin.orderps', ['order' => $order]);
+        return redirect('/indexorder')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function indexorder(Request $request)
     {
 
-
         if ($request->has('cari')) {
-            $order = Order::where('nomerpesanan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
+            $data = Order::where('status', '=',  $request->cari)->paginate(4);
         } else {
-            $order = Order::paginate(4);
+            $data = Order::paginate(4);
         }
-
-
-        return view('admin.indexorder', ['order' => $order]);
+        return view('admin.indexorder', ['data' => $data]);
     }
 
 
@@ -137,28 +96,11 @@ class OrderController extends Controller
         return view('users.pesanan', ['order' => $order, 'totalcart' => $totalcart]);
     }
 
-
-
-
-
-
     public function Dpesanan($id)
     {
         $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
         $totalcart = count($cart);
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
         return view('users.Dpesanan', ['orderdetail' => $orderdetail, 'totalcart' => $totalcart]);
-    }
-
-
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-
-    public function destroy(Order $order)
-    {
-        //
     }
 }

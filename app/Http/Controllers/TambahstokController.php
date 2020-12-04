@@ -11,27 +11,26 @@ class TambahstokController extends Controller
 
     public function indextambahstok(Request $request)
     {
-
-        $produk = Produk::all();
+        $data1 = Produk::all();
         if ($request->has('cari')) {
             if ($request->cari == "") {
-                $tambahstok = Tambahstok::paginate(5);
+                $data = Tambahstok::paginate(4);
             } else {
-                $data = Produk::where('nama', '=', $request->cari)->get();
-                $flag = count($data);
+                $data1 = Produk::where('nama', '=', $request->cari)->get();
+                $flag = count($data1);
                 if ($flag == 1) {
-                    foreach ($data as $p) {
+                    foreach ($data1 as $p) {
                         $id = $p->id;
                     }
-                    $tambahstok = Tambahstok::where('produk_id', '=', $id)->paginate(5);
+                    $data = Tambahstok::where('produk_id', '=', $id)->paginate(4);
                 } else {
-                    $tambahstok = Tambahstok::paginate(5);
+                    $data = Tambahstok::paginate(4);
                 }
             }
         } else {
-            $tambahstok = Tambahstok::paginate(5);
+            $data = Tambahstok::paginate(4);
         }
-        return view('admin.tambah_stokproduk', ['produk' => $produk], ['tambahstok' => $tambahstok]);
+        return view('admin.tambah_stokproduk', ['data' => $data, 'data1' => $data1]);
     }
     public function indexsuperadmin(Request $request)
     {
@@ -71,30 +70,6 @@ class TambahstokController extends Controller
         $produk->stok = $produk->stok + $request->stok;
         $produk->save();
         return redirect('/tambahstok')->with('sukses', 'Data Berhasil Ditambahkan');
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show(Tambahstok $tambahstok)
-    {
-        //
-    }
-
-
-    public function edit(Tambahstok $tambahstok)
-    {
-        //
-    }
-
-
-    public function update(Request $request, Tambahstok $tambahstok)
-    {
-        //
     }
 
 

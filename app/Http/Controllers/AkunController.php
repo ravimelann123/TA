@@ -25,9 +25,9 @@ class AkunController extends Controller
 
     public function biodata(Request $request, $id)
     {
-        $dataakun = Akun::where('users_id', '=', $id)->get();
+        $data = Akun::where('users_id', '=', $id)->get();
         //dd($dataakun);
-        return view('admin.biodata', ['dataakun' => $dataakun]);
+        return view('admin.biodata', ['data' => $data]);
     }
     public function biodatasuperadmin(Request $request, $id)
     {
@@ -38,8 +38,8 @@ class AkunController extends Controller
 
     public function edit($id)
     {
-        $akun = Akun::find($id);
-        return view('admin.akun_edit', ['akun' => $akun]);
+        $data = Akun::find($id);
+        return response()->json($data);
     }
 
     public function editsuperadmin($id)
@@ -47,17 +47,17 @@ class AkunController extends Controller
         $akun = Akun::find($id);
         return view('superadmin.superadmin_biodata_edit', ['akun' => $akun]);
     }
-    public function updatesuperadmin(Request $request, $id)
+    public function updatesuperadmin(Request $request)
     {
         //dd($request->all());
-        $this->validate($request, [
-            'email' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|numeric',
-            'avatar' => 'mimes:jpeg,png',
-        ]);
-        $akun = Akun::find($id);
+        // $this->validate($request, [
+        //     'email' => 'required',
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp' => 'required|min:10|numeric',
+        //     'avatar' => 'mimes:jpeg,png',
+        // ]);
+        $akun = Akun::find($request->id);
         $akun->update($request->all());
         if ($request->hasFile('avatar')) {
             $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
@@ -69,17 +69,17 @@ class AkunController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //dd($request->all());
-        $this->validate($request, [
-            'email' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|numeric',
-            'avatar' => 'mimes:jpeg,png',
-        ]);
-        $akun = Akun::find($id);
+        // $this->validate($request, [
+        //     'email' => 'required',
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp' => 'required|min:10|numeric',
+        //     'avatar' => 'mimes:jpeg,png',
+        // ]);
+        $akun = Akun::find($request->id);
         $akun->update($request->all());
         if ($request->hasFile('avatar')) {
             $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
@@ -125,5 +125,11 @@ class AkunController extends Controller
     {
 
         return view('users.profileuser');
+    }
+
+    public function getdatabyid($id)
+    {
+        $data = Akun::find($id);
+        return response()->json($data);
     }
 }

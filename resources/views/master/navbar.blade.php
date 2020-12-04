@@ -36,6 +36,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    MASTER
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/users">Akun</a>
+                    <a class="dropdown-item" href="/produk">Produk</a>
+                    <a class="dropdown-item" href="/tambahstok">Tambah Stok</a>
+                    {{-- <div class="dropdown-divider"></div> --}}
+
+                </div>
+            </li>
+            <a class=" nav-item nav-link navku" href="/indexorder">Pesanan</a>
 
             {{-- <a class=" nav-item nav-link navku" href="/dashboard"><i class="fas fa-bell"></i></a> --}}
             <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"></i></a>
@@ -71,8 +85,8 @@
                     <a class="dropdown-item" href="/superadmin_users">Akun</a>
                     <a class="dropdown-item" href="/superadmin_produk">Produk</a>
                     <a class="dropdown-item" href="/superadmin_tambahstok">Tambah Stok</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/superadmin_tambahstok">Tambah Stok</a>
+                    {{-- <div class="dropdown-divider"></div> --}}
+
                 </div>
             </li>
             <li class="nav-item dropdown">

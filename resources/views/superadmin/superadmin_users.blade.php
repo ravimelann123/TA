@@ -46,9 +46,10 @@
                                 </form>
                                 <div class="row">
                                     <div class="col table-responsive">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover table-bordered">
                                             <thead class="thead-white">
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Username</th>
                                                     <th>Biodata</th>
                                                     <th>Role</th>
@@ -59,8 +60,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($data as $p)
+                                                @foreach($data as $no=>$p)
                                                 <tr>
+                                                    <td>{{$data->firstItem()+$no}}</td>
                                                     <td>{{ $p->username }}</td>
                                                     {{-- <td>{{ $p->role }}</td> --}}
                                                     <td><a href="/superadmin_biodata/{{$p->id}}" name="id" value="">View
@@ -166,7 +168,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Bahasa Alami</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Akun</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -233,7 +235,7 @@
 
 <script>
     function editAkun(id){
-    $.get('/superadmin_users/'+id,function(d){
+    $.get('/users/'+id,function(d){
         $("#id").val(d.id);
         $("#username").val(d.username);
         $("#akuneditModal").modal("toggle");

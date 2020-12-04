@@ -42,7 +42,7 @@
                                 </form>
                                 <div class="row">
                                     <div class="col table-responsive">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>

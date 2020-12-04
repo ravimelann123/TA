@@ -52,31 +52,31 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/users', 'UsersController@index');
     Route::post('/users/create', 'UsersController@create');
-    Route::get('/users/edit/{id}', 'UsersController@edit');
-    Route::put('/users/update/{id}', 'UsersController@update');
+    Route::get('/users/{id}', 'UsersController@edit');
+    Route::put('/users/update', 'UsersController@update');
     Route::get('/users/hapus/{id}', 'UsersController@delete');
 
     Route::get('/produk', 'ProdukController@index');
     Route::post('/produk/create', 'ProdukController@create');
     Route::post('/photo/create', 'PhotoController@create');
 
-    Route::get('/produk/edit/{id}', 'ProdukController@edit');
-    Route::put('/produk/update/{id}', 'ProdukController@update');
+    Route::get('/produk/{id}', 'ProdukController@edit');
+    Route::put('/produk/update', 'ProdukController@update');
     Route::get('/produk/hapus/{id}', 'ProdukController@delete');
     Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
     Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
 
-    Route::get('/biodata/{id}', 'AkunController@biodata');
-    Route::get('/biodata/{id}/edit', 'AkunController@edit');
-    Route::put('/akun/update/{id}', 'AkunController@update');
+    Route::get('/users/biodata/{id}', 'AkunController@biodata');
+    Route::get('/users/biodata/{id}/edit', 'AkunController@edit');
+    Route::put('/users/biodata/update', 'AkunController@update');
+
+
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');
     Route::get('/detailpesanan/{id}', 'OrderController@orderdetailpesanan');
     Route::get('/indexorder', 'OrderController@indexorder');
-    Route::get('/orderbd', 'OrderController@orderbd');
-    Route::get('/ordersd', 'OrderController@ordersd');
-    Route::get('/orderps', 'OrderController@orderps');
+
     Route::get('/updatetosd/{id}', 'OrderController@updatetosd');
     Route::get('/updatetops/{id}', 'OrderController@updatetops');
 });
@@ -84,6 +84,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
     Route::get('/superadmin_users', 'UsersController@indexsuperadmin');
     Route::post('/superadmin_users/create', 'UsersController@createsuperadmin');
+    Route::get('/superadmin_users/biodata/{id}', 'AkunController@getdatabyid');
+    Route::put('/superadmin_users/biodata/update', 'AkunController@updatesuperadmin');
     Route::get('/superadmin_users/{id}', 'UsersController@getdatabyid');
     Route::put('/superadmin_users/update', 'UsersController@updatesuperadmin');
     Route::get('/superadmin_users/{id}/delete', 'UsersController@deletesuperadmin');

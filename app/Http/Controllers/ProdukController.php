@@ -15,13 +15,11 @@ class ProdukController extends Controller
     {
 
         if ($request->has('cari')) {
-            $produk = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $produk = Produk::paginate(5);
+            $data = Produk::paginate(4);
         }
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('admin.produk', ['produk' => $produk, 'totalcart' => $totalcart]);
+        return view('admin.produk', ['data' => $data]);
     }
 
     public function indexsuperadmin(Request $request)
@@ -60,8 +58,8 @@ class ProdukController extends Controller
     public function photoproduk($id)
     {
         //$produk_id = $id;
-        $photo = Photo::where('produk_id', '=', $id)->paginate(5);
-        return view('admin.Photo', ['photo' => $photo]);
+        $data = Photo::where('produk_id', '=', $id)->paginate(1);
+        return view('admin.Photo', ['data' => $data]);
     }
 
     public function create(Request $request)
@@ -93,20 +91,14 @@ class ProdukController extends Controller
 
 
 
-    public function show(Produk $produk)
-    {
-        //
-    }
-
-
     public function edit($id)
     {
-        $produk = Produk::find($id);
-        return view('admin.produk_edit', ['produk' => $produk]);
+        $data = Produk::find($id);
+        return response()->json($data);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // $this->validate($request, [
         //     'username' => 'required|min:8',
@@ -115,7 +107,7 @@ class ProdukController extends Controller
 
         // ]);
 
-        $produk = Produk::find($id);
+        $produk = Produk::find($request->id);
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;
