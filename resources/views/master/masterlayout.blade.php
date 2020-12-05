@@ -27,7 +27,6 @@
     </div>
     @endif
 
-
     {{-- JS --}}
 
     @include('master.s')

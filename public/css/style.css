@@ -4,16 +4,17 @@
     font-size: 32px;
 }
 
-.tombol {
+/* .jumbotron {
+    background-image: url("/images/bg/Jumbotron.png");
+    background-size: cover;
+    height: 600px;
+} */
+/* .tombol {
     text-transform: uppercase;
     border-radius: 40px;
 }
 
-.jumbotronhome {
-    background-image: url("/images/bg/Jumbotron.png");
-    background-size: cover;
-    height: 600px;
-}
+
 
 .jumbotronhome .display-4 {
     color: #ffc178;
@@ -23,8 +24,9 @@
 }
 .jumbotronhome .display-4 span {
     font-weight: 500;
-}
+} */
 
+/* Sidebar */
 .sidebar a,
 .dropdown-btn {
     border: none;
@@ -35,7 +37,6 @@
     text-align: left;
 }
 
-/* Sidebar */
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
     display: none;
@@ -194,37 +195,13 @@
     pointer-events: none;
 }
 
+.dropdownku {
+    text-transform: uppercase;
+    margin-right: 30px;
+}
 /* Desktop Version */
 @media (min-width: 992px) {
-    .navku {
+    /* .navku {
         text-transform: uppercase;
-    }
-    .navkutombol {
-        text-transform: capitalize;
-        margin-right: 30px;
-        margin-left: 30px;
-    }
-
-    .navku:hover::after {
-        content: "";
-        display: block;
-        border-bottom: 3px solid #0b63dc;
-        width: 50%;
-        margin: auto;
-        padding-bottom: 5px;
-        margin-bottom: -8px;
-    }
-    .jumbotron {
-        margin-top: -75px;
-    }
-
-    .dropdownku {
-        text-transform: uppercase;
-        margin-right: 30px;
-    }
-
-    .gambar {
-        height: 175px;
-        width: 100%;
-    }
+    } */
 }
