@@ -14,16 +14,15 @@
                         </nav>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <a href="/superadmin_Prosess_NLP" class="btn btn-info">
-                            Proses NLP <i class="fas fa-sync"></i>
-                        </a>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col">
                         <div class="card">
+                            <div class="card-header">
+                                <a href="/superadmin_Prosess_NLP" class="btn btn-info">
+                                    <i class="fas fa-sync"></i>
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">

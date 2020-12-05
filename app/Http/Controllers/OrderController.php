@@ -87,20 +87,18 @@ class OrderController extends Controller
     public function indexpesanan(Request $request)
     {
         if ($request->has('cari')) {
-            $order = Order::where('status', '=',  $request->cari)->where('users_id', '=', auth()->user()->id)->paginate(5);
+            $data = Order::where('status', '=',  $request->cari)->where('users_id', '=', auth()->user()->id)->paginate(4);
         } else {
-            $order = Order::where('users_id', '=', auth()->user()->id)->paginate(5);
+            $data = Order::where('users_id', '=', auth()->user()->id)->paginate(4);
         }
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('users.pesanan', ['order' => $order, 'totalcart' => $totalcart]);
+
+        return view('users.pesanan', ['data' => $data]);
     }
 
     public function Dpesanan($id)
     {
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
+
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
-        return view('users.Dpesanan', ['orderdetail' => $orderdetail, 'totalcart' => $totalcart]);
+        return view('users.Dpesanan', ['orderdetail' => $orderdetail]);
     }
 }

@@ -15,16 +15,15 @@
                         </nav>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <a href="/superadmin_produk" class="btn btn-info">
-                            Produk <i class="fas fa-sync"></i>
-                        </a>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col">
                         <div class="card">
+                            <div class="card-header">
+                                <a href="/superadmin_produk" class="btn btn-info">
+                                    <i class="fas fa-sync"></i>
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <form method="GET" action="/superadmin_produk">
                                     <div class="row mb-2">

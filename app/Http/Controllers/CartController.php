@@ -13,11 +13,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        $photo = Photo::groupBy('produk_id')->get();
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $produk = Produk::all();
-        $totalcart = count($cart);
-        return view('users.cart', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart, 'produk' => $produk]);
+        $data = Cart::where('users_id', '=', auth()->user()->id)->get();
+        $data1 = Produk::all();
+        return view('users.cart', ['data' => $data, 'data1' => $data1]);
     }
 
 

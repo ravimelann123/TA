@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-
+            <a class=" nav-item nav-link navku" href="/pesanan">Pesanan</a>
             <a class=" nav-item nav-link navku" href="/dashboard"><i class=" fas fa-home"
                     style="margin-right: 5px"></i></a>
             <a class=" nav-item nav-link navku" href="/cart"><i class="fas fa-shopping-basket"
@@ -79,7 +79,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Master
+                    MASTER
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/superadmin_users">Akun</a>
@@ -92,7 +92,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Proses
+                    PROSES
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/superadmin_aturan">Aturan</a>

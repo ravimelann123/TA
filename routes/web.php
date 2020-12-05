@@ -35,7 +35,9 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/changemyprofile', 'AkunController@indexmyprofile');
     Route::put('/changemyprofile/update', 'AkunController@updatemyprofile');
     Route::get('/changepassword', 'UsersController@IndexPassword');
+
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
+
     Route::get('/transaksi', 'OrderController@indextransaksi');
     Route::get('/cart', 'CartController@index');
     Route::post('/cart/addproduk', 'CartController@addprodukcart');

@@ -10,23 +10,19 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Order</li>
+                            <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
                         </ol>
                     </nav>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <a href="/indexorder" class="btn btn-info">
-                        Pesanan <i class="fas fa-sync"></i>
-                    </a>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col">
                     <div class="card">
+                        <div class="card-header">
+                            <a href="/indexorder" class="btn btn-info">
+                                <i class="fas fa-sync"></i>
+                            </a>
+                        </div>
                         <div class="card-body">
                             <form method="GET" action="/indexorder">
                                 <div class="row mb-3">

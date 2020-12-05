@@ -149,7 +149,7 @@ class UsersController extends Controller
                 $users = Users::find(auth()->user()->id);
                 $users->password = bcrypt($data['passwordbaru']);
                 $users->save();
-                return redirect('/changepassword')->with('sukses', 'Kata Sandi Berhasil Dirubah');
+                return redirect('/myprofile')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
                 return redirect()->back();
             }

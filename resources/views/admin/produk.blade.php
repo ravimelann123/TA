@@ -16,20 +16,17 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <a href="/tambahstok" class="btn btn-info">
-                        <i class="fas fa-sync"></i>
-                    </a>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produkModal"
-                        style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
-                    </button>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col">
                     <div class="card">
+                        <div class="card-header">
+                            <a href="/tambahstok" class="btn btn-info">
+                                <i class="fas fa-sync"></i>
+                            </a>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produkModal"
+                                style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
+                            </button>
+                        </div>
                         <div class="card-body">
                             <form method="GET" action="/produk">
                                 <div class="row mb-3">
