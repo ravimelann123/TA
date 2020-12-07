@@ -35,9 +35,7 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/changemyprofile', 'AkunController@indexmyprofile');
     Route::put('/changemyprofile/update', 'AkunController@updatemyprofile');
     Route::get('/changepassword', 'UsersController@IndexPassword');
-
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
-
     Route::get('/transaksi', 'OrderController@indextransaksi');
     Route::get('/cart', 'CartController@index');
     Route::post('/cart/addproduk', 'CartController@addprodukcart');
@@ -61,18 +59,18 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/produk', 'ProdukController@index');
     Route::post('/produk/create', 'ProdukController@create');
     Route::post('/photo/create', 'PhotoController@create');
-
     Route::get('/produk/{id}', 'ProdukController@edit');
     Route::put('/produk/update', 'ProdukController@update');
     Route::get('/produk/hapus/{id}', 'ProdukController@delete');
+    Route::get('/myprofileadmin', 'AkunController@myprofileadmin');
     Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
     Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
-
+    Route::put('/changepasswordadmin/update', 'UsersController@UpdatePasswordadmin');
     Route::get('/users/biodata/{id}', 'AkunController@biodata');
     Route::get('/users/biodata/{id}/edit', 'AkunController@edit');
     Route::put('/users/biodata/update', 'AkunController@update');
 
-
+    Route::put('/changemyprofileadmin/update', 'AkunController@updatemyprofileadmin');
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');

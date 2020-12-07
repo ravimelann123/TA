@@ -9,20 +9,27 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
 
-            <div class="btn-group">
-                <a href="/dashboard" class="btn btn-primary"
-                    style="border-bottom-left-radius: 20px;border-top-left-radius: 20px"><i
-                        class=" fas fa-home"></i></a>
-                <a href="/cart" class="btn btn-primary"><i class="fas fa-shopping-basket"></i></a>
-                <a href="/chatbot" class="btn btn-primary"
-                    style="border-bottom-right-radius: 20px;border-top-right-radius: 20px"><i class=" fas
-                    fa-comments"></i></a>
-            </div>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/dashboard"><i class=" fas fa-home"></i> Home</a>
+                    <a class="dropdown-item" href="/chatbot"><i class=" fas
+                        fa-comments"></i> Chatbot</a>
+                    <a class="dropdown-item" href="/cart"><i class="fas fa-shopping-basket"></i> Keranjang</a>
+                    <a class="dropdown-item" href="/myprofile"><i class="fas fa-cog"></i> Pengaturan</a>
+                    {{-- <div class="dropdown-divider"></div> --}}
+
+                </div>
+            </li>
             <a class="nav-item nav-link" href="/pesanan">PESANAN</a>
         </ul>
         <span>
-            <a class="btn btn-danger" type="submit" href="/logout">Log
-                out <i class="fas fa-sign-out-alt"></i></a>
+            <a class="btn btn-danger" type="submit" href="/logout" style="border-radius: 20px"> <i
+                    class="fas fa-sign-out-alt"></i></a>
 
         </span>
     </div>
@@ -32,6 +39,7 @@
 {{-- NAVBAR ADMIN--}}
 @if(auth()->user()->role=='admin')
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
+
     <a class="navbar-brand" href="#">KUE BOLU RM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +47,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <a class="btn btn-primary" href="/dashboard" style="border-radius: 20px"><i class=" fas fa-home"></i></a>
+
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/dashboard"><i class=" fas fa-home"></i> Home</a>
+
+                    <a class="dropdown-item" href="/myprofileadmin"><i class="fas fa-cog"></i> Pengaturan</a>
+                    {{-- <div class="dropdown-divider"></div> --}}
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     MASTER
                 </a>
@@ -56,8 +78,8 @@
             <a class="nav-item nav-link" href="/indexorder">PESANAN</a>
         </ul>
         <span>
-            <a class="btn btn-danger" type="submit" href="/logout">Log
-                out <i class="fas fa-sign-out-alt"></i></a>
+            <a class="btn btn-danger" type="submit" href="/logout" style="border-radius: 20px"><i
+                    class="fas fa-sign-out-alt"></i></a>
         </span>
     </div>
 </nav>
@@ -74,9 +96,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <a class="btn btn-primary" href="/dashboard" style="border-radius: 20px"><i class=" fas fa-home"></i></a>
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/dashboard"><i class=" fas fa-home"></i> Home</a>
+
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     MASTER
                 </a>
@@ -89,7 +122,7 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     PROSES
                 </a>
@@ -104,8 +137,8 @@
 
         </ul>
         <span>
-            <a class="btn btn-danger" type="submit" href="/logout">Log
-                out <i class="fas fa-sign-out-alt"></i></a>
+            <a class="btn btn-danger" type="submit" href="/logout" style="border-radius: 20px"><i
+                    class="fas fa-sign-out-alt"></i></a>
         </span>
     </div>
 </nav>

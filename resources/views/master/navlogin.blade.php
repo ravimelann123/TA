@@ -7,14 +7,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
-            </li>
+            </li> --}}
 
         </ul>
         <span class="navbar-text">
-            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Log
-                In <i class="fas fa-sign-in-alt"></i></button>
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                style="border-radius: 20px"> <i class="fas fa-sign-in-alt"></i></button>
 
         </span>
     </div>

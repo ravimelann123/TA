@@ -157,7 +157,28 @@ class UsersController extends Controller
             return redirect()->back();
         }
     }
-
+    public function UpdatePasswordadmin(Request $request)
+    {
+        $this->validate($request, [
+            'passwordlama' => 'required|min:8',
+            'passwordbaru' => 'required|min:8',
+            'konfirmasipassword' => 'required|min:8',
+        ]);
+        //dd($request->all());
+        $data = $request->all();
+        if (Hash::check($data['passwordlama'], auth()->user()->password)) {
+            if ($data['passwordbaru'] == $data['konfirmasipassword']) {
+                $users = Users::find(auth()->user()->id);
+                $users->password = bcrypt($data['passwordbaru']);
+                $users->save();
+                return redirect('/myprofileadmin')->with('sukses', 'Kata Sandi Berhasil Dirubah');
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
 
     public function delete($id)
     {

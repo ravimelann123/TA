@@ -14,7 +14,6 @@
                     </nav>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -109,7 +108,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/changepassword/update" method="POST">
+                <form action="/changepasswordadmin/update" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
@@ -172,7 +171,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/changemyprofile/update" method="POST" enctype="multipart/form-data">
+                <form action="/changemyprofileadmin/update" method="POST" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
