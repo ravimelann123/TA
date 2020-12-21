@@ -42,12 +42,12 @@ class UsersController extends Controller
     }
     public function createsuperadmin(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'password' => 'required|min:8',
-            'role' => 'required'
+        // $this->validate($request, [
+        //     'username' => 'required|min:8',
+        //     'password' => 'required|min:8',
+        //     'role' => 'required'
 
-        ]);
+        // ]);
 
         $data = $request->all();
         $users = new Users;
@@ -120,12 +120,12 @@ class UsersController extends Controller
 
     public function updatesuperadmin(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'password' => 'required|min:8',
-            'role' => 'required'
+        // $this->validate($request, [
+        //     'username' => 'required|min:8',
+        //     'password' => 'required|min:8',
+        //     'role' => 'required'
 
-        ]);
+        // ]);
 
         $users = Users::find($request->id);
         $users->username = $request->username;
@@ -137,11 +137,11 @@ class UsersController extends Controller
 
     public function UpdatePassword(Request $request)
     {
-        $this->validate($request, [
-            'passwordlama' => 'required|min:8',
-            'passwordbaru' => 'required|min:8',
-            'konfirmasipassword' => 'required|min:8',
-        ]);
+        // $this->validate($request, [
+        //     'passwordlama' => 'required|min:8',
+        //     'passwordbaru' => 'required|min:8',
+        //     'konfirmasipassword' => 'required|min:8',
+        // ]);
         //dd($request->all());
         $data = $request->all();
         if (Hash::check($data['passwordlama'], auth()->user()->password)) {
@@ -159,11 +159,11 @@ class UsersController extends Controller
     }
     public function UpdatePasswordadmin(Request $request)
     {
-        $this->validate($request, [
-            'passwordlama' => 'required|min:8',
-            'passwordbaru' => 'required|min:8',
-            'konfirmasipassword' => 'required|min:8',
-        ]);
+        // $this->validate($request, [
+        //     'passwordlama' => 'required|min:8',
+        //     'passwordbaru' => 'required|min:8',
+        //     'konfirmasipassword' => 'required|min:8',
+        // ]);
         //dd($request->all());
         $data = $request->all();
         if (Hash::check($data['passwordlama'], auth()->user()->password)) {

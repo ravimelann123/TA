@@ -233,9 +233,10 @@
 
 <script>
     function editAkun(id){
-    $.get('/users/'+id,function(d){
+    $.get('/superadmin_users/'+id,function(d){
         $("#id").val(d.id);
         $("#username").val(d.username);
+        $("#password").val(d.password);
         $("#akuneditModal").modal("toggle");
     });
 }
