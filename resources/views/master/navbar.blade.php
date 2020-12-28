@@ -19,7 +19,7 @@
                     <a class="dropdown-item" href="/dashboard"><i class=" fas fa-home"></i> Home</a>
                     <a class="dropdown-item" href="/chatbot"><i class=" fas
                         fa-comments"></i> Chatbot</a>
-                    <a class="dropdown-item" href="/cart"><i class="fas fa-shopping-basket"></i> Keranjang</a>
+                    {{-- <a class="dropdown-item" href="/cart"><i class="fas fa-shopping-basket"></i> Keranjang</a> --}}
                     <a class="dropdown-item" href="/myprofile"><i class="fas fa-cog"></i> Pengaturan</a>
                     {{-- <div class="dropdown-divider"></div> --}}
 

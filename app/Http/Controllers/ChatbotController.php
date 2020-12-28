@@ -56,13 +56,51 @@ class ChatbotController extends Controller
         $kalimat->kalimat = $pesan2spasi;
         $kalimat->save();
 
+        $listkata = array(
+            array("kata perintah", "tampilkan"),
+            array("kata perintah", "pesan"),
+            array("kata perintah", "batalkan"),
+            array("kata perintah", "ubah"),
+            array("operator", "seluruh"),
+            array("atribut", "nomer"),
+            array("atribut", "nama"),
+            array("atribut", "harga"),
+            array("atribut", "status"),
+            array("kata", "jumlah"),
+            array("kata", "biaya"),
+            array("kata", "pesanan"),
+            array("kata", "produk"),
+            array("kata", "ditawarkan"),
+            array("kata", "bernomer"),
+            array("kata tanya", "kapan"),
+            array("kata tanya", "apa"),
+            array("kata tanya", "berapa"),
+        );
+
+        $listaturan = array(
+            array("aturan1", "tampilkan seluruh produk"),
+            array("aturan1", "tampilkan seluruh pesanan"),
+            array("aturan1", "tampilkan nama produk"),
+            array("aturan1", "tampilkan harga produk"),
+            array("aturan1", "tampilkan nama harga produk"),
+            array("aturan1", "tampilkan status pesanan"),
+            array("aturan2", "pesan"),
+            array("aturan3", "batalkan pesanan nomer"),
+            array("aturan3", "batalkan pesanan bernomer"),
+            array("aturan4", "ubah pesanan"),
+            array("aturan5", "berapa jumlah pesanan"),
+            array("aturan5", "berapa jumlah biaya pesanan"),
+            array("aturan6", "kapan pesanan nomer"),
+            array("aturan7", "apa pesanan nomer"),
+            array("aturan7", "apa produk ditawarkan"),
+
+        );
         // menggambil id data kalimat terbaru yang di inputkan
         $idkalimat = 0;
         $datakalimat = Kalimat::where('users_id', '=', auth()->user()->id)->latest()->first();
         $idkalimat = $datakalimat->id;
-
         $arr_pesandipecah = count($pesandipecah);
-        $bahasa = Kata::all();
+
         $token = 0;
         for ($i = 0; $i < $arr_pesandipecah; $i++) {
             $tblprosesnlp = new Prosesnlp;
@@ -70,12 +108,11 @@ class ChatbotController extends Controller
             $tblprosesnlp->proses_id = $prosesid;
             $tblprosesnlp->kalimat_id = $idkalimat;
             $tblprosesnlp->kata = $pesandipecah[$i];
-            foreach ($bahasa as $p) {
-                if ($pesandipecah[$i] == $p->kata) {
+            for ($baris = 0; $baris < count($listkata); $baris++) {
+                if ($pesandipecah[$i] == $listkata[$baris][1]) {
                     $token = 1;
                 }
             }
-
             if ($token == 1) {
                 $tblprosesnlp->token = 1;
             } else {
@@ -94,13 +131,15 @@ class ChatbotController extends Controller
         $kalimat = trim(preg_replace('/\s+/', ' ', $kalimat));
 
         //parser
-        $dataaturan = Aturan::all();
+        //$dataaturan = Aturan::all();
         $parser = "";
-        foreach ($dataaturan as $da) {
-            if ($kalimat == $da->aturanproduksi) {
-                $parser = $da->tag;
+        //foreach ($dataaturan as $da) {
+        for ($baris = 0; $baris < count($listaturan); $baris++) {
+            if ($kalimat == $listaturan[$baris][1]) {
+                $parser = $listaturan[$baris][0];
             }
         }
+        //}
 
         $datakalimat1 = Kalimat::find($idkalimat);
         $datakalimat1->parsing = $parser;
