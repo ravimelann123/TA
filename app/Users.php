@@ -32,4 +32,8 @@ class Users extends Authenticatable
     {
         return $this->hasOne(Kalimat::class);
     }
+    public function similarity()
+    {
+        return $this->hasOne(Similarity::class);
+    }
 }

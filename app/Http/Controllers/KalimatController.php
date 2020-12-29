@@ -19,6 +19,6 @@ class KalimatController extends Controller
         }
 
         $data1 = Prosesnlp::all();
-        return view('superadmin.superadmin_ProsessNlp', ['data' => $data, 'data1' => $data1]);
+        return view('admin.proses_nlp', ['data' => $data, 'data1' => $data1]);
     }
 }

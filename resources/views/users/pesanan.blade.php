@@ -4,12 +4,12 @@
 <div class="col">
     <div class="card" style="min-height:85vh">
         <div class="card-body">
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Pesanan Saya</li>
+                            <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
                         </ol>
                     </nav>
                 </div>
@@ -19,12 +19,12 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <a href="/pesanan">
-                                <h5>Pesanan</h5>
+                            <a href="/plgn/pesanan" class="btn btn-info">
+                                Refresh
                             </a>
                         </div>
                         <div class="card-body">
-                            <form method="GET" action="/pesanan">
+                            <form method="GET" action="/plgn/pesanan">
                                 <div class="row mb-3">
                                     <div class="col">
                                         <div class="input-group">
@@ -53,10 +53,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Order Number</th>
+                                                    <th>Nomer Pesanan</th>
                                                     <th>Status</th>
-                                                    <th>Total Price</th>
-                                                    <th>Order Details</th>
+                                                    <th>Total Harga</th>
+                                                    <th>Opsi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

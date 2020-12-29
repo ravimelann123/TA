@@ -85,7 +85,7 @@ class ProdukController extends Controller
                 $photo->produk_id = $produk->id;
                 $photo->save();
             }
-            return redirect('/produk')->with('sukses', 'Data Berhasil Ditambahkan');
+            return redirect('/admin/produk')->with('sukses', 'Data Berhasil Ditambahkan');
         }
     }
 
@@ -112,7 +112,7 @@ class ProdukController extends Controller
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;
         $produk->save();
-        return redirect('/produk')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/produk')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function delete($id)
@@ -120,6 +120,6 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->delete();
         $photo = Photo::where('produk_id', '=', $id)->delete();
-        return redirect('/produk')->with('delete', 'Data Berhasil Dihapus');
+        return redirect('/admin/produk')->with('delete', 'Data Berhasil Dihapus');
     }
 }

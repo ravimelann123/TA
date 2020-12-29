@@ -18,21 +18,13 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         if ($request->has('cari')) {
-            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->where('role', '=', 'user')->paginate(5);
+            $datausers = Users::where('username', 'LIKE', '%' . $request->cari . '%')->where('id', '!=', auth()->user()->id)->paginate(5);
         } else {
-            $datausers = Users::where('role', '=', 'user')->paginate(5);
+            $datausers = Users::where('id', '!=', auth()->user()->id)->paginate(5);
         }
         return view('admin.users', ['datausers' => $datausers]);
     }
-    public function indexsuperadmin(Request $request)
-    {
-        if ($request->has('cari')) {
-            $data = Users::where('username', 'LIKE', '%' . $request->cari . '%')->paginate(4);
-        } else {
-            $data = Users::paginate(4);
-        }
-        return view('superadmin.superadmin_users', ['data' => $data]);
-    }
+
 
     public function indexpassword()
     {
@@ -40,12 +32,14 @@ class UsersController extends Controller
         $totalcart = count($cart);
         return view('users.changepassword', ['totalcart' => $totalcart]);
     }
-    public function createsuperadmin(Request $request)
+
+
+
+    public function create(Request $request)
     {
         // $this->validate($request, [
         //     'username' => 'required|min:8',
-        //     'password' => 'required|min:8',
-        //     'role' => 'required'
+        //     'password' => 'required|min:8'
 
         // ]);
 
@@ -60,30 +54,7 @@ class UsersController extends Controller
         $akun->users_id = $users->id;
         $akun->nama = "Default";
         $akun->save();
-        return redirect('/superadmin_users')->with('sukses', 'Data Berhasil Ditambahkan');
-    }
-
-
-    public function create(Request $request)
-    {
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'password' => 'required|min:8'
-
-        ]);
-
-        $data = $request->all();
-        $users = new Users;
-        $users->username = $data['username'];
-        $users->password = bcrypt($data['password']);
-        $users->role = "user";
-        $users->save();
-
-        $akun = new Akun;
-        $akun->users_id = $users->id;
-        $akun->nama = "Default";
-        $akun->save();
-        return redirect('/users')->with('sukses', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/users')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     public function getdatabyid($id)
@@ -97,34 +68,13 @@ class UsersController extends Controller
         $data = Users::find($id);
         return response()->json($data);
     }
-    public function editsuperadmin($id)
-    {
-        $users = Users::find($id);
-        return view('superadmin.superadmin_users_edit', ['users' => $users]);
-    }
+
 
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'password' => 'required|min:8'
-        ]);
-
-        $users = Users::find($request->id);
-        $users->username = $request->username;
-        $users->password = bcrypt($request->password);
-        $users->role = "user";
-        $users->save();
-        return redirect('/users')->with('sukses', 'Data Berhasil Dirubah');
-    }
-
-    public function updatesuperadmin(Request $request)
-    {
         // $this->validate($request, [
         //     'username' => 'required|min:8',
-        //     'password' => 'required|min:8',
-        //     'role' => 'required'
-
+        //     'password' => 'required|min:8'
         // ]);
 
         $users = Users::find($request->id);
@@ -132,8 +82,10 @@ class UsersController extends Controller
         $users->password = bcrypt($request->password);
         $users->role = $request->role;
         $users->save();
-        return redirect('/superadmin_users')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/users')->with('sukses', 'Data Berhasil Dirubah');
     }
+
+
 
     public function UpdatePassword(Request $request)
     {
@@ -149,7 +101,7 @@ class UsersController extends Controller
                 $users = Users::find(auth()->user()->id);
                 $users->password = bcrypt($data['passwordbaru']);
                 $users->save();
-                return redirect('/myprofile')->with('sukses', 'Kata Sandi Berhasil Dirubah');
+                return redirect('/plgn/biodata')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
                 return redirect()->back();
             }
@@ -171,7 +123,7 @@ class UsersController extends Controller
                 $users = Users::find(auth()->user()->id);
                 $users->password = bcrypt($data['passwordbaru']);
                 $users->save();
-                return redirect('/myprofileadmin')->with('sukses', 'Kata Sandi Berhasil Dirubah');
+                return redirect('/admin/biodata')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
                 return redirect()->back();
             }
@@ -187,16 +139,6 @@ class UsersController extends Controller
         $akun = Akun::find($users_id);
         $users->delete();
         $akun->delete();
-        return redirect('/users')->with('delete', 'Data Berhasil Dihapus');
-    }
-
-    public function deletesuperadmin($id)
-    {
-        $users = Users::find($id);
-        $users_id = $users->id;
-        $akun = Akun::find($users_id);
-        $users->delete();
-        $akun->delete();
-        return redirect('/superadmin_users')->with('delete', 'Data Berhasil Dihapus');
+        return redirect('/admin/users')->with('delete', 'Data Berhasil Dihapus');
     }
 }

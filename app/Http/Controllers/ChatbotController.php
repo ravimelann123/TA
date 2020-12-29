@@ -226,6 +226,7 @@ class ChatbotController extends Controller
                 $order = new Order;
                 $order->nomerpesanan = "o" . date("Ymds") . auth()->user()->id;
                 $order->users_id = auth()->user()->id;
+                $order->proses_id = $prosesid;
                 $order->status = "Menunggu Diproses";
                 $order->save();
                 $pesan = "Pesanan Dengan Nomer " . $order->nomerpesanan . " isi kue :";
@@ -445,6 +446,7 @@ class ChatbotController extends Controller
                 $totalsimilarity = $kesamaan / (($arr_chat + $arr_balas) - $kesamaan);
                 $tablesimilarity = new Similarity;
                 $tablesimilarity->users_id = auth()->user()->id;
+                $tablesimilarity->proses_id = $prosesid;
                 $tablesimilarity->training_id = $idtraining;
                 $tablesimilarity->pesan = $request->pesan;
                 $tablesimilarity->balas = $p->balas;
@@ -476,7 +478,7 @@ class ChatbotController extends Controller
         }
     }
 
-    public function indexsuperadmin(Request $request)
+    public function indexdataset(Request $request)
     {
         if ($request->has('cari')) {
             $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(4);
@@ -484,7 +486,7 @@ class ChatbotController extends Controller
 
             $data = Chatbot::paginate(4);
         }
-        return view('superadmin.superadmin_datasetchatbot', ['data' => $data]);
+        return view('admin.dataset', ['data' => $data]);
     }
 
     public function create(Request $request)
@@ -493,7 +495,7 @@ class ChatbotController extends Controller
         $data->chat = $request->chat;
         $data->balas = $request->balas;
         $data->save();
-        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/dataset')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     public function getdatabyid($id)
@@ -509,13 +511,13 @@ class ChatbotController extends Controller
         $data->chat = $request->chat;
         $data->balas = $request->balas;
         $data->save();
-        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/dataset')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function delete($id)
     {
         $data = Chatbot::find($id);
         $data->delete();
-        return redirect('/superadmin_datasetchatbot')->with('sukses', 'Data Berhasil Dihapus');
+        return redirect('/admin/dataset')->with('sukses', 'Data Berhasil Dihapus');
     }
 }

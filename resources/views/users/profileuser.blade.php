@@ -4,24 +4,14 @@
 <div class="col">
     <div class="card" style="min-height:85vh">
         <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Biodata Saya</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="/myprofile">
-                                <h5>Biodata</h5>
-                            </a>
+                        <div class="card-header text-center">
+                            <h5>
+                                Biodata
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -29,7 +19,7 @@
                                     <img width="150" height="150" src="{{auth()->user()->akun->getAvatar()}}">
                                     <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
                                     <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                        data-target="#passwordModal" style="border-radius: 5px">Rubah Kata sandi
+                                        data-target="#passwordModal" style="border-radius: 5px">Ubah Kata Sandi
                                     </button>
                                 </div>
 
@@ -78,7 +68,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#biodataModal" style="border-radius: 5px;">Update <i
+                                                data-target="#biodataModal" style="border-radius: 5px;"><i
                                                     class="fas fa-edit"></i>
                                             </button>
 
@@ -103,7 +93,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Kata sandi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Kata sandi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -166,7 +156,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Kata sandi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Biodata</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

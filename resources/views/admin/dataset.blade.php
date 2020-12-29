@@ -9,7 +9,7 @@
                         <nav>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bahasa Alami</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dataset</li>
                             </ol>
                         </nav>
                     </div>
@@ -19,16 +19,17 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <a href="/superadmin_bahasaalami" class="btn btn-info">
-                                    <i class="fas fa-sync"></i>
+                                <a href="/admin/dataset" class="btn btn-info">
+                                    Refresh
                                 </a>
+
                                 <button type="button" class="btn btn-info" data-toggle="modal"
-                                    data-target="#aturanModal" style="border-radius: 5px">Tambah <i
+                                    data-target="#datasetModal" style="border-radius: 5px">Tambah <i
                                         class="fas fa-plus-square"></i>
                                 </button>
                             </div>
                             <div class="card-body">
-                                <form method="GET" action="/superadmin_bahasaalami">
+                                <form method="GET" action="/superadmin_datasetchatbot">
                                     <div class="row mb-2">
                                         <div class="col">
                                             <div class="input-group">
@@ -48,8 +49,8 @@
                                             <thead class="thead-white">
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Tag</th>
-                                                    <th>Kata</th>
+                                                    <th>Chat</th>
+                                                    <th>Balas</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
@@ -57,11 +58,11 @@
                                                 @foreach( $data as $no =>$p)
                                                 <tr>
                                                     <td>{{$data->firstItem()+$no}}</td>
-                                                    <td>{{$p->tag}}</td>
-                                                    <td>{{ $p->kata}}</td>
+                                                    <td>{{$p->chat}}</td>
+                                                    <td>{{ $p->balas}}</td>
                                                     <td> <a href="javascript:void(0)" onclick="editAturan({{$p->id}})"
                                                             style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" bahasaalami-id="{{$p->id}}" class="delete"
+                                                        <a href="#" dataset-id="{{$p->id}}" class="delete"
                                                             style="color: red;"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr>
@@ -84,37 +85,37 @@
 </div>
 
 <!-- Modal Create-->
-<div class="modal fade" id="aturanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="datasetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Bahasa Alami</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Dataset Chatbot</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/superadmin_bahasaalami/create" method="POST">
+                <form action="/admin/dataset/create" method="POST">
                     {{ csrf_field() }}
-                    <div class="form-group row {{$errors->has('tag') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Tag</label>
+                    <div class="form-group row {{$errors->has('chat') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Chat</label>
                         <div class="col-sm-8">
-                            <input type="text" name="tag" class="form-control" value="{{old('tag')}}">
+                            <input type="text" name="chat" class="form-control" value="{{old('chat')}}">
 
-                            @if($errors->has('tag'))
-                            <span class="help-block">{{$errors->first('tag')}}</span>
+                            @if($errors->has('chat'))
+                            <span class="help-block">{{$errors->first('chat')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('kata') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Kata</label>
+                    <div class="form-group row {{$errors->has('balas') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Balas</label>
                         <div class="col-sm-8">
-                            <input type="text" name="kata" class="form-control" value="{{old('kata')}}">
+                            <input type="text" name="balas" class="form-control" value="{{old('balas')}}">
 
-                            @if($errors->has('kata'))
-                            <span class="help-block">{{$errors->first('kata')}}</span>
+                            @if($errors->has('balas'))
+                            <span class="help-block">{{$errors->first('balas')}}</span>
                             @endif
                         </div>
                     </div>
@@ -133,7 +134,7 @@
 {{-- end modal create --}}
 
 <!-- Modal edit-->
-<div class="modal fade" id="aturaneditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="dataseteditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -144,29 +145,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="aturaneditform" action="/superadmin_bahasaalami/update" method="POST">
+                <form id="dataseteditform" action="/superadmin_datasetchatbot/update" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
                     <input type="hidden" id="id" name="id" class="form-control">
 
-                    <div class="form-group row {{$errors->has('tag') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">Tag</label>
+                    <div class="form-group row {{$errors->has('chat') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Chat</label>
                         <div class="col-sm-8">
-                            <input type="text" id="tag" name="tag" class="form-control">
+                            <input type="text" id="chat" name="chat" class="form-control">
 
-                            @if($errors->has('tag'))
-                            <span class="help-block">{{$errors->first('tag')}}</span>
+                            @if($errors->has('chat'))
+                            <span class="help-block">{{$errors->first('chat')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('kata') ? 'has-error' : ''}}">
-                        <label class="col-sm-4 col-form-label">kata</label>
+                    <div class="form-group row {{$errors->has('balas') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Balas</label>
                         <div class="col-sm-8">
-                            <input type="text" id="kata" name="kata" class="form-control">
-                            @if($errors->has('kata'))
-                            <span class="help-block">{{$errors->first('kata')}}</span>
+                            <input type="text" id="balas" name="balas" class="form-control">
+                            @if($errors->has('balas'))
+                            <span class="help-block">{{$errors->first('balas')}}</span>
                             @endif
                         </div>
                     </div>
@@ -186,18 +187,18 @@
 @section('footer')
 <script>
     function editAturan(id){
-    $.get('/superadmin_bahasaalami/'+id,function(d){
+    $.get('/superadmin_datasetchatbot/'+id,function(d){
         $("#id").val(d.id);
-        $("#tag").val(d.tag);
-        $("#kata").val(d.kata);
-        $("#aturaneditModal").modal("toggle");
+        $("#chat").val(d.chat);
+        $("#balas").val(d.balas);
+        $("#dataseteditModal").modal("toggle");
     });
 }
     $('.delete').click(function(){
-        var bahasaalami_id = $(this).attr('bahasaalami-id');
+        var dataset_id = $(this).attr('dataset-id');
         Swal.fire({
         title: "Yakin?",
-        text: "Mau dihapus data user dengan id "+ bahasaalami_id+"??",
+        text: "Mau dihapus data user dengan id "+ dataset_id+"??",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -207,9 +208,9 @@
         }).then((result) => {
 
         if (result.isConfirmed) {
-        setTimeout(function(){ window.location = "/superadmin_bahasaalami/"+bahasaalami_id+"/delete"; }, 250);
+        setTimeout(function(){ window.location = "/superadmin_datasetchatbot/"+dataset_id+"/delete"; }, 250);
         }else{
-            window.location = "/superadmin_bahasaalami";
+            window.location = "/superadmin_datasetchatbot";
         }
         })
     });

@@ -26,9 +26,9 @@ class DashboardController extends Controller
             return view('superadmin.dashboard');
         } else {
             $photo = Photo::groupBy('produk_id')->get();
-            $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-            $totalcart = count($cart);
-            return view('users.dashboard', ['cart' => $cart, 'photo' => $photo, 'totalcart' => $totalcart]);
+            $order = Order::where('users_id', '=', auth()->user()->id)->get();
+            $order = count($order);
+            return view('users.dashboard', ['photo' => $photo, 'order' => $order]);
         }
     }
 }

@@ -9,8 +9,8 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item"><a href="/indexorder">Order</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                            <li class="breadcrumb-item"><a href="/admin/pesanan">Pesanan</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail Pesanan</li>
                         </ol>
                     </nav>
                 </div>

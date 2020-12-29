@@ -29,45 +29,12 @@ class AkunController extends Controller
         //dd($dataakun);
         return view('admin.biodata', ['data' => $data]);
     }
-    public function biodatasuperadmin(Request $request, $id)
-    {
-        $data = Akun::where('users_id', '=', $id)->get();
-        //dd($dataakun);
-        return view('superadmin.superadmin_biodata', ['data' => $data]);
-    }
 
     public function edit($id)
     {
         $data = Akun::find($id);
         return response()->json($data);
     }
-
-    public function editsuperadmin($id)
-    {
-        $akun = Akun::find($id);
-        return view('superadmin.superadmin_biodata_edit', ['akun' => $akun]);
-    }
-    public function updatesuperadmin(Request $request)
-    {
-        //dd($request->all());
-        // $this->validate($request, [
-        //     'email' => 'required',
-        //     'nama' => 'required',
-        //     'alamat' => 'required',
-        //     'nohp' => 'required|min:10|numeric',
-        //     'avatar' => 'mimes:jpeg,png',
-        // ]);
-        $akun = Akun::find($request->id);
-        $akun->update($request->all());
-        if ($request->hasFile('avatar')) {
-            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
-            $akun->avatar = $request->file('avatar')->getClientOriginalName();
-            $akun->save();
-        }
-        return redirect('/superadmin_users')->with('sukses', 'Data Berhasil Dirubah');
-    }
-
-
 
     public function update(Request $request)
     {
@@ -99,14 +66,14 @@ class AkunController extends Controller
     public function updatemyprofile(Request $request)
     {
         //dd($request->all());
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'email' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|numeric',
-            'avatar' => 'mimes:jpeg,png',
-        ]);
+        // $this->validate($request, [
+        //     'username' => 'required|min:8',
+        //     'email' => 'required',
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp' => 'required|min:10|numeric',
+        //     'avatar' => 'mimes:jpeg,png',
+        // ]);
 
         $users = Users::find(auth()->user()->id);
         $users->username = $request->username;
@@ -118,20 +85,20 @@ class AkunController extends Controller
             $akun->avatar = $request->file('avatar')->getClientOriginalName();
             $akun->save();
         }
-        return redirect('/myprofile')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/plgn/biodata')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function updatemyprofileadmin(Request $request)
     {
         //dd($request->all());
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'email' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|numeric',
-            'avatar' => 'mimes:jpeg,png',
-        ]);
+        // $this->validate($request, [
+        //     'username' => 'required|min:8',
+        //     'email' => 'required',
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp' => 'required|min:10|numeric',
+        //     'avatar' => 'mimes:jpeg,png',
+        // ]);
 
         $users = Users::find(auth()->user()->id);
         $users->username = $request->username;
@@ -143,7 +110,7 @@ class AkunController extends Controller
             $akun->avatar = $request->file('avatar')->getClientOriginalName();
             $akun->save();
         }
-        return redirect('/myprofileadmin')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/biodata')->with('sukses', 'Data Berhasil Dirubah');
     }
     public function myprofile()
     {

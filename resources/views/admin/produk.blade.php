@@ -1,87 +1,91 @@
 @extends('master.masterlayout')
 @section('content')
+<div class="row">
 
-<div class="col">
-    <div class="card" style="min-height:85vh">
-        <div class="card-body">
+    <div class="col">
+        <div class="card" style="min-height:85vh">
+            <div class="card-body">
 
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Produk</li>
-                        </ol>
-                    </nav>
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Produk</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="/tambahstok" class="btn btn-info">
-                                <i class="fas fa-sync"></i>
-                            </a>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produkModal"
-                                style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <form method="GET" action="/produk">
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="cari" placeholder="Search">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-info" type=" button"><i
-                                                        class="fas fa-search"></i></button>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/admin/produk" class="btn btn-info">
+                                    Refresh
+                                </a>
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#produkModal" style="border-radius: 5px">Tambah <i
+                                        class="fas fa-plus-square"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <form method="GET" action="/admin/produk">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="cari"
+                                                    placeholder="Search">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-info" type=" button"><i
+                                                            class="fas fa-search"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="col table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="thead-white">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Deskripsi</th>
-                                                <th>Stok</th>
-                                                <th>Harga</th>
-                                                <th>Gambar</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach( $data as $no=>$d)
-                                            <tr>
-                                                <td>{{$data->firstItem()+$no}}</td>
-                                                <td>{{$d->nama}}</td>
-                                                <td>{{ $d->deskripsi }}</td>
-                                                <td>{{ $d->stok }}</td>
-                                                <td>{{ $d->harga }}</td>
-                                                <td><a href="/photoproduk/{{$d->id}}" style="color:gray"><i
-                                                            class="fas fa-eye"></i>
-                                                    </a></td>
-                                                <td>
-                                                    <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
-                                                        style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                    <a href="#" produk-id="{{$d->id}}" class="delete"
-                                                        style="color: red;"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
+                                </form>
+                                <div class="row">
+                                    <div class="col table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead class="thead-white">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Deskripsi</th>
+                                                    {{-- <th>Stok</th> --}}
+                                                    <th>Harga</th>
+                                                    <th>Gambar</th>
+                                                    <th>Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach( $data as $no=>$d)
+                                                <tr>
+                                                    <td>{{$data->firstItem()+$no}}</td>
+                                                    <td>{{$d->nama}}</td>
+                                                    <td>{{ $d->deskripsi }}</td>
+                                                    {{-- <td>{{ $d->stok }}</td> --}}
+                                                    <td>{{ $d->harga }}</td>
+                                                    <td><a href="/photoproduk/{{$d->id}}" style="color:gray"><i
+                                                                class="fas fa-eye"></i>
+                                                        </a></td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
+                                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
+                                                        <a href="#" produk-id="{{$d->id}}" class="delete"
+                                                            style="color: red;"><i class="fas fa-trash-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
 
-                                    </table>
-                                </div>
+                                        </table>
+                                    </div>
 
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col">{{$data->links()}}</div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">{{$data->links()}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +93,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {{-- MODAL --}}
 <div class="modal fade" id="produkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

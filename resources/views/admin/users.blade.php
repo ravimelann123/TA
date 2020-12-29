@@ -1,91 +1,109 @@
 @extends('master.masterlayout')
 @section('content')
-<div class="col">
-    <div class="card" style="min-height:85vh">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Akun</li>
-                        </ol>
-                    </nav>
+<div class="row">
+
+    <div class="col">
+        <div class="card" style="min-height:85vh">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Users</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
 
-                            <a href="/users" class="btn btn-info">
-                                <i class="fas fa-sync"></i>
-                            </a>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#akunModal"
-                                style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
-                            </button>
-                        </div>
-                        <div class="card-body">
+                                <a href="/admin/users" class="btn btn-info">
+                                    Refresh
+                                </a>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#akunModal"
+                                    style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
 
-                            <form method="GET" action="/users">
-                                <div class="row mb-2">
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="cari" placeholder="Cari">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-info" type=" button"><i
-                                                        class="fas fa-search"></i></button>
+                                <form method="GET" action="/admin/users">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="cari" placeholder="Cari">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-info" type=" button"><i
+                                                            class="fas fa-search"></i></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="col table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="thead-white">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Username</th>
-                                                <th>Biodata</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($datausers as $no=>$p)
-                                            <tr>
-                                                <td>{{$datausers->firstItem()+$no}}</td>
-                                                <td>{{ $p->username }}</td>
-                                                {{-- <td>{{ $p->role }}</td> --}}
-                                                <td><a href="/users/biodata/{{$p->id}}" name="id" value="">View Detail
-                                                    </a></td>
-                                                <td>
-                                                    <a href="javascript:void(0)" onclick="editAkun({{$p->id}})"
-                                                        style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                    <a href="#" class=" delete" users-id="{{$p->id}}"
-                                                        style="color: red;"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
+                                </form>
+                                <div class="row">
+                                    <div class="col table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead class="thead-white">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Username</th>
+                                                    <th>Role</th>
+                                                    <th>Biodata</th>
+                                                    <th>Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($datausers as $no=>$p)
+                                                <tr>
+                                                    <td>{{$datausers->firstItem()+$no}}</td>
+                                                    <td>{{ $p->username }}</td>
+                                                    <td>{{ $p->role }}</td>
+                                                    {{-- <td>{{ $p->role }}</td> --}}
+                                                    <td>@if($p->role == "admin")
+                                                        -
+                                                        @else
+                                                        <a href="/users/biodata/{{$p->id}}" name="id" value="">View
+                                                            Detail
+                                                        </a></td>
+                                                    @endif
 
-                                    </table>
+                                                    <td>
+                                                        @if($p->role == "admin")
+                                                        <a href="#" style="color: grey;"><i class="fas fa-edit"></i></a>
+                                                        <a href="#" style="color: grey;"><i
+                                                                class="fas fa-trash-alt"></i></a>
+                                                        @else
+                                                        <a href="javascript:void(0)" onclick="editAkun({{$p->id}})"
+                                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
+                                                        <a href="#" class=" delete" users-id="{{$p->id}}"
+                                                            style="color: red;"><i class="fas fa-trash-alt"></i></a>
+                                                        @endif
+
+
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col">{{$datausers->links()}}</div>
+                                <div class="row mt-2">
+                                    <div class="col">{{$datausers->links()}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 
@@ -121,6 +139,20 @@
 
                             @if($errors->has('password'))
                             <span class="help-block">{{$errors->first('password')}}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Pilih Role</label>
+                        <div class="col-sm-8">
+                            <select name="role" class="form-control">
+                                <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
+                                </option>
+                                <option value="user" {{(old('role') == 'user' ) ? ' selected' :''}}>User</option>
+                            </select>
+
+                            @if($errors->has('role'))
+                            <span class="help-block">{{$errors->first('role')}}</span>
                             @endif
                         </div>
                     </div>
@@ -175,7 +207,20 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
+                        <label class="col-sm-4 col-form-label">Pilih Role</label>
+                        <div class="col-sm-8">
+                            <select name="role" class="form-control">
+                                <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
+                                </option>
+                                <option value="user" {{(old('role') == 'user' ) ? ' selected' :''}}>User</option>
+                            </select>
 
+                            @if($errors->has('role'))
+                            <span class="help-block">{{$errors->first('role')}}</span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col text-right">
                             <button type="submit" class="btn btn-primary">Update</button>

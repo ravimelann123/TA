@@ -11,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item"><a href="/users">Akun</a></li>
+                                <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Biodata</li>
                             </ol>
                         </nav>

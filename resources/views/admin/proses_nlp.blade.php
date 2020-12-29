@@ -19,15 +19,15 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <a href="/superadmin_Prosess_NLP" class="btn btn-info">
-                                    <i class="fas fa-sync"></i>
+                                <a href="/admin/proses_nlp" class="btn btn-info">
+                                    Refresh
                                 </a>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
 
-                                        <form method="GET" action="/superadmin_Prosess_NLP">
+                                        <form method="GET" action="/admin/proses_nlp">
                                             <div class="row mb-2">
                                                 <div class="col">
                                                     <div class="input-group">

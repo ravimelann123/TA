@@ -1,76 +1,79 @@
 @extends('master.masterlayout')
 @section('content')
+<div class="row">
 
-<div class="col">
-    <div class="card" style="min-height:85vh">
-        <div class="card-body">
+    <div class="col">
+        <div class="card" style="min-height:85vh">
+            <div class="card-body">
 
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                            <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Gambar</li>
-                        </ol>
-                    </nav>
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                                <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Gambar</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="/tambahstok" class="btn btn-info">
-                                <i class="fas fa-sync"></i>
-                            </a>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
-                                style="border-radius: 5px">Tambah <i class="fas fa-plus-square"></i>
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="thead-white">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Gambar</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($data as $no=>$d)
-                                            <tr>
-                                                <td>{{$data->firstItem()+$no}}</td>
-                                                <td>{{$d->namafoto}}</td>
-                                                <td><img src="/images/produk/{{$d->namafoto}}" width="125" height="125">
-                                                </td>
-                                                <td>
-
-                                                    <a href="#" class=" delete" photo-id="{{$d->id}}"
-                                                        style="color: red;"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/tambahstok" class="btn btn-info">
+                                    <i class="fas fa-sync"></i>
+                                </a>
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#exampleModal" style="border-radius: 5px">Tambah <i
+                                        class="fas fa-plus-square"></i>
+                                </button>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col">{{$data->links()}}</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead class="thead-white">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Gambar</th>
+                                                    <th>Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($data as $no=>$d)
+                                                <tr>
+                                                    <td>{{$data->firstItem()+$no}}</td>
+                                                    <td>{{$d->namafoto}}</td>
+                                                    <td><img src="/images/produk/{{$d->namafoto}}" width="125"
+                                                            height="125">
+                                                    </td>
+                                                    <td>
+
+                                                        <a href="#" class=" delete" photo-id="{{$d->id}}"
+                                                            style="color: red;"><i class="fas fa-trash-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">{{$data->links()}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
-
         </div>
-
     </div>
-</div>
 </div>
 
 {{-- MODAL --}}
