@@ -26,7 +26,7 @@ Route::get('/logout', 'AuthController@logout');
 
 //Route::get('/login', 'PhotoController@indexlogin')->name('login');
 
-Route::group(['middleware' => ['auth', 'checkRole:user,admin,superadmin']], function () {
+Route::group(['middleware' => ['auth', 'checkRole:user,admin']], function () {
     Route::get('/dashboard', 'DashboardController@index');
 });
 
@@ -36,12 +36,7 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::put('/changemyprofile/update', 'AkunController@updatemyprofile');
     Route::get('/changepassword', 'UsersController@IndexPassword');
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
-    // Route::get('/transaksi', 'OrderController@indextransaksi');
-    // Route::get('/cart', 'CartController@index');
-    // Route::post('/cart/addproduk', 'CartController@addprodukcart');
-    // Route::post('/ordercart/{id}', 'CartController@indexcart');
-    // Route::get('/clearcart', 'CartController@deletecart');
-    // Route::get('/clearcartitem/{id}', 'CartController@deletecartitem');
+
     Route::get('/allproduk', 'ProdukController@indexproduk');
     Route::get('/plgn/pesanan', 'OrderController@indexpesanan');
     Route::get('/plgn/chatbot', 'ChatbotController@index');
@@ -88,34 +83,4 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     Route::get('admin/proses_nlp', 'KalimatController@indexProsessNLP');
     Route::get('admin/similarity', 'SimilarityController@index');
-});
-
-Route::group(['middleware' => ['auth', 'checkRole:superadmin']], function () {
-    Route::get('/superadmin_users', 'UsersController@indexsuperadmin');
-    Route::post('/superadmin_users/create', 'UsersController@createsuperadmin');
-    Route::get('/superadmin_users/biodata/{id}', 'AkunController@getdatabyid');
-    Route::put('/superadmin_users/biodata/update', 'AkunController@updatesuperadmin');
-    Route::get('/superadmin_users/{id}', 'UsersController@getdatabyid');
-    Route::put('/superadmin_users/update', 'UsersController@updatesuperadmin');
-    Route::get('/superadmin_users/{id}/delete', 'UsersController@deletesuperadmin');
-
-    Route::get('/superadmin_biodata/{id}', 'AkunController@biodatasuperadmin');
-    Route::get('/superadmin_biodata/{id}/edit', 'AkunController@editsuperadmin');
-    Route::put('/superadmin_biodata/{id}/update', 'AkunController@updatesuperadmin');
-
-    Route::get('/superadmin_produk', 'ProdukController@indexsuperadmin');
-    Route::get('/superadmin_tambahstok', 'TambahstokController@indexsuperadmin');
-    Route::get('/superadmin_Prosess_NLP', 'KalimatController@indexProsessNLP');
-
-    Route::get('/superadmin_aturan', 'AturanController@index');
-    Route::post('/superadmin_aturan/create', 'AturanController@create');
-    Route::get('/superadmin_aturan/{id}', 'AturanController@getdatabyid');
-    Route::put('/superadmin_aturan/update', 'AturanController@update');
-    Route::get('/superadmin_aturan/{id}/delete', 'AturanController@delete');
-
-    Route::get('/superadmin_bahasaalami', 'BahasaalamiController@index');
-    Route::post('/superadmin_bahasaalami/create', 'BahasaalamiController@create');
-    Route::get('/superadmin_bahasaalami/{id}', 'BahasaalamiController@getdatabyid');
-    Route::put('/superadmin_bahasaalami/update', 'BahasaalamiController@update');
-    Route::get('/superadmin_bahasaalami/{id}/delete', 'BahasaalamiController@delete');
 });
