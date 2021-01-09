@@ -107,46 +107,53 @@
             <div class="modal-body">
                 <form action="/produk/create" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group row {{$errors->has('nama') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Nama Produk</label>
                         <div class="col-sm-8">
-                            <input type="text" name="nama" class="form-control" value="{{old('nama')}}">
+                            <input type="text" name="nama"
+                                class="form-control {{$errors->has('nama') ? 'is-invalid' : ''}}"
+                                value="{{old('nama')}}">
 
                             @if($errors->has('nama'))
-                            <span class="help-block">{{$errors->first('nama')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('nama')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('deskripsi') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Deskripsi</label>
                         <div class="col-sm-8">
-                            <input type="text" name="deskripsi" class="form-control" value="{{old('deskripsi')}}">
+                            <input type="text" name="deskripsi"
+                                class="form-control {{$errors->has('deskripsi') ? 'is-invalid' : ''}}"
+                                value="{{old('deskripsi')}}">
 
                             @if($errors->has('deskripsi'))
-                            <span class="help-block">{{$errors->first('usdeskripsiername')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('deskripsi')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('harga') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Harga</label>
                         <div class="col-sm-8">
-                            <input type="text" name="harga" class="form-control" value="{{old('harga')}}">
+                            <input type="text" name="harga"
+                                class="form-control {{$errors->has('harga') ? 'is-invalid' : ''}}"
+                                value="{{old('harga')}}">
 
                             @if($errors->has('harga'))
-                            <span class="help-block">{{$errors->first('harga')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('harga')}}</span>
                             @endif
                         </div>
                     </div>
 
 
-                    <div class="form-group row {{$errors->has('namafoto') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-4 col-form-label">Foto</label>
                         <div class="col-sm-8">
-                            <input type="file" name="namafoto[]" class=" form-control-file" multiple>
+                            <input type="file" name="namafoto[]"
+                                class=" form-control-file {{$errors->has('namafoto') ? 'is-invalid' : ''}}" multiple>
                             @if($errors->has('namafoto'))
-                            <span class="help-block">{{$errors->first('namafoto')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('namafoto')}}</span>
                             @endif
                         </div>
                     </div>
@@ -179,32 +186,35 @@
                     {{ method_field('PUT') }}
                     <input type="hidden" id="id" name="id" class="form-control">
 
-                    <div class="form-group row {{$errors->has('nama') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">nama</label>
                         <div class="col-sm-8">
-                            <input type="text" id="nama" name="nama" class="form-control">
+                            <input type="text" id="nama" name="nama"
+                                class="form-control {{$errors->has('nama') ? 'is-invalid' : ''}}">
 
                             @if($errors->has('nama'))
-                            <span class="help-block">{{$errors->first('nama')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('nama')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('deskripsi') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">deskripsi</label>
                         <div class="col-sm-8">
-                            <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                            <input type="text" id="deskripsi" name="deskripsi"
+                                class="form-control {{$errors->has('deskripsi') ? 'is-invalid' : ''}}">
                             @if($errors->has('deskripsi'))
-                            <span class="help-block">{{$errors->first('deskripsi')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('deskripsi')}}</span>
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row {{$errors->has('harga') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Harga</label>
                         <div class="col-sm-8">
-                            <input type="text" id="harga" name="harga" class="form-control">
+                            <input type="text" id="harga" name="harga"
+                                class="form-control {{$errors->has('harga') ? 'is-invalid' : ''}}">
                             @if($errors->has('harga'))
-                            <span class="help-block">{{$errors->first('harga')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('harga')}}</span>
                             @endif
                         </div>
                     </div>

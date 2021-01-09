@@ -98,24 +98,28 @@
             <div class="modal-body">
                 <form action="/admin/dataset/create" method="POST">
                     {{ csrf_field() }}
-                    <div class="form-group row {{$errors->has('chat') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Chat</label>
                         <div class="col-sm-8">
-                            <input type="text" name="chat" class="form-control" value="{{old('chat')}}">
+                            <input type="text" name="chat"
+                                class="form-control {{$errors->has('chat') ? 'is-invalid' : ''}}"
+                                value="{{old('chat')}}">
 
                             @if($errors->has('chat'))
-                            <span class="help-block">{{$errors->first('chat')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('chat')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('balas') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Balas</label>
                         <div class="col-sm-8">
-                            <input type="text" name="balas" class="form-control" value="{{old('balas')}}">
+                            <input type="text" name="balas"
+                                class="form-control {{$errors->has('balas') ? 'is-invalid' : ''}}"
+                                value="{{old('balas')}}">
 
                             @if($errors->has('balas'))
-                            <span class="help-block">{{$errors->first('balas')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('balas')}}</span>
                             @endif
                         </div>
                     </div>
@@ -151,23 +155,25 @@
 
                     <input type="hidden" id="id" name="id" class="form-control">
 
-                    <div class="form-group row {{$errors->has('chat') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Chat</label>
                         <div class="col-sm-8">
-                            <input type="text" id="chat" name="chat" class="form-control">
+                            <input type="text" id="chat" name="chat"
+                                class="form-control {{$errors->has('chat') ? 'is-invalid' : ''}}">
 
                             @if($errors->has('chat'))
-                            <span class="help-block">{{$errors->first('chat')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('chat')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('balas') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Balas</label>
                         <div class="col-sm-8">
-                            <input type="text" id="balas" name="balas" class="form-control">
+                            <input type="text" id="balas" name="balas"
+                                class="form-control {{$errors->has('balas') ? 'is-invalid' : ''}}">
                             @if($errors->has('balas'))
-                            <span class="help-block">{{$errors->first('balas')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('balas')}}</span>
                             @endif
                         </div>
                     </div>

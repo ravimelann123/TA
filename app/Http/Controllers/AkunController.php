@@ -58,22 +58,20 @@ class AkunController extends Controller
 
     public function indexmyprofile()
     {
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('users.editmyprofile', ['totalcart' => $totalcart]);
+        return view('users.editmyprofile');
     }
 
     public function updatemyprofile(Request $request)
     {
         //dd($request->all());
-        // $this->validate($request, [
-        //     'username' => 'required|min:8',
-        //     'email' => 'required',
-        //     'nama' => 'required',
-        //     'alamat' => 'required',
-        //     'nohp' => 'required|min:10|numeric',
-        //     'avatar' => 'mimes:jpeg,png',
-        // ]);
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png',
+        ]);
 
         $users = Users::find(auth()->user()->id);
         $users->username = $request->username;
@@ -91,14 +89,14 @@ class AkunController extends Controller
     public function updatemyprofileadmin(Request $request)
     {
         //dd($request->all());
-        // $this->validate($request, [
-        //     'username' => 'required|min:8',
-        //     'email' => 'required',
-        //     'nama' => 'required',
-        //     'alamat' => 'required',
-        //     'nohp' => 'required|min:10|numeric',
-        //     'avatar' => 'mimes:jpeg,png',
-        // ]);
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png'
+        ]);
 
         $users = Users::find(auth()->user()->id);
         $users->username = $request->username;

@@ -11,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
+                                <li class="breadcrumb-item"><a href="/admin/produk">Produk</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Gambar</li>
                             </ol>
                         </nav>
@@ -91,13 +91,14 @@
 
                     {{ csrf_field() }}
 
-                    <div class="form-group row {{$errors->has('namafoto') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-4 col-form-label">Foto</label>
                         <div class="col-sm-8">
                             <input type="hidden" name="id" value="{{$d->produk_id}}">
-                            <input type="file" name="namafoto[]" class=" form-control-file" multiple>
+                            <input type="file" name="namafoto[]"
+                                class=" form-control-file {{$errors->has('namafoto') ? 'is-invalid' : ''}}" multiple>
                             @if($errors->has('namafoto'))
-                            <span class="help-block">{{$errors->first('namafoto')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('namafoto')}}</span>
                             @endif
                         </div>
                     </div>

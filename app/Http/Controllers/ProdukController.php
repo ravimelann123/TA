@@ -22,16 +22,7 @@ class ProdukController extends Controller
         return view('admin.produk', ['data' => $data]);
     }
 
-    public function indexsuperadmin(Request $request)
-    {
 
-        if ($request->has('cari')) {
-            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(4);
-        } else {
-            $data = Produk::paginate(4);
-        }
-        return view('superadmin.superadmin_produk', ['data' => $data]);
-    }
     public function indexproduk(Request $request)
     {
         if ($request->has('cari')) {
@@ -64,6 +55,12 @@ class ProdukController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'namafoto' => 'mimes:jpeg,png'
+        ]);
         $produk = new Produk;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
@@ -100,12 +97,11 @@ class ProdukController extends Controller
 
     public function update(Request $request)
     {
-        // $this->validate($request, [
-        //     'username' => 'required|min:8',
-        //     'password' => 'required|min:8',
-        //     'role' => 'required'
-
-        // ]);
+        $this->validate($request, [
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required'
+        ]);
 
         $produk = Produk::find($request->id);
         $produk->nama = $request->nama;

@@ -28,20 +28,19 @@ class UsersController extends Controller
 
     public function indexpassword()
     {
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
-        $totalcart = count($cart);
-        return view('users.changepassword', ['totalcart' => $totalcart]);
+
+        return view('users.changepassword');
     }
 
 
 
     public function create(Request $request)
     {
-        // $this->validate($request, [
-        //     'username' => 'required|min:8',
-        //     'password' => 'required|min:8'
-
-        // ]);
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ]);
 
         $data = $request->all();
         $users = new Users;
@@ -72,10 +71,11 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        // $this->validate($request, [
-        //     'username' => 'required|min:8',
-        //     'password' => 'required|min:8'
-        // ]);
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ]);
 
         $users = Users::find($request->id);
         $users->username = $request->username;
@@ -89,11 +89,11 @@ class UsersController extends Controller
 
     public function UpdatePassword(Request $request)
     {
-        // $this->validate($request, [
-        //     'passwordlama' => 'required|min:8',
-        //     'passwordbaru' => 'required|min:8',
-        //     'konfirmasipassword' => 'required|min:8',
-        // ]);
+        $this->validate($request, [
+            'passwordlama' => 'required|min:8',
+            'passwordbaru' => 'required|min:8',
+            'konfirmasipassword' => 'required|min:8',
+        ]);
         //dd($request->all());
         $data = $request->all();
         if (Hash::check($data['passwordlama'], auth()->user()->password)) {
@@ -103,7 +103,7 @@ class UsersController extends Controller
                 $users->save();
                 return redirect('/plgn/biodata')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
-                return redirect()->back();
+                return redirect()->back()->with('delete', 'Kata Sandi Tidak Sama');
             }
         } else {
             return redirect()->back();
@@ -111,11 +111,11 @@ class UsersController extends Controller
     }
     public function UpdatePasswordadmin(Request $request)
     {
-        // $this->validate($request, [
-        //     'passwordlama' => 'required|min:8',
-        //     'passwordbaru' => 'required|min:8',
-        //     'konfirmasipassword' => 'required|min:8',
-        // ]);
+        $this->validate($request, [
+            'passwordlama' => 'required|min:8',
+            'passwordbaru' => 'required|min:8',
+            'konfirmasipassword' => 'required|min:8',
+        ]);
         //dd($request->all());
         $data = $request->all();
         if (Hash::check($data['passwordlama'], auth()->user()->password)) {
@@ -125,7 +125,7 @@ class UsersController extends Controller
                 $users->save();
                 return redirect('/admin/biodata')->with('sukses', 'Kata Sandi Berhasil Dirubah');
             } else {
-                return redirect()->back();
+                return redirect()->back()->with('delete', 'Kata Sandi Tidak Sama');
             }
         } else {
             return redirect()->back();

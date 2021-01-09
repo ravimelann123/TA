@@ -122,37 +122,41 @@
                 <form action="/users/create" method="POST">
                     {{ csrf_field() }}
 
-                    <div class="form-group row {{$errors->has('username') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Username</label>
                         <div class="col-sm-8">
-                            <input type="text" name="username" class="form-control" value="{{old('username')}}">
+                            <input type="text" name="username"
+                                class="form-control {{$errors->has('username') ? 'is-invalid' : ''}}"
+                                value="{{old('username')}}">
                             @if($errors->has('username'))
-                            <span class="help-block">{{$errors->first('username')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('username')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('password') ? 'has-error' : ''}}">
+                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Password</label>
                         <div class="col-sm-8">
-                            <input type="password" name="password" class="form-control" value="{{old('password')}}">
+                            <input type="password" name="password"
+                                class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}"
+                                value="{{old('password')}}">
 
                             @if($errors->has('password'))
-                            <span class="help-block">{{$errors->first('password')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('password')}}</span>
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Pilih Role</label>
                         <div class="col-sm-8">
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
                                 <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
                                 </option>
                                 <option value="user" {{(old('role') == 'user' ) ? ' selected' :''}}>User</option>
                             </select>
 
                             @if($errors->has('role'))
-                            <span class="help-block">{{$errors->first('role')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('role')}}</span>
                             @endif
                         </div>
                     </div>
@@ -187,37 +191,39 @@
 
                     <input type="hidden" id="id" name="id" class="form-control">
 
-                    <div class="form-group row {{$errors->has('username') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Username</label>
                         <div class="col-sm-8">
-                            <input type="text" id="username" name="username" class="form-control">
+                            <input type="text" id="username" name="username"
+                                class="form-control {{$errors->has('username') ? 'is-invalid' : ''}}">
 
                             @if($errors->has('username'))
-                            <span class="help-block">{{$errors->first('username')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('username')}}</span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row {{$errors->has('password') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Password</label>
                         <div class="col-sm-8">
-                            <input type="password" id="password" name="password" class="form-control">
+                            <input type="password" id="password" name="password"
+                                class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}">
                             @if($errors->has('password'))
-                            <span class="help-block">{{$errors->first('password')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('password')}}</span>
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row {{$errors->has('role') ? 'has-error' : ''}}">
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Pilih Role</label>
                         <div class="col-sm-8">
-                            <select name="role" class="form-control">
-                                <option value="admin" {{(old('role') == 'admin' ) ? ' selected' : ''}}>Admin
+                            <select name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
+                                <option value="admin">Admin
                                 </option>
-                                <option value="user" {{(old('role') == 'user' ) ? ' selected' :''}}>User</option>
+                                <option value="user">User</option>
                             </select>
 
                             @if($errors->has('role'))
-                            <span class="help-block">{{$errors->first('role')}}</span>
+                            <span class="invalid-feedback">{{$errors->first('role')}}</span>
                             @endif
                         </div>
                     </div>

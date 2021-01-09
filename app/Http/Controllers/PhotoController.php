@@ -23,6 +23,9 @@ class PhotoController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'namafoto' => 'mimes:jpeg,png'
+        ]);
         if ($request->hasFile('namafoto')) {
             $image_array = $request->file('namafoto');
             $array_len = count($image_array);

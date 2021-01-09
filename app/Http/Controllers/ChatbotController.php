@@ -464,7 +464,7 @@ class ChatbotController extends Controller
                 }
             }
 
-            if ($hasilsimilarity < 0.5) {
+            if ($hasilsimilarity <= 0.75) {
                 $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
                 return response()->json(['pesan' => $pesan], 200);
             } else {
@@ -491,6 +491,10 @@ class ChatbotController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'chat' => 'required',
+            'balas' => 'required'
+        ]);
         $data = new Chatbot();
         $data->chat = $request->chat;
         $data->balas = $request->balas;
@@ -507,6 +511,10 @@ class ChatbotController extends Controller
     public function update(Request $request)
     {
         //dd($request->all());
+        $this->validate($request, [
+            'chat' => 'required',
+            'balas' => 'required'
+        ]);
         $data = Chatbot::find($request->id);
         $data->chat = $request->chat;
         $data->balas = $request->balas;

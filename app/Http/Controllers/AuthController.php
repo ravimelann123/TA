@@ -15,10 +15,14 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required'
+        ]);
         if (Auth::attempt($request->only('username', 'password'))) {
             return redirect('/dashboard');
         }
-        return redirect('/login');
+        return redirect('/login')->with('delete', 'Username dan Password Salah');;
         //dd($request->all());
     }
 

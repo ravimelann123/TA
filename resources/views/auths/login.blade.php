@@ -31,27 +31,30 @@
                             </div>
 
                             {{ csrf_field() }}
-                            <div class="row mb-2">
-                                <div class="col-md ">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text lnr lnr-user"></span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
+
+                            <div class="form-group row ">
+                                <div class="col">
+                                    <input type="text" name="username" placeholder="Username"
+                                        class="form-control {{$errors->has('username') ? 'is-invalid' : ''}}"
+                                        value="{{old('username')}}">
+
+                                    @if($errors->has('username'))
+                                    <span class="invalid-feedback">{{$errors->first('username')}}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-md">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text lnr lnr-lock"></span>
-                                        </div>
-                                        <input type="password" class="form-control" placeholder="Password"
-                                            name="password">
-                                    </div>
+                            <div class="form-group row ">
+                                <div class="col">
+                                    <input type="password" name="password" placeholder="Password"
+                                        class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}"
+                                        value="{{old('password')}}">
+
+                                    @if($errors->has('password'))
+                                    <span class="invalid-feedback">{{$errors->first('password')}}</span>
+                                    @endif
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col text-center">
                                     <button type="submit" class="btn btn-primary">Login</button>
