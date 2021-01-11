@@ -4,7 +4,7 @@
 <div class="col">
     <div class="card" style="min-height:85vh">
         <div class="card-body">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -14,38 +14,86 @@
                         </ol>
                     </nav>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-2">
+                                    <b>Nomer Pesanan</b> <br>
+                                    <b>Tanggal </b><br>
+                                    <b>Nama </b>
+                                </div>
+                                <div class="col-10">
+                                    <b>:</b> {{$data->nomerpesanan}}<br>
+                                    <b>:</b> {{$data->created_at}}<br>
+                                    <b>:</b> {{$data->users->akun->nama}}
+                                </div>
+
+                            </div>
+                            @php
+                            $total45 = 0;
+                            $total35 = 0;
+                            @endphp
+                            @foreach($orderdetail as $p)
+                            @if($p->produk->harga == 45000)
+                            @php
+                            $total45 += $p->jumlah ;
+                            @endphp
+                            @else
+                            @php
+                            $total35 += $p->jumlah ;
+                            @endphp
+                            @endif
+                            @endforeach
+                            @php
+                            $harga45 = $total45 * 45000 ;
+                            $harga35 = $total35 * 35000 ;
+                            @endphp
+                            <div class="row mb-2">
+                                <div class="col-2">
+                                    Rp. 45000 x {{$total45}} <br>
+                                    Rp. 35000 x {{$total35}}
+                                </div>
+                                <div class="col-10">
+                                    : Rp. {{$harga45}} <br>
+                                    : Rp. {{$harga35}}
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="table-responsive">
                                         <table class="table table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Product Name</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                    <th>Total</th>
+                                                    {{-- <th>No</th> --}}
+                                                    <th>Nama Produk</th>
+                                                    <th>Jumlah</th>
+                                                    {{-- <th>Price</th> --}}
+                                                    {{-- <th>Total</th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($orderdetail as $no=>$p)
+                                                @foreach($orderdetail as $p)
                                                 <tr>
-                                                    <td>{{$no+1}}</td>
+                                                    {{-- <td>{{$no+1}}</td> --}}
                                                     <td>{{$p->produk->nama}}</td>
                                                     <td>{{$p->jumlah}}</td>
-                                                    <td>{{$p->produk->harga}}</td>
-                                                    <td>{{$p->jumlah * $p->produk->harga}}</td>
+                                                    {{-- <td>{{$p->produk->harga}}</td> --}}
+                                                    {{-- <td>{{$p->jumlah * $p->produk->harga}}</td> --}}
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <a href="/admin/pesanan/detail/print/{{$data->id}}" class="btn btn-danger">Export <i
+                                            class="fas fa-file-pdf"></i></a>
                                 </div>
                             </div>
                         </div>

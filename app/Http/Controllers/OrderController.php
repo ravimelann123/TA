@@ -8,13 +8,22 @@ use App\Produk;
 use App\Cart;
 use Illuminate\Http\Request;
 use \Sastrawi\Stemmer\StemmerFactory;
+use PDF;
 
 class OrderController extends Controller
 {
     public function orderdetailpesanan($id)
     {
+        $data = Order::find($id);
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
-        return view('admin.orderdetail', ['orderdetail' => $orderdetail]);
+        return view('admin.orderdetail', ['orderdetail' => $orderdetail, 'data' => $data]);
+    }
+    public function pdf($id)
+    {
+        $data = Order::find($id);
+        $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
+        $pdf = PDF::loadView('admin.print', ['orderdetail' => $orderdetail, 'data' => $data]);
+        return $pdf->download('invoice.pdf');
     }
 
     public function updatetosd($id)

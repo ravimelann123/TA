@@ -36,4 +36,8 @@ class Users extends Authenticatable
     {
         return $this->hasOne(Similarity::class);
     }
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

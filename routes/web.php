@@ -69,9 +69,10 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');
-    Route::get('/detailpesanan/{id}', 'OrderController@orderdetailpesanan');
-    Route::get('/admin/pesanan', 'OrderController@indexorder');
+    Route::get('/admin/pesanan/detail/{id}', 'OrderController@orderdetailpesanan');
 
+    Route::get('/admin/pesanan', 'OrderController@indexorder');
+    Route::get('/admin/pesanan/detail/print/{id}', 'OrderController@pdf');
     Route::get('/updatetosd/{id}', 'OrderController@updatetosd');
     Route::get('/updatetops/{id}', 'OrderController@updatetops');
 
