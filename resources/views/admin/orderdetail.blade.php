@@ -4,17 +4,17 @@
 <div class="col">
     <div class="card" style="min-height:85vh">
         <div class="card-body">
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
                             <li class="breadcrumb-item"><a href="/admin/pesanan">Pesanan</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Detail Pesanan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail</li>
                         </ol>
                     </nav>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="row">
                 <div class="col">

@@ -23,7 +23,7 @@ class OrderController extends Controller
         $data = Order::find($id);
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
         $pdf = PDF::loadView('admin.print', ['orderdetail' => $orderdetail, 'data' => $data]);
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream();
     }
 
     public function updatetosd($id)
@@ -31,7 +31,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Sedang Diproses";
         $order->save();
-        return redirect('/indexorder')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/pesanan')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function updatetops($id)
@@ -39,7 +39,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Pesanan Selesai";
         $order->save();
-        return redirect('/indexorder')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/pesanan')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function indexorder(Request $request)
@@ -106,8 +106,8 @@ class OrderController extends Controller
 
     public function Dpesanan($id)
     {
-
+        $data = Order::find($id);
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
-        return view('users.Dpesanan', ['orderdetail' => $orderdetail]);
+        return view('users.Dpesanan', ['orderdetail' => $orderdetail, 'data' => $data]);
     }
 }

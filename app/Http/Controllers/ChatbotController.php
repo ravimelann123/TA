@@ -59,10 +59,10 @@ class ChatbotController extends Controller
         $listkata = array(
             array("kata perintah", "tampilkan"),
             array("kata perintah", "pesan"),
-            array("kata perintah", "batalkan"),
+            array("kata perintah", "batal"),
             array("kata perintah", "ubah"),
             array("operator", "seluruh"),
-            array("atribut", "nomer"),
+            array("atribut", "nomor"),
             array("atribut", "nama"),
             array("atribut", "harga"),
             array("atribut", "status"),
@@ -71,7 +71,6 @@ class ChatbotController extends Controller
             array("kata", "pesanan"),
             array("kata", "produk"),
             array("kata", "ditawarkan"),
-            array("kata", "bernomer"),
             array("kata tanya", "kapan"),
             array("kata tanya", "apa"),
             array("kata tanya", "berapa"),
@@ -85,15 +84,13 @@ class ChatbotController extends Controller
             array("aturan1", "tampilkan nama harga produk"),
             array("aturan1", "tampilkan status pesanan"),
             array("aturan2", "pesan"),
-            array("aturan3", "batalkan pesanan nomer"),
-            array("aturan3", "batalkan pesanan bernomer"),
+            array("aturan3", "batal pesanan nomor"),
             array("aturan4", "ubah pesanan"),
             array("aturan5", "berapa jumlah pesanan"),
             array("aturan5", "berapa jumlah biaya pesanan"),
-            array("aturan6", "kapan pesanan nomer"),
-            array("aturan7", "apa pesanan nomer"),
+            array("aturan6", "kapan pesanan nomor"),
+            array("aturan7", "apa pesanan nomor"),
             array("aturan7", "apa produk ditawarkan"),
-
         );
         // menggambil id data kalimat terbaru yang di inputkan
         $idkalimat = 0;
@@ -361,7 +358,7 @@ class ChatbotController extends Controller
                 }
 
                 $getddorder = Order::where('id', '=', $id)->get();
-                $pesan = $pesan . " pesanan bernomer pesanan " . $nomer . "<br>terjadi pada ";
+                $pesan = $pesan . " pesanan bernomor pesanan " . $nomer . "<br>terjadi pada ";
                 foreach ($getddorder as $p) {
                     $pesan = $pesan . $p->created_at;
                 }
@@ -384,7 +381,7 @@ class ChatbotController extends Controller
                 }
 
                 $pesan = "";
-                if ($kalimat == "apa pesanan nomer") {
+                if ($kalimat == "apa pesanan nomor") {
                     $getddorder = OrderDetail::where('order_id', '=', $id)->get();
                     $pesan = $pesan . "Isi pesanan bernomer pesanan " . $nomer . " adalah <br>";
                     foreach ($getddorder as $p) {

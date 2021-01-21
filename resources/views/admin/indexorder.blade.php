@@ -67,11 +67,7 @@
                                                         <td>Rp. {{$p->total}}</td>
                                                         <td class="text-center">
                                                             <a href="/admin/pesanan/detail/{{$p->id}}"
-                                                                style="color: gray"> <i class="fas fa-eye"></i></a>
-                                                            <a href="#" style="color: red"><i
-                                                                    class="fas fa-print"></i></a>
-                                                            <a href="/admin/pesanan/print" style="color: red"><i
-                                                                    class="fas fa-file-pdf"></i></a>
+                                                                style="color: red"> <i class="fas fa-file-pdf"></i></a>
                                                             @if($p->status == "Menunggu Diproses")
                                                             <a href="/updatetosd/{{$p->id}}" style="color: orange"><i
                                                                     class="fas fa-edit"></i></a>

@@ -41,7 +41,8 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/plgn/pesanan', 'OrderController@indexpesanan');
     Route::get('/plgn/chatbot', 'ChatbotController@index');
     Route::post('/chatbot/chat', 'ChatbotController@chatbotchat');
-    Route::get('/Dpesanan/{id}', 'OrderController@Dpesanan');
+    Route::get('/plgn/pesanan/detail/{id}', 'OrderController@Dpesanan');
+    Route::get('/plgn/pesanan/detail/print/{id}', 'OrderController@pdf');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {

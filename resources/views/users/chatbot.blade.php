@@ -53,7 +53,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                Saya mau pesan kue B10 5, C10 5
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">1. tampilkan seluruh produk 2. tampilkan seluruh pesanan, tampilkan nama
+                        produk,tampilkan harga produk, tampilkan nama harga produk, tampilkan status pesanan</li>
+                    <li class="list-group-item">Saya mau pesan kue <b>nama kue</b> : <b>jumlah</b> ...</li>
+                    <li class="list-group-item">batal pesanan nomor <b>nomor pesanan</b>
+                    </li>
+                    <li class="list-group-item">ubah pesanan <b>nama kue</b> : <b>jumlah</b> ...</li>
+                    <li class="list-group-item">berapa jumlah pesanan, berapa jumlah biaya pesanan </li>
+                    <li class="list-group-item"> kapan pesanan nomor <b>nomor pesanan</b> terjadi</li>
+                    <li class="list-group-item"> apa pesanan nomor <br>apa produk ditawarkan</li>
+                </ul>
+
             </div>
 
         </div>

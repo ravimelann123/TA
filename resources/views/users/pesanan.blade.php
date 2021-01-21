@@ -67,11 +67,11 @@
                                                     <td>{{$p->status}}</td>
                                                     <td>Rp. {{$p->total}}</td>
                                                     <td>
+                                                        <a href="/plgn/pesanan/detail/{{$p->id}}" style="color: red">
+                                                            <i class="fas fa-file-pdf"></i></a>
                                                         <a href="/Dpesanan/{{$p->id}}" style="color: gray"> <i
                                                                 class="fas fa-eye"></i></a>
-                                                        <a href="#" style="color: red"><i class="fas fa-print"></i></a>
-                                                        <a href="#" style="color: red"><i
-                                                                class="fas fa-file-pdf"></i></a>
+
                                                     </td>
                                                 </tr>
                                                 @endforeach
