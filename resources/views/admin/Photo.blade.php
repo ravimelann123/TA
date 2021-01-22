@@ -23,30 +23,45 @@
 
                     </div>
                 </div>
+                <form action="/photo/create" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="text" name="id" value="4">
+                                    <input type="file" class="custom-file-input" name="namafoto[]" multiple>
+                                    <label class=" custom-file-label">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-
-                <div class="row mb-2">
+                {{-- <div class="row mb-2">
                     <div class="col text-left">
-                        {{-- <div class="card">
-                            <div class="card-header"> --}}
+
 
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             <i class="fas fa-plus-square"></i> Add Product Picture
                         </button>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover table-striped">
-                            <thead class="thead-white">
+                            {{-- <thead class="thead-white">
                                 <tr>
                                     <th>#</th>
                                     <th>Nama</th>
                                     <th>Gambar</th>
                                     <th>Opsi</th>
                                 </tr>
-                            </thead>
+                            </thead> --}}
                             <tbody>
                                 {{-- @if($data) --}}
 
@@ -88,7 +103,7 @@
 </div>
 
 {{-- MODAL --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -102,28 +117,28 @@
 
                     {{ csrf_field() }}
 
-                    <div class="form-group row ">
-                        <label class="col-4 col-form-label">Foto</label>
-                        <div class="col-sm-8">
-                            <input type="hidden" name="id" value="{{$d->produk_id}}">
-                            <input type="file" name="namafoto[]"
-                                class=" form-control-file {{$errors->has('namafoto') ? 'is-invalid' : ''}}" multiple>
-                            @if($errors->has('namafoto'))
-                            <span class="invalid-feedback">{{$errors->first('namafoto')}}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col text-right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="form-group row ">
+    <label class="col-4 col-form-label">Foto</label>
+    <div class="col-sm-8">
+        <input type="hidden" name="id" value="{{$d->produk_id}}">
+        <input type="file" name="namafoto[]" class=" form-control-file {{$errors->has('namafoto') ? 'is-invalid' : ''}}"
+            multiple>
+        @if($errors->has('namafoto'))
+        <span class="invalid-feedback">{{$errors->first('namafoto')}}</span>
+        @endif
     </div>
 </div>
+
+<div class="row">
+    <div class="col text-right">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div> --}}
 {{-- END MODAL --}}
 @stop
 
