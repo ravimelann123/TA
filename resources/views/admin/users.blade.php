@@ -5,19 +5,18 @@
     <div class="col">
         <div class="card" style="min-height:85vh">
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
                             <li class="breadcrumb-item active"><a href="/admin/users" style="color: #212529">
-                                    <b>Users</b>
+                                    <b>Table Data Users</b>
                                 </a>
                             </li>
                         </ol>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Users</li>
                         </ol>
 
@@ -25,14 +24,14 @@
                 </div>
 
                 <form method="GET" action="/admin/users">
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <div class="col">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="cari" placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type=" button"><i
                                             class="fas fa-search"></i></button>
-                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#akunModal"><i class="fas fa-plus-square"></i>
                                     </button>
                                 </div>
@@ -43,10 +42,10 @@
 
                 <div class="row">
                     <div class="col table-responsive">
-                        <table class="table table-hover table-bordered">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr class="text-center">
-                                    <th>No</th>
+                                    <th>#</th>
                                     <th>Username</th>
                                     <th>Role</th>
                                     <th>Biodata</th>
@@ -60,11 +59,9 @@
                                     <td>{{ $p->username }}</td>
                                     <td>{{ $p->role }}</td>
                                     {{-- <td>{{ $p->role }}</td> --}}
-                                    <td>@if($p->role == "admin")
-                                        -
-                                        @else
-                                        <a href="/users/biodata/{{$p->id}}" name="id" value="" class="btn btn-primary">
-                                            Detail
+                                    <td>@if($p->role == "admin") - @else <a href="/users/biodata/{{$p->id}}" name="id"
+                                            value="" class="btn btn-secondary">
+                                            <i class="fas fa-info"></i> Info
                                         </a></td>
                                     @endif
 
@@ -107,7 +104,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

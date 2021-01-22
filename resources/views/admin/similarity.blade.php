@@ -5,80 +5,78 @@
         <div class="card" style="min-height:85vh">
             <div class="card-body">
                 <div class="row">
-                    <div class="col">
-                        <nav>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Similarity</li>
-                            </ol>
-                        </nav>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item active"><a href="/admin/similarity" style="color: #212529">
+                                    <b>Table Data Similarity</b>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Similarity</li>
+                        </ol>
+
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href="/admin/similarity" class="btn btn-info">
-                                    Refresh
-                                </a>
 
 
-                            </div>
-                            <div class="card-body">
-                                <form method="GET" action="/admin/similarity">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="cari" placeholder="Cari">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-info" type=" button"><i
-                                                            class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <div class="row">
-                                    <div class="col table-responsive">
-                                        <table class="table table-hover table-bordered">
-                                            <thead class="thead-white">
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Id Training</th>
-                                                    <th>Users</th>
-                                                    <th>Pesan</th>
-                                                    <th>Perbandingan</th>
-                                                    <th>Similarity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="datatable">
-                                                @foreach( $data as $no =>$p)
-                                                <tr>
-                                                    <td>{{$data->firstItem()+$no}}</td>
-                                                    <td>{{ $p->training_id}}</td>
-                                                    <td>{{ $p->users->akun->nama}}</td>
-                                                    <td>{{ $p->pesan}}</td>
-                                                    <td>{{ $p->balas}}</td>
-                                                    <td>{{ $p->similarity}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">{{$data->links()}}
-                                    </div>
+                <form method="GET" action="/admin/similarity">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type=" button"><i
+                                            class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead class="thead-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Id Training</th>
+                                    <th>Users</th>
+                                    <th>Pesan</th>
+                                    <th>Perbandingan</th>
+                                    <th>Similarity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="datatable">
+                                @foreach( $data as $no =>$p)
+                                <tr>
+                                    <td>{{$data->firstItem()+$no}}</td>
+                                    <td>{{ $p->training_id}}</td>
+                                    <td>{{ $p->users->akun->nama}}</td>
+                                    <td>{{ $p->pesan}}</td>
+                                    <td>{{ $p->balas}}</td>
+                                    <td>{{ $p->similarity}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">{{$data->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <!-- Modal Create-->

@@ -11,9 +11,9 @@ class SimilarityController extends Controller
     {
 
         if ($request->has('cari')) {
-            $data = Similarity::where('pesan', 'LIKE', '%' . $request->cari . '%')->paginate(4);
+            $data = Similarity::where('pesan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $data = Similarity::paginate(4);
+            $data = Similarity::paginate(5);
         }
         return view('admin.similarity', ['data' => $data]);
     }

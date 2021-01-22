@@ -5,85 +5,83 @@
     <div class="card" style="min-height:85vh">
         <div class="card-body">
 
+            <div class="row mb-3">
+                <div class="col text-center">
+                    <h1>
+                        Biodata
+                    </h1>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h5>
-                                Biodata
-                            </h5>
-                        </div>
-                        <div class="card-body">
+                <div class="col-md-6 text-center">
+                    <img width="150" height="150" src="{{auth()->user()->akun->getAvatar()}}">
+                    <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#passwordModal"
+                        style="border-radius: 5px">Ubah Kata Sandi
+                    </button>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="row">
+                        <div class="col">
                             <div class="row">
-                                <div class="col-md-4 text-center">
-                                    <img width="150" height="150" src="{{auth()->user()->akun->getAvatar()}}">
-                                    <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                        data-target="#passwordModal" style="border-radius: 5px">Ubah Kata Sandi
-                                    </button>
+                                <div class="col-3">
+                                    Nama
                                 </div>
+                                <div class="col-9">
+                                    {{auth()->user()->akun->nama}}
+                                </div>
+                            </div>
 
-                                <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-3">
+                                    Email
+                                </div>
+                                <div class="col-9">
+                                    {{auth()->user()->akun->email}}
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    Nama
-                                                </div>
-                                                <div class="col-9">
-                                                    {{auth()->user()->akun->nama}}
-                                                </div>
-                                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    Nomer Handphone
+                                </div>
+                                <div class="col-9">
+                                    {{auth()->user()->akun->nohp}}
+                                </div>
+                            </div>
 
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    Email
-                                                </div>
-                                                <div class="col-9">
-                                                    {{auth()->user()->akun->email}}
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    Nomer Handphone
-                                                </div>
-                                                <div class="col-9">
-                                                    {{auth()->user()->akun->nohp}}
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    Alamat
-                                                </div>
-                                                <div class="col-9">
-                                                    {{auth()->user()->akun->alamat}}
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#biodataModal" style="border-radius: 5px;"><i
-                                                    class="fas fa-edit"></i>
-                                            </button>
-
-                                        </div>
-
-                                    </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    Alamat
+                                </div>
+                                <div class="col-9">
+                                    {{auth()->user()->akun->alamat}}
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#biodataModal" style="border-radius: 5px;"><i class="fas fa-edit"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 

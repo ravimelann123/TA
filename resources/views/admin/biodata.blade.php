@@ -5,62 +5,64 @@
     <div class="col">
         <div class="card" style="min-height:85vh">
             <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item active" style="color: #212529">
+                                <b>Biodata</b>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Biodata</li>
+                        </ol>
 
-                <div class="row mb-3">
-                    <div class="col">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Biodata</li>
-                            </ol>
-                        </nav>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Biodata</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col table-responsive">
-                                        <table class="table table-hover table-bordered">
-                                            <thead class="thead-white">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>E-mail</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Address</th>
-                                                    <th>Profile Picture</th>
-                                                    <th>Opsi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($data as $d)
-                                                <tr>
+                        {{-- <div class="card">
 
-                                                    <td>{{ $d->nama}}</td>
-                                                    <td>{{ $d->email }}</td>
-                                                    <td>{{ $d->nohp }}</td>
-                                                    <td>{{ $d->alamat }}</td>
-                                                    <td>
-                                                        <img src="/images/{{ $d->avatar }}" width="75" height="75">
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0)" onclick="editbiodata({{$d->id}})"
-                                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                            <div class="card-body"> --}}
+                        <div class="row">
+                            <div class="col table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <thead class="thead-white">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>E-mail</th>
+                                            <th>Phone Number</th>
+                                            <th>Address</th>
+                                            <th>Profile Picture</th>
+                                            <th>Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($data as $d)
+                                        <tr>
+                                            <td>{{ $d->nama}}</td>
+                                            <td>{{ $d->email }}</td>
+                                            <td>{{ $d->nohp }}</td>
+                                            <td>{{ $d->alamat }}</td>
+                                            <td>
+                                                <img src="/images/{{ $d->avatar }}" width="75" height="75">
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="editbiodata({{$d->id}})"
+                                                    style=" color: orange;"><i class="fas fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                        {{-- </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -73,7 +75,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Bahasa Alami</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Biodata</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -141,7 +143,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-right">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form>

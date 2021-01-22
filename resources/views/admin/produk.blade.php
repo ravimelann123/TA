@@ -5,101 +5,96 @@
     <div class="col">
         <div class="card" style="min-height:85vh">
             <div class="card-body">
-
                 <div class="row">
-                    <div class="col">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Produk</li>
-                            </ol>
-                        </nav>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item active"><a href="/admin/produk" style="color: #212529">
+                                    <b>Table Data Product</b>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Product</li>
+                        </ol>
+
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href="/admin/produk" class="btn btn-info">
-                                    Refresh
-                                </a>
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                    data-target="#produkModal" style="border-radius: 5px">Tambah <i
-                                        class="fas fa-plus-square"></i>
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <form method="GET" action="/admin/produk">
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="cari"
-                                                    placeholder="Search">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-info" type=" button"><i
-                                                            class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col table-responsive">
-                                        <table class="table table-hover table-bordered">
-                                            <thead class="thead-white">
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Deskripsi</th>
-                                                    {{-- <th>Stok</th> --}}
-                                                    <th>Harga</th>
-                                                    <th>Gambar</th>
-                                                    <th>Opsi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach( $data as $no=>$d)
-                                                <tr>
-                                                    <td>{{$data->firstItem()+$no}}</td>
-                                                    <td>{{$d->nama}}</td>
-                                                    <td>{{ $d->deskripsi }}</td>
-                                                    {{-- <td>{{ $d->stok }}</td> --}}
-                                                    <td>{{ $d->harga }}</td>
-                                                    <td><a href="/photoproduk/{{$d->id}}" style="color:gray"><i
-                                                                class="fas fa-eye"></i>
-                                                        </a></td>
-                                                    <td>
-                                                        <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
-                                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" produk-id="{{$d->id}}" class="delete"
-                                                            style="color: red;"><i class="fas fa-trash-alt"></i></a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">{{$data->links()}}</div>
+                <form method="GET" action="/admin/produk">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="cari" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type=" button"><i
+                                            class="fas fa-search"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#produkModal"><i class="fas fa-plus-square"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </form>
+                <div class="row">
+                    <div class="col table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead class="thead-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    {{-- <th>Stok</th> --}}
+                                    <th>Price</th>
+                                    <th>Picture</th>
+                                    <th>Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach( $data as $no=>$d)
+                                <tr>
+                                    <td>{{$data->firstItem()+$no}}</td>
+                                    <td>{{$d->nama}}</td>
+                                    <td>{{ $d->deskripsi }}</td>
+                                    {{-- <td>{{ $d->stok }}</td> --}}
+                                    <td>{{ $d->harga }}</td>
+                                    <td><a href="/photoproduk/{{$d->id}}" class="btn btn-secondary"><i
+                                                class="fas fa-info"></i> Info
+                                        </a></td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
+                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
+                                        <a href="#" produk-id="{{$d->id}}" class="delete" style="color: red;"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                    </div>
+
                 </div>
+                <div class="row mt-2">
+                    <div class="col">{{$data->links()}}</div>
+                </div>
+                {{-- </div>
+                        </div> --}}
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 {{-- MODAL --}}
 <div class="modal fade" id="produkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -151,9 +146,9 @@
                         <label class="col-4 col-form-label">Foto</label>
                         <div class="col-sm-8">
                             <input type="file" name="namafoto[]"
-                                class=" form-control-file {{$errors->has('namafoto') ? 'is-invalid' : ''}}" multiple>
-                            @if($errors->has('namafoto'))
-                            <span class="invalid-feedback">{{$errors->first('namafoto')}}</span>
+                                class=" form-control-file {{$errors->has('namafoto[]') ? 'is-invalid' : ''}}" multiple>
+                            @if($errors->has('namafoto[]'))
+                            <span class="invalid-feedback">{{$errors->first('namafoto[]')}}</span>
                             @endif
                         </div>
                     </div>
@@ -175,7 +170,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Bahasa Alami</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -221,7 +216,7 @@
 
                     <div class="row">
                         <div class="col text-right">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form>
@@ -260,7 +255,7 @@
         setTimeout(function(){ window.location = "/produk/hapus/"+produk_id+""; }, 250);
 
         }else{
-            window.location = "/produk";
+            window.location = "/admin/produk";
         }
         })
     });

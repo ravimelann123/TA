@@ -15,9 +15,9 @@ class ProdukController extends Controller
     {
 
         if ($request->has('cari')) {
-            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(4);
+            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-            $data = Produk::paginate(4);
+            $data = Produk::paginate(5);
         }
         return view('admin.produk', ['data' => $data]);
     }
@@ -55,12 +55,14 @@ class ProdukController extends Controller
 
     public function create(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'namafoto' => 'mimes:jpeg,png'
+            'namafoto[]' => 'mimes:jpeg,png'
         ]);
+
         $produk = new Produk;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
@@ -71,7 +73,6 @@ class ProdukController extends Controller
         if ($request->hasFile('namafoto')) {
             $image_array = $request->file('namafoto');
             $array_len = count($image_array);
-
 
             for ($i = 0; $i < $array_len; $i++) {
                 $namafoto = $image_array[$i]->getClientOriginalName();

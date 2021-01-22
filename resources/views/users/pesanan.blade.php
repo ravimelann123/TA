@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Halaman Utama</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Pesanan</li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
                                         <option value="Pesanan Selesai">Pesanan Selesai</option>
                                     </select>
                                     <div class="input-group-append">
-                                        <button class="btn btn-info" type=" button"><i
+                                        <button class="btn btn-primary" type=" button"><i
                                                 class="fas fa-search"></i></button>
                                     </div>
                                 </div>
@@ -52,12 +52,11 @@
                         </div>
                     </form>
 
-
                     <div class="row mb-3">
                         <div class="col">
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
+                                <table class="table table-hover table-striped">
+                                    <thead class="text-center">
                                         <tr>
                                             <th>No</th>
                                             <th>Nomer Pesanan</th>
@@ -66,7 +65,7 @@
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="text-center">
                                         @foreach($data as $no=>$p)
                                         <tr>
 
@@ -77,8 +76,7 @@
                                             <td>
                                                 <a href="/plgn/pesanan/detail/{{$p->id}}" style="color: red">
                                                     <i class="fas fa-file-pdf"></i></a>
-                                                <a href="/Dpesanan/{{$p->id}}" style="color: gray"> <i
-                                                        class="fas fa-eye"></i></a>
+
 
                                             </td>
                                         </tr>

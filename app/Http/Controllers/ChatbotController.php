@@ -478,10 +478,10 @@ class ChatbotController extends Controller
     public function indexdataset(Request $request)
     {
         if ($request->has('cari')) {
-            $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(4);
+            $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
 
-            $data = Chatbot::paginate(4);
+            $data = Chatbot::paginate(5);
         }
         return view('admin.dataset', ['data' => $data]);
     }

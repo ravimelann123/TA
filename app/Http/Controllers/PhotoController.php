@@ -24,7 +24,7 @@ class PhotoController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'namafoto' => 'mimes:jpeg,png'
+            'namafoto[]' => 'mimes:jpeg,png'
         ]);
         if ($request->hasFile('namafoto')) {
             $image_array = $request->file('namafoto');
@@ -38,7 +38,7 @@ class PhotoController extends Controller
                 $photo->produk_id = $request->id;
                 $photo->save();
             }
-            return redirect::back()->with('sukses', 'Data Berhasil Ditambahkan');
+            return redirect('/admin/produk')->with('sukses', 'Data Berhasil Ditambahkan');
         }
     }
 
