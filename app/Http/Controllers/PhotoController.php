@@ -9,16 +9,7 @@ use Illuminate\Http\Request;
 class PhotoController extends Controller
 {
 
-    public function indexlogin()
-    {
-        $photo = Photo::take(6)->groupBy('produk_id')->get();
-        return view('auths.login', ['photo' => $photo]);
-    }
-    public function viewall()
-    {
-        $photo = Photo::groupBy('produk_id')->get();
-        return view('master.viewall', ['photo' => $photo]);
-    }
+
 
 
     public function create(Request $request)
@@ -38,7 +29,7 @@ class PhotoController extends Controller
                 $photo->produk_id = $request->id;
                 $photo->save();
             }
-            return redirect('/admin/produk')->with('sukses', 'Data Berhasil Ditambahkan');
+            return redirect::back()->with('sukses', 'Data Berhasil Ditambahkan');
         }
     }
 

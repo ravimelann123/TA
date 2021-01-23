@@ -49,8 +49,11 @@ class ProdukController extends Controller
     public function photoproduk($id)
     {
         //$produk_id = $id;
-        $data = Photo::where('produk_id', '=', $id)->paginate(1);
-        return view('admin.Photo', ['data' => $data]);
+        $data = Photo::where('produk_id', '=', $id)->paginate(3);
+        $count = Photo::where('produk_id', '=', $id)->count();
+
+        $idproduk = $id;
+        return view('admin.Photo', ['data' => $data, 'idproduk' => $idproduk, 'count' => $count]);
     }
 
     public function create(Request $request)
