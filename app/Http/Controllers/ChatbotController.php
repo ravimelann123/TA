@@ -411,36 +411,17 @@ class ChatbotController extends Controller
                     $idtraining = $data->training_id + 1;
                 }
             }
-            // //merubah kalimat menjadi huruf kecil
-            // $chat = strtolower($request->pesan);
 
-            // //Menghapus Karakter Lain Selain Huruf dan Angka
-            // $regex = "/[^a-zA-Z0-9]+/i";
-            // $chat = preg_replace($regex, " ", $chat);
-
-            // //minghilangkan spasi duplicate dan merubahnya menjadi 1 spasi
-            // $chat = trim(preg_replace('/\s+/', ' ', $chat));
 
             //pecah string berdasarkan string " "
             $chat = explode(" ", $pesan2spasi);
-
-            $arr_chat = count($chat);
             $datachat = Chatbot::all();
-            //$kesamaan = 0;
             foreach ($datachat as $p) {
-                $kesamaan = 0;
                 $ss = $p->chat;
                 $ss = explode(" ", $ss);
-                $arr_balas = count($ss);
-                for ($i = 0; $i < $arr_chat; $i++) {
-                    for ($j = 0; $j < $arr_balas; $j++) {
-                        if ($chat[$i] == $ss[$j]) {
-                            $kesamaan += 1;
-                        }
-                    }
-                }
-
-                $totalsimilarity = $kesamaan / (($arr_chat + $arr_balas) - $kesamaan);
+                $result = array_intersect($chat, $ss);
+                $result = count($result);
+                $totalsimilarity = $result / (count($chat) + count($ss) - $result);
                 $tablesimilarity = new Similarity;
                 $tablesimilarity->users_id = auth()->user()->id;
                 $tablesimilarity->proses_id = $prosesid;
@@ -461,7 +442,7 @@ class ChatbotController extends Controller
                 }
             }
 
-            if ($hasilsimilarity <= 0.75) {
+            if ($hasilsimilarity < 0.75) {
                 $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
                 return response()->json(['pesan' => $pesan], 200);
             } else {
@@ -478,10 +459,10 @@ class ChatbotController extends Controller
     public function indexdataset(Request $request)
     {
         if ($request->has('cari')) {
-            $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Chatbot::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
 
-            $data = Chatbot::paginate(5);
+            $data = Chatbot::paginate(4);
         }
         return view('admin.dataset', ['data' => $data]);
     }

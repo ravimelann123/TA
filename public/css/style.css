@@ -1,7 +1,7 @@
 /* Navbar */
 .navbar-brand {
-    font-family: Viga;
     font-size: 32px;
+    font-weight: bold;
 }
 
 /* .jumbotron {

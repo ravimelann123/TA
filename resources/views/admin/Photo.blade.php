@@ -60,12 +60,13 @@
                     @endif
                 </div>
                 {{-- @endif --}}
-
+                <div class="row mt-2">
+                    <div class="col">{{$data->links()}}</div>
+                </div>
             </div>
+
         </div>
-        <div class="row mt-2">
-            <div class="col">{{$data->links()}}</div>
-        </div>
+
     </div>
 </div>
 </div>

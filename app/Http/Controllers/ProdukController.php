@@ -15,9 +15,9 @@ class ProdukController extends Controller
     {
 
         if ($request->has('cari')) {
-            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Produk::where('nama', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $data = Produk::paginate(5);
+            $data = Produk::paginate(4);
         }
         return view('admin.produk', ['data' => $data]);
     }
