@@ -75,8 +75,6 @@
                                         <a href="#" class=" delete" users-id="{{$p->id}}" style="color: red;"><i
                                                 class="fas fa-trash-alt"></i></a>
                                         @endif
-
-
                                     </td>
                                 </tr>
                                 @endforeach
@@ -256,7 +254,6 @@
         cancelButtonText: 'Batal'
         }).then((result) => {
         if (result.isConfirmed) {
-
 
         setTimeout(function(){ window.location = "/users/hapus/"+users_id+""; }, 250);
 

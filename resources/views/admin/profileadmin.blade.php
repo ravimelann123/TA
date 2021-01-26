@@ -13,10 +13,9 @@
                 <div class="row">
                     <div class="col">
 
-
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <img width="150" height="150" src="{{auth()->user()->akun->getAvatar()}}">
+                                <img width="150" height="150" src="{{auth()->user()->getAvatar()}}">
                                 <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal"
                                     data-target="#passwordModal" style="border-radius: 5px">Rubah Kata sandi
@@ -32,7 +31,7 @@
                                                 Nama
                                             </div>
                                             <div class="col-9">
-                                                {{auth()->user()->akun->nama}}
+                                                {{auth()->user()->nama}}
                                             </div>
                                         </div>
 
@@ -41,7 +40,7 @@
                                                 Email
                                             </div>
                                             <div class="col-9">
-                                                {{auth()->user()->akun->email}}
+                                                {{auth()->user()->email}}
                                             </div>
                                         </div>
 
@@ -50,7 +49,7 @@
                                                 Nomer Handphone
                                             </div>
                                             <div class="col-9">
-                                                {{auth()->user()->akun->nohp}}
+                                                {{auth()->user()->nohp}}
                                             </div>
                                         </div>
 
@@ -59,7 +58,7 @@
                                                 Alamat
                                             </div>
                                             <div class="col-9">
-                                                {{auth()->user()->akun->alamat}}
+                                                {{auth()->user()->alamat}}
                                             </div>
                                         </div>
 
@@ -188,7 +187,7 @@
                         <div class="col-md-8">
                             <input type="text" name="nama"
                                 class="form-control {{$errors->has('nama') ? 'is-invalid' : ''}}"
-                                value="{{auth()->user()->akun->nama}}">
+                                value="{{auth()->user()->nama}}">
                             @if($errors->has('nama'))
                             <span class="invalid-feedback">{{$errors->first('nama')}}</span>
                             @endif
@@ -200,7 +199,7 @@
                         <div class="col-md-8">
                             <input type="email" name="email"
                                 class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
-                                value="{{auth()->user()->akun->email}}">
+                                value="{{auth()->user()->email}}">
                             @if($errors->has('email'))
                             <span class="invalid-feedback">{{$errors->first('email')}}</span>
                             @endif
@@ -212,20 +211,18 @@
                         <div class="col-md-8">
                             <input type="text" name="nohp"
                                 class="form-control {{$errors->has('nohp') ? 'is-invalid' : ''}}"
-                                value="{{auth()->user()->akun->nohp}}">
+                                value="{{auth()->user()->nohp}}">
                             @if($errors->has('nohp'))
                             <span class="invalid-feedback">{{$errors->first('nohp')}}</span>
                             @endif
                         </div>
                     </div>
 
-
-
                     <div class="form-group row ">
                         <label class="col-md-4 col-form-label">Address</label>
                         <div class="col-md-8">
                             <textarea name="alamat"
-                                class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}">{{auth()->user()->akun->alamat  }}</textarea>
+                                class="form-control {{$errors->has('alamat') ? 'is-invalid' : ''}}">{{auth()->user()->alamat  }}</textarea>
                             @if($errors->has('alamat'))
                             <span class="invalid-feedback">{{$errors->first('alamat')}}</span>
                             @endif

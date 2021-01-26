@@ -11,12 +11,8 @@ class Users extends Authenticatable
 
     use Notifiable;
     protected $table = 'users';
-    protected $fillable = ['username', 'password', 'role'];
+    protected $fillable = ['username', 'password', 'role', 'nama', 'email', 'nohp', 'alamat', 'avatar'];
 
-    public function akun()
-    {
-        return $this->hasOne(Akun::class);
-    }
 
     public function tambahstok()
     {
@@ -39,5 +35,12 @@ class Users extends Authenticatable
     public function order()
     {
         return $this->hasOne(Order::class);
+    }
+    public function getAvatar()
+    {
+        if (!$this->avatar) {
+            return asset('images/default.jpg');
+        }
+        return asset('images/' . $this->avatar);
     }
 }

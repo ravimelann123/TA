@@ -58,15 +58,15 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/produk/{id}', 'ProdukController@edit');
     Route::put('/produk/update', 'ProdukController@update');
     Route::get('/produk/hapus/{id}', 'ProdukController@delete');
-    Route::get('/admin/biodata', 'AkunController@myprofileadmin');
+    Route::get('/admin/biodata', 'UsersController@myprofileadmin');
     Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
     Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
     Route::put('/changepasswordadmin/update', 'UsersController@UpdatePasswordadmin');
-    Route::get('/users/biodata/{id}', 'AkunController@biodata');
-    Route::get('/users/biodata/{id}/edit', 'AkunController@edit');
-    Route::put('/users/biodata/update', 'AkunController@update');
+    Route::get('/users/biodata/{id}', 'UsersController@biodata');
+    Route::get('/users/biodata/{id}/edit', 'UsersController@edit');
+    Route::put('/users/biodata/update', 'UsersController@updateusersadmin');
 
-    Route::put('/changemyprofileadmin/update', 'AkunController@updatemyprofileadmin');
+    Route::put('/changemyprofileadmin/update', 'UsersController@updatemyprofileadmin');
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');

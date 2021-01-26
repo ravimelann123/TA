@@ -47,12 +47,8 @@ class UsersController extends Controller
         $users->username = $data['username'];
         $users->password = bcrypt($data['password']);
         $users->role = $data['role'];
+        $users->nama = "Default Name";
         $users->save();
-
-        $akun = new Akun;
-        $akun->users_id = $users->id;
-        $akun->nama = "Default";
-        $akun->save();
         return redirect('/admin/users')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
@@ -135,10 +131,110 @@ class UsersController extends Controller
     public function delete($id)
     {
         $users = Users::find($id);
-        $users_id = $users->id;
-        $akun = Akun::find($users_id);
         $users->delete();
-        $akun->delete();
         return redirect('/admin/users')->with('delete', 'Data Berhasil Dihapus');
+    }
+    public function biodata(Request $request, $id)
+    {
+        $data = Users::where('id', '=', $id)->get();
+        //dd($dataakun);
+        return view('admin.biodata', ['data' => $data]);
+    }
+
+    public function updateusersadmin(Request $request)
+    {
+        //dd($request->all());
+        $this->validate($request, [
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png',
+        ]);
+        $users = Users::find($request->id);
+        $users->nama = $request->nama;
+        $users->email = $request->email;
+        $users->nohp = $request->nohp;
+        $users->alamat = $request->alamat;
+
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $users->avatar = $request->file('avatar')->getClientOriginalName();
+            $users->save();
+        }
+        return Redirect::back()->with('sukses', 'Data Berhasil Dirubah');
+    }
+    public function myprofileadmin()
+    {
+        return view('admin.profileadmin');
+    }
+    public function indexmyprofile()
+    {
+        return view('users.editmyprofile');
+    }
+
+    public function updatemyprofile(Request $request)
+    {
+        //dd($request->all());
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png',
+        ]);
+
+        $users = Users::find(auth()->user()->id);
+        $users->username = $request->username;
+        $users->save();
+        $akun = Akun::find(auth()->user()->akun->id);
+        $akun->update($request->all());
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $akun->avatar = $request->file('avatar')->getClientOriginalName();
+            $akun->save();
+        }
+        return redirect('/plgn/biodata')->with('sukses', 'Data Berhasil Dirubah');
+    }
+
+    public function updatemyprofileadmin(Request $request)
+    {
+        //dd($request->all());
+        $this->validate($request, [
+            'username' => 'required|min:8',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:10|numeric',
+            'avatar' => 'mimes:jpeg,png'
+        ]);
+
+        $users = Users::find();
+        $users->username = $request->username;
+        $users->nama = $request->nama;
+        $users->email = $request->email;
+        $users->nohp = $request->nohp;
+        $users->alamat = $request->alamat;
+        $users->save();
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $users->avatar = $request->file('avatar')->getClientOriginalName();
+            $users->save();
+        }
+        return Redirect::back()->with('sukses', 'Data Berhasil Dirubah');
+    }
+
+    public function myprofile()
+    {
+
+        return view('users.profileuser');
+    }
+
+
+    public function getdatabyida($id)
+    {
+        $data = Akun::find($id);
+        return response()->json($data);
     }
 }

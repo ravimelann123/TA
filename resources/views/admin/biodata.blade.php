@@ -81,7 +81,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="akuneditform" action="/users/biodata/update" method="POST">
+                <form id="akuneditform" action="/users/biodata/update" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
