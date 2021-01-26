@@ -299,7 +299,7 @@ class ChatbotController extends Controller
                     $id = 0;
                     for ($i = 0; $i < $arr_pesandipecah; $i++) {
                         foreach ($getddorder as $order) {
-                            if ($pesandipecah[$i] == $order->produk->nama) {
+                            if ($pesandipecah[$i] == $order->produk->kode) {
                                 $id = $order->id;
                                 $update = OrderDetail::find($id);
                                 $update->jumlah = $pesandipecah[$i + 1];
