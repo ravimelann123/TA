@@ -204,7 +204,6 @@ class UsersController extends Controller
 
     public function myprofile()
     {
-
         return view('users.profileuser');
     }
 }

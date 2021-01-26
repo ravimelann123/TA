@@ -56,7 +56,7 @@
                                 <tr>
                                     <td>{{$data->firstItem()+$no}}</td>
                                     <td>{{ $p->training_id}}</td>
-                                    <td>{{ $p->users->akun->nama}}</td>
+                                    <td>{{ $p->kalimat->users->nama}}</td>
                                     <td>{{ $p->pesan}}</td>
                                     <td>{{ $p->balas}}</td>
                                     <td>{{ $p->similarity}}</td>

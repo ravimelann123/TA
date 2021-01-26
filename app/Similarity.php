@@ -13,4 +13,8 @@ class Similarity extends Model
     {
         return $this->belongsTo(Users::class);
     }
+    public function kalimat()
+    {
+        return $this->belongsTo(Kalimat::class);
+    }
 }

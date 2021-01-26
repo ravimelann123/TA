@@ -28,10 +28,7 @@ class Users extends Authenticatable
     {
         return $this->hasOne(Kalimat::class);
     }
-    public function similarity()
-    {
-        return $this->hasOne(Similarity::class);
-    }
+
     public function order()
     {
         return $this->hasOne(Order::class);
@@ -42,5 +39,10 @@ class Users extends Authenticatable
             return asset('images/default.jpg');
         }
         return asset('images/' . $this->avatar);
+    }
+
+    public function similarity()
+    {
+        return $this->hasOne(Similarity::class);
     }
 }

@@ -13,4 +13,14 @@ class Kalimat extends Model
     {
         return $this->belongsTo(Users::class);
     }
+
+    public function prosesnlp()
+    {
+        return $this->hasMany(Prosesnlp::class);
+    }
+
+    public function similarity()
+    {
+        return $this->hasMany(Similarity::class);
+    }
 }

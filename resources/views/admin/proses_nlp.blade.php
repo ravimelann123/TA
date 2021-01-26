@@ -45,7 +45,8 @@
                                         <span class="input-group-text" style="width: 45px"><i
                                                 class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" value="{{$d->users->akun->nama}}" disabled>
+                                    <input type="text" class="form-control" value="{{$d->users->nama}}" disabled>
+
                                 </div>
                                 <div> </div>
                             </div>

@@ -8,4 +8,9 @@ class Prosesnlp extends Model
 {
     protected $table = 'prosesnlp';
     protected $fillable = ['users_id', 'proses_id', 'kalimat', 'kata', 'token', 'parsing'];
+
+    public function kalimat()
+    {
+        return $this->belongsTo(Kalimat::class);
+    }
 }
