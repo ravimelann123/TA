@@ -210,7 +210,7 @@ class UsersController extends Controller
             'avatar' => 'mimes:jpeg,png'
         ]);
 
-        $users = Users::find();
+        $users = Users::find(auth()->user()->id);
         $users->username = $request->username;
         $users->nama = $request->nama;
         $users->email = $request->email;
