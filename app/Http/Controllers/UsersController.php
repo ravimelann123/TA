@@ -207,11 +207,4 @@ class UsersController extends Controller
 
         return view('users.profileuser');
     }
-
-
-    public function getdatabyida($id)
-    {
-        $data = Akun::find($id);
-        return response()->json($data);
-    }
 }
