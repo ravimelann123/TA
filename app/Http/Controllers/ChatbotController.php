@@ -502,6 +502,12 @@ class ChatbotController extends Controller
             'chat' => 'required',
             'balas' => 'required'
         ]);
+        $dataset = Chatbot::all();
+        foreach ($dataset as $p) {
+            if ($p->chat == $request->chat) {
+                return Redirect::back()->with('delete', 'Dataset sudah ada');
+            }
+        }
         $data = Chatbot::find($request->id);
         $data->chat = $request->chat;
         $data->balas = $request->balas;
