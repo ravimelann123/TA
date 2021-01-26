@@ -60,6 +60,7 @@ class ProdukController extends Controller
     {
         //dd($request->all());
         $this->validate($request, [
+            'kode' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
@@ -67,9 +68,9 @@ class ProdukController extends Controller
         ]);
 
         $produk = new Produk;
+        $produk->kode = $request->kode;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
-        $produk->stok = 0;
         $produk->harga = $request->harga;
         $produk->save();
 
@@ -102,12 +103,14 @@ class ProdukController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
+            'kode' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required'
         ]);
 
         $produk = Produk::find($request->id);
+        $produk->kode = $request->kode;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;

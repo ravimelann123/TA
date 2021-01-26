@@ -45,6 +45,7 @@
                             <thead class="thead-white">
                                 <tr>
                                     <th>#</th>
+                                    <th>Kode</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     {{-- <th>Stok</th> --}}
@@ -57,6 +58,7 @@
                                 @foreach( $data as $no=>$d)
                                 <tr>
                                     <td>{{$data->firstItem()+$no}}</td>
+                                    <td>{{$d->kode}}</td>
                                     <td>{{$d->nama}}</td>
                                     <td>{{ $d->deskripsi }}</td>
                                     {{-- <td>{{ $d->stok }}</td> --}}
@@ -102,6 +104,18 @@
             <div class="modal-body">
                 <form action="/produk/create" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div class="form-group row ">
+                        <label class="col-sm-4 col-form-label">Kode Produk</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="kode"
+                                class="form-control {{$errors->has('kode') ? 'is-invalid' : ''}}"
+                                value="{{old('kode')}}">
+
+                            @if($errors->has('kode'))
+                            <span class="invalid-feedback">{{$errors->first('kode')}}</span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">Nama Produk</label>
                         <div class="col-sm-8">
@@ -182,6 +196,17 @@
                     <input type="hidden" id="id" name="id" class="form-control">
 
                     <div class="form-group row ">
+                        <label class="col-sm-4 col-form-label">Kode</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="kode" name="kode"
+                                class="form-control {{$errors->has('kode') ? 'is-invalid' : ''}}">
+
+                            @if($errors->has('kode'))
+                            <span class="invalid-feedback">{{$errors->first('kode')}}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row ">
                         <label class="col-sm-4 col-form-label">nama</label>
                         <div class="col-sm-8">
                             <input type="text" id="nama" name="nama"
@@ -232,6 +257,7 @@
     function editProduk(id){
     $.get('/produk/'+id,function(d){
         $("#id").val(d.id);
+        $("#kode").val(d.kode);
         $("#nama").val(d.nama);
         $("#deskripsi").val(d.deskripsi);
         $("#harga").val(d.harga);

@@ -58,6 +58,7 @@ class ChatbotController extends Controller
             array("atribut", "harga"),
             array("atribut", "status"),
             array("kata", "jumlah"),
+            array("kata", "kode"),
             array("kata", "biaya"),
             array("kata", "pesanan"),
             array("kata", "produk"),
@@ -70,9 +71,9 @@ class ChatbotController extends Controller
         $listaturan = array(
             array("aturan1", "tampilkan seluruh produk"),
             array("aturan1", "tampilkan seluruh pesanan"),
+            array("aturan1", "tampilkan kode produk"),
             array("aturan1", "tampilkan nama produk"),
             array("aturan1", "tampilkan harga produk"),
-            array("aturan1", "tampilkan nama harga produk"),
             array("aturan1", "tampilkan status pesanan"),
             array("aturan2", "pesan"),
             array("aturan3", "batal pesanan nomor"),
@@ -176,6 +177,9 @@ class ChatbotController extends Controller
                     if ($p->kata == "harga") {
                         $harga = 1;
                     }
+                    if ($p->kata == "kode") {
+                        $kode = 1;
+                    }
                     if ($p->kata == "status") {
                         $status = 1;
                     }
@@ -185,16 +189,16 @@ class ChatbotController extends Controller
                 }
 
                 if ($flag == 1) {
-                    if ($kalimat == "tampilkan seluruh produk" || $kalimat == "tampilkan nama harga produk" || $kalimat == "tampilkan nama produk" || $kalimat == "tampilkan harga produk") {
+                    if ($kalimat == "tampilkan seluruh produk"  || $kalimat == "tampilkan nama produk" || $kalimat == "tampilkan harga produk" || $kalimat == "tampilkan kode produk") {
                         foreach ($dataprodukall as $p) {
                             if ($seluruh == 1) {
-                                $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga . " Deskripsi " . $p->deskripsi . "<br>";
-                            } elseif ($harga == 1 && $seluruh != 1 && $nama == 1) {
-                                $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga .  "<br>";
+                                $pesan = $pesan . "Kode Produk " . $p->kode . "Nama Produk " . $p->nama . " harga " . $p->harga . " Deskripsi " . $p->deskripsi . "<br>";
                             } elseif ($nama == 1 && $seluruh != 1) {
                                 $pesan = $pesan . "Nama Produk " . $p->nama .  "<br>";
                             } elseif ($harga == 1 && $seluruh != 1) {
                                 $pesan = $pesan . "Nama Produk " . $p->nama . " harga " . $p->harga .  "<br>";
+                            } elseif ($kode == 1 && $seluruh != 1) {
+                                $pesan = $pesan . "Kode <b>(" . $p->kode . " )</b> Nama :" . $p->nama .  "<br>";
                             }
                         }
                         return response()->json(['pesan' => $pesan], 200);
@@ -230,8 +234,9 @@ class ChatbotController extends Controller
                 $totalharga = 0;
                 for ($i = 0; $i < $arr_pesandipecah; $i++) {
                     foreach ($dataprodukall as $produk) {
-                        if ($pesandipecah[$i] == $produk->nama) {
-                            $pesan = $pesan . " <br> Kue " . $produk->nama;
+                        if ($pesandipecah[$i] == $produk->kode) {
+                            $pesan = $pesan . " <br> Kode<b>(" . $produk->kode . ")</b>";
+                            $pesan = $pesan . "Nama " . $produk->nama;
                             $pesan = $pesan . " jumlah " . $pesandipecah[$i + 1];
                             $jumlahharga = $pesandipecah[$i + 1] * $produk->harga;
                             $totalharga = $totalharga + $jumlahharga;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     protected $table = 'produk';
-    protected $fillable = ['nama', 'deskripsi', 'stok', 'harga'];
+    protected $fillable = ['nama', 'deskripsi', 'harga', 'kode'];
 
     public function photo()
     {
