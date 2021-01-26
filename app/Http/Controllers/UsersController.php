@@ -173,32 +173,9 @@ class UsersController extends Controller
         return view('users.editmyprofile');
     }
 
+
+
     public function updatemyprofile(Request $request)
-    {
-        //dd($request->all());
-        $this->validate($request, [
-            'username' => 'required|min:8',
-            'email' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp' => 'required|min:10|numeric',
-            'avatar' => 'mimes:jpeg,png',
-        ]);
-
-        $users = Users::find(auth()->user()->id);
-        $users->username = $request->username;
-        $users->save();
-        $akun = Akun::find(auth()->user()->akun->id);
-        $akun->update($request->all());
-        if ($request->hasFile('avatar')) {
-            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
-            $akun->avatar = $request->file('avatar')->getClientOriginalName();
-            $akun->save();
-        }
-        return redirect('/plgn/biodata')->with('sukses', 'Data Berhasil Dirubah');
-    }
-
-    public function updatemyprofileadmin(Request $request)
     {
         //dd($request->all());
         $this->validate($request, [

@@ -31,9 +31,9 @@ Route::group(['middleware' => ['auth', 'checkRole:user,admin']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
-    Route::get('/plgn/biodata', 'AkunController@myprofile');
-    Route::get('/changemyprofile', 'AkunController@indexmyprofile');
-    Route::put('/changemyprofile/update', 'AkunController@updatemyprofile');
+    Route::get('/plgn/biodata', 'UsersController@myprofile');
+    // Route::get('/changemyprofile', 'AkunController@indexmyprofile');
+    Route::put('/changemyprofile/update', 'UsersController@updatemyprofile');
     Route::get('/changepassword', 'UsersController@IndexPassword');
     Route::put('/changepassword/update', 'UsersController@UpdatePassword');
 
@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/users/biodata/{id}/edit', 'UsersController@edit');
     Route::put('/users/biodata/update', 'UsersController@updateusersadmin');
 
-    Route::put('/changemyprofileadmin/update', 'UsersController@updatemyprofileadmin');
+    Route::put('/changemyprofileadmin/update', 'UsersController@updatemyprofile');
     Route::get('/tambahstok', 'TambahstokController@indextambahstok');
     Route::post('/tambahstok/create', 'TambahstokController@create');
     Route::get('/tambahstok/hapus/{id}', 'TambahstokController@delete');
