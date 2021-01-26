@@ -7,6 +7,7 @@ use App\Produk;
 use App\Photo;
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProdukController extends Controller
 {
@@ -66,7 +67,12 @@ class ProdukController extends Controller
             'harga' => 'required',
             'namafoto[]' => 'mimes:jpeg,png'
         ]);
-
+        $produk = Produk::all();
+        foreach ($produk as $p) {
+            if ($p->kode == $request->kode) {
+                return Redirect::back()->with('delete', 'Kode sudah ada');
+            }
+        }
         $produk = new Produk;
         $produk->kode = $request->kode;
         $produk->nama = $request->nama;
@@ -108,7 +114,12 @@ class ProdukController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required'
         ]);
-
+        $produk = Produk::all();
+        foreach ($produk as $p) {
+            if ($p->kode == $request->kode) {
+                return Produk::back()->with('delete', 'Kode sudah ada');
+            }
+        }
         $produk = Produk::find($request->id);
         $produk->kode = $request->kode;
         $produk->nama = $request->nama;
