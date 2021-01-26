@@ -27,16 +27,6 @@ class ChatbotController extends Controller
 
     public function chatbotchat(Request $request)
     {
-        // PROSES NLP
-        $data = Prosesnlp::where('users_id', '=', auth()->user()->id)->latest()->first();
-
-        if ($data == null) {
-            $prosesid = 1;
-        } else {
-            foreach ($data as $d) {
-                $prosesid = $data->proses_id + 1;
-            }
-        }
 
         //merubah kalimat menjadi huruf kecil
         $pesan = strtolower($request->pesan);
@@ -93,6 +83,16 @@ class ChatbotController extends Controller
             array("aturan7", "apa pesanan nomor"),
             array("aturan7", "apa produk ditawarkan"),
         );
+
+        // PROSES NLP
+        $data = Prosesnlp::latest()->first();
+        $prosesid = 0;
+        if ($data == null) {
+            $prosesid = 1;
+        } else {
+            $prosesid = $data->proses_id + 1;
+        }
+
         // menggambil id data kalimat terbaru yang di inputkan
         $idkalimat = 0;
         $datakalimat = Kalimat::where('users_id', '=', auth()->user()->id)->latest()->first();
@@ -102,7 +102,6 @@ class ChatbotController extends Controller
         $token = 0;
         for ($i = 0; $i < $arr_pesandipecah; $i++) {
             $tblprosesnlp = new Prosesnlp;
-            $tblprosesnlp->users_id = auth()->user()->id;
             $tblprosesnlp->proses_id = $prosesid;
             $tblprosesnlp->kalimat_id = $idkalimat;
             $tblprosesnlp->kata = $pesandipecah[$i];
@@ -120,7 +119,7 @@ class ChatbotController extends Controller
             $token = 0;
         }
 
-        $dataprosesnlp_token = Prosesnlp::where('users_id', '=', auth()->user()->id)->where('kalimat_id', '=', $idkalimat)->where('token', '=', 1)->get();
+        $dataprosesnlp_token = Prosesnlp::where('kalimat_id', '=', $idkalimat)->where('token', '=', 1)->get();
 
         $kalimat = "";
         foreach ($dataprosesnlp_token as $dpnlp) {
@@ -157,7 +156,7 @@ class ChatbotController extends Controller
         $dataprodukall = Produk::all();
         $dataorder_users_id = Order::Where('users_id', '=', auth()->user()->id)->get();
         $dataorder_satu_terbaru = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
-        $dataprosesnlpall = Prosesnlp::where('users_id', '=', auth()->user()->id)->where('kalimat_id', '=', $idkalimat)->get();
+        $dataprosesnlpall = Prosesnlp::where('kalimat_id', '=', $idkalimat)->get();
         //aturan 1
         //         tampilkan
         // - tampilkan seluruh daftar pesanan saya
@@ -404,13 +403,11 @@ class ChatbotController extends Controller
             }
         } else {
             //PROSES JACCARD SIMILARITY
-            $data = Similarity::where('users_id', '=', auth()->user()->id)->latest()->first();
+            $data = Similarity::latest()->first();
             if ($data == null) {
                 $idtraining = 1;
             } else {
-                foreach ($data as $d) {
-                    $idtraining = $data->training_id + 1;
-                }
+                $idtraining = $data->training_id + 1;
             }
 
 
@@ -424,8 +421,7 @@ class ChatbotController extends Controller
                 $result = count($result);
                 $totalsimilarity = $result / (count($chat) + count($ss) - $result);
                 $tablesimilarity = new Similarity;
-                $tablesimilarity->users_id = auth()->user()->id;
-                $tablesimilarity->proses_id = $prosesid;
+                $tablesimilarity->kalimat_id = $idkalimat;
                 $tablesimilarity->training_id = $idtraining;
                 $tablesimilarity->pesan = $request->pesan;
                 $tablesimilarity->balas = $p->balas;
@@ -433,7 +429,7 @@ class ChatbotController extends Controller
                 $tablesimilarity->save();
             }
 
-            $max = Similarity::where('users_id', '=', auth()->user()->id)->where('training_id', '=', $idtraining)->get();
+            $max = Similarity::where('training_id', '=', $idtraining)->get();
             $idmax = 0;
             $hasilsimilarity = 0;
             foreach ($max as $p) {
@@ -443,7 +439,7 @@ class ChatbotController extends Controller
                 }
             }
 
-            if ($hasilsimilarity < 0.75) {
+            if ($hasilsimilarity == 0) {
                 $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
                 return response()->json(['pesan' => $pesan], 200);
             } else {
@@ -451,7 +447,6 @@ class ChatbotController extends Controller
                 foreach ($datareturn as $datar) {
                     $pesan = $datar->balas;
                 }
-
                 return response()->json(['pesan' => $pesan], 200);
             }
         }
