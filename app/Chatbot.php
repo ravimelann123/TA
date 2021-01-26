@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chatbot extends Model
 {
-    protected $table = 'chatbot';
+    protected $table = 'dataset';
     protected $fillable = ['chat', 'balas'];
 }

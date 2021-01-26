@@ -13,6 +13,7 @@ use App\Produk;
 use App\Prosesnlp;
 use App\Similarity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Swift_LoadBalancedTransport;
 
 class ChatbotController extends Controller
@@ -473,6 +474,14 @@ class ChatbotController extends Controller
             'chat' => 'required',
             'balas' => 'required'
         ]);
+
+        $dataset = Chatbot::all();
+
+        foreach ($dataset as $p) {
+            if ($p->chat == $request->chat) {
+                return Redirect::back()->with('delete', 'Dataset sudah ada');
+            }
+        }
         $data = new Chatbot();
         $data->chat = $request->chat;
         $data->balas = $request->balas;
