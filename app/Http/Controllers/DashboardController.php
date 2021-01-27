@@ -25,10 +25,14 @@ class DashboardController extends Controller
         } elseif (auth()->user()->role == "superadmin") {
             return view('superadmin.dashboard');
         } else {
-            $photo = Photo::groupBy('produk_id')->get();
-            $order = Order::where('users_id', '=', auth()->user()->id)->get();
-            $order = count($order);
-            return view('users.dashboard', ['photo' => $photo, 'order' => $order]);
+
+            // $order = Order::where('users_id', '=', auth()->user()->id)->get();
+            // $order = count($order);
+            // return view('users.dashboard', ['order' => $order]);
+
+            // $order = Order::where('users_id', '=', auth()->user()->id)->get();
+            // $order = count($order);['order' => $order]
+            return view('users.dashboard');
         }
     }
 }

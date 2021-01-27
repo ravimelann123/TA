@@ -33,7 +33,7 @@
                                     <div class="text-uppercase mb-1">
                                         Pesanan
                                     </div>
-                                    {{$order}}
+                                    {{-- {{$order}} --}}
                                 </div>
                             </div>
                         </div>

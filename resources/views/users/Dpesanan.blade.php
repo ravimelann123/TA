@@ -35,7 +35,7 @@
                 <div class="col-10">
                     <b>:</b> {{$data->nomerpesanan}}<br>
                     <b>:</b> {{$data->created_at}}<br>
-                    <b>:</b> {{$data->users->akun->nama}}
+                    <b>:</b> {{$data->users->nama}}
                 </div>
 
             </div>
