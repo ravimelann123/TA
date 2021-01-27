@@ -156,6 +156,7 @@ class ChatbotController extends Controller
         //get data tabel
         $dataprodukall = Produk::all();
         $dataorder_users_id = Order::Where('users_id', '=', auth()->user()->id)->get();
+        $dataorder_users_id_count = count($dataorder_users_id);
         $dataorder_satu_terbaru = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
         $dataprosesnlpall = Prosesnlp::where('kalimat_id', '=', $idkalimat)->get();
         //aturan 1
@@ -204,14 +205,20 @@ class ChatbotController extends Controller
                         return response()->json(['pesan' => $pesan], 200);
                     } elseif ($kalimat == "tampilkan seluruh pesanan" || $kalimat == "tampilkan status pesanan") {
 
-                        foreach ($dataorder_users_id as $p) {
-                            if ($seluruh == 1) {
-                                $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Total Biaya Rp. " . $p->total . " Status " . $p->status . "<br>";
-                            } elseif ($status == 1 && $seluruh != 1) {
-                                $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Status " . $p->status . "<br>";
+                        if ($dataorder_users_id_count == 0) {
+                            $pesan = "Maaf, Kami tidak menemukan pesanan yang pernah anda lakukan";
+                            return response()->json(['pesan' => $pesan], 200);
+                        } else {
+
+                            foreach ($dataorder_users_id as $p) {
+                                if ($seluruh == 1) {
+                                    $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Total Biaya Rp. " . $p->total . " Status " . $p->status . "<br>";
+                                } elseif ($status == 1 && $seluruh != 1) {
+                                    $pesan = $pesan . "Nomer Pesanan " . $p->nomerpesanan . " Status " . $p->status . "<br>";
+                                }
                             }
+                            return response()->json(['pesan' => $pesan], 200);
                         }
-                        return response()->json(['pesan' => $pesan], 200);
                     } else {
                         $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
                         return response()->json(['pesan' => $pesan], 200);

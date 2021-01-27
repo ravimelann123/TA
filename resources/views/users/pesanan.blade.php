@@ -76,6 +76,8 @@
                                             <td>
                                                 <a href="/plgn/pesanan/detail/{{$p->id}}" style="color: red">
                                                     <i class="fas fa-file-pdf"></i></a>
+
+
                                             </td>
                                         </tr>
                                         @endforeach

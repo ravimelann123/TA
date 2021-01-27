@@ -98,9 +98,9 @@ class OrderController extends Controller
         if ($request->has('cari')) {
             $data = Order::where('status', '=',  $request->cari)->where('users_id', '=', auth()->user()->id)->paginate(4);
         } else {
-            // $data = Order::where('users_id', '=', auth()->user()->id)->paginate(4);
-            $data = Order::paginate(4);
+            $data = Order::where('users_id', '=', auth()->user()->id)->paginate(4);
         }
+
         return view('users.pesanan', ['data' => $data]);
     }
 
