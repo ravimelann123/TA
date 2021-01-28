@@ -54,13 +54,13 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     Route::get('/admin/produk', 'ProdukController@index');
     Route::post('/produk/create', 'ProdukController@create');
-    Route::post('/photo/create', 'PhotoController@create');
+    // Route::post('/photo/create', 'PhotoController@create');
     Route::get('/produk/{id}', 'ProdukController@edit');
     Route::put('/produk/update', 'ProdukController@update');
     Route::get('/produk/hapus/{id}', 'ProdukController@delete');
     Route::get('/admin/biodata', 'UsersController@myprofileadmin');
-    Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
-    Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
+    // Route::get('/photoproduk/{id}', 'ProdukController@photoproduk');
+    // Route::get('/photoproduk/hapus/{id}', 'PhotoController@delete');
     Route::put('/changepasswordadmin/update', 'UsersController@UpdatePasswordadmin');
     Route::get('/users/biodata/{id}', 'UsersController@biodata');
     Route::get('/users/biodata/{id}/edit', 'UsersController@edit');

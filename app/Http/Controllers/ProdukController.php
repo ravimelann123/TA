@@ -65,7 +65,7 @@ class ProdukController extends Controller
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'namafoto[]' => 'mimes:jpeg,png'
+            // 'namafoto[]' => 'mimes:jpeg,png'
         ]);
         $produk = Produk::all();
         foreach ($produk as $p) {
@@ -80,21 +80,21 @@ class ProdukController extends Controller
         $produk->harga = $request->harga;
         $produk->save();
 
-        if ($request->hasFile('namafoto')) {
-            $image_array = $request->file('namafoto');
-            $array_len = count($image_array);
+        // if ($request->hasFile('namafoto')) {
+        //     $image_array = $request->file('namafoto');
+        //     $array_len = count($image_array);
 
-            for ($i = 0; $i < $array_len; $i++) {
-                $namafoto = $image_array[$i]->getClientOriginalName();
-                $image_array[$i]->move('images/produk/', $namafoto);
-                $photo = new Photo();
+        //     for ($i = 0; $i < $array_len; $i++) {
+        //         $namafoto = $image_array[$i]->getClientOriginalName();
+        //         $image_array[$i]->move('images/produk/', $namafoto);
+        //         $photo = new Photo();
 
-                $photo->namafoto = $namafoto;
-                $photo->produk_id = $produk->id;
-                $photo->save();
-            }
-            return redirect('/admin/produk')->with('sukses', 'Data Berhasil Ditambahkan');
-        }
+        //         $photo->namafoto = $namafoto;
+        //         $photo->produk_id = $produk->id;
+        //         $photo->save();
+        //     }
+        return redirect('/admin/produk')->with('sukses', 'Data Berhasil Ditambahkan');
+        // }
     }
 
 
@@ -133,7 +133,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::find($id);
         $produk->delete();
-        $photo = Photo::where('produk_id', '=', $id)->delete();
+        // $photo = Photo::where('produk_id', '=', $id)->delete();
         return redirect('/admin/produk')->with('delete', 'Data Berhasil Dihapus');
     }
 }

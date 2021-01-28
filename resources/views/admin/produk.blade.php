@@ -50,7 +50,7 @@
                                     <th>Description</th>
                                     {{-- <th>Stok</th> --}}
                                     <th>Price</th>
-                                    <th>Picture</th>
+                                    {{-- <th>Picture</th> --}}
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -63,9 +63,9 @@
                                     <td>{{ $d->deskripsi }}</td>
                                     {{-- <td>{{ $d->stok }}</td> --}}
                                     <td>{{ $d->harga }}</td>
-                                    <td><a href="/photoproduk/{{$d->id}}" class="btn btn-secondary"><i
-                                                class="fas fa-info"></i> Info
-                                        </a></td>
+                                    {{-- <td><a href="/photoproduk/{{$d->id}}" class="btn btn-secondary"><i
+                                        class="fas fa-info"></i> Info
+                                    </a></td>--}}
                                     <td>
                                         <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
                                             style=" color: orange;"><i class="fas fa-edit"></i></a>
@@ -156,26 +156,26 @@
                     </div>
 
 
-                    <div class="form-group row ">
+                    {{-- <div class="form-group row ">
                         <label class="col-4 col-form-label">Foto</label>
                         <div class="col-sm-8">
                             <input type="file" name="namafoto[]"
                                 class=" form-control-file {{$errors->has('namafoto[]') ? 'is-invalid' : ''}}" multiple>
-                            @if($errors->has('namafoto[]'))
-                            <span class="invalid-feedback">{{$errors->first('namafoto[]')}}</span>
-                            @endif
-                        </div>
-                    </div>
+                    @if($errors->has('namafoto[]'))
+                    <span class="invalid-feedback">{{$errors->first('namafoto[]')}}</span>
+                    @endif
+            </div>
+        </div> --}}
 
-                    <div class="row">
-                        <div class="col text-right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </form>
+        <div class="row">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
+        </form>
     </div>
+</div>
+</div>
 </div>
 {{-- END MODAL --}}
 <!-- Modal edit-->
