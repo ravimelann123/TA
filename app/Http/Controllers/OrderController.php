@@ -101,8 +101,11 @@ class OrderController extends Controller
         } else {
             $data = Auth::user()->kalimat()->with('order')->get();
             $orders = $data->pluck('order');
+
             $orders = $orders->filter();
+
             $data = Order::whereIn('id', $orders->pluck('id'))->paginate(4);
+
             // $data = Auth::user()->kalimat()->with('order')->get();
             // $orders = $data->pluck('order');
             // $orders = $orders->filter();
