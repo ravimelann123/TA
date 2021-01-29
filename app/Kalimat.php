@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kalimat extends Model
 {
     protected $table = 'kalimat';
-    protected $fillable = ['users_id', 'kalimat', 'parsing'];
+    protected $fillable = ['users_id', 'kalimat'];
 
     public function users()
     {

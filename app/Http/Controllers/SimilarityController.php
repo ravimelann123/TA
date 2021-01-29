@@ -11,7 +11,7 @@ class SimilarityController extends Controller
     {
 
         if ($request->has('cari')) {
-            $data = Similarity::where('pesan', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Similarity::where('prosesnlp_id', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
             $data = Similarity::paginate(5);
         }

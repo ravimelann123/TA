@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Similarity extends Model
 {
-    protected $table = 'similaritytable';
-    protected $fillable = ['pesan', 'users_id', 'balas', 'similarity', 'kalimat_id'];
+    protected $table = 'similarity';
+    protected $fillable = ['dataset_id', 'similarity', 'prosesnlp_id'];
 
-    public function users()
+    // public function users()
+    // {
+    //     return $this->belongsTo(Users::class);
+    // }
+    public function dataset()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Dataset::class);
     }
-    public function kalimat()
+    public function prosesnlp()
     {
-        return $this->belongsTo(Kalimat::class);
+        return $this->belongsTo(Prosesnlp::class);
     }
 }

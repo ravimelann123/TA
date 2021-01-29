@@ -44,10 +44,11 @@
                             <thead class="thead-white">
                                 <tr>
                                     <th>#</th>
-                                    <th>Id Training</th>
+                                    <th>Prosesnlp id</th>
                                     <th>Users</th>
-                                    <th>Pesan</th>
+                                    <th>Kalimat Input</th>
                                     <th>Perbandingan</th>
+                                    <th>Pesan Balasan</th>
                                     <th>Similarity</th>
                                 </tr>
                             </thead>
@@ -55,10 +56,11 @@
                                 @foreach( $data as $no =>$p)
                                 <tr>
                                     <td>{{$data->firstItem()+$no}}</td>
-                                    <td>{{ $p->training_id}}</td>
-                                    <td>{{ $p->kalimat->users->nama}}</td>
-                                    <td>{{ $p->pesan}}</td>
-                                    <td>{{ $p->balas}}</td>
+                                    <td>{{ $p->prosesnlp_id}}</td>
+                                    <td>{{ $p->prosesnlp->kalimat->users->nama}}</td>
+                                    <td>{{ $p->prosesnlp->kalimat->kalimat}}</td>
+                                    <td>{{ $p->dataset->chat}}</td>
+                                    <td>{{ $p->dataset->balas}}</td>
                                     <td>{{ $p->similarity}}</td>
                                 </tr>
                                 @endforeach
