@@ -249,7 +249,7 @@ class ChatbotController extends Controller
             elseif ($dataparsing->parsing == "aturan2") {
 
                 $order = new Order;
-                $order->id = "o" . date("Ymds");
+                $order->id = "inv" . date("hms");
                 // $order->users_id = auth()->user()->id;
                 $order->prosesnlp_id = $tblprosesnlp->id;
                 $order->status = "Menunggu Diproses";
@@ -378,16 +378,16 @@ class ChatbotController extends Controller
             elseif ($dataparsing->parsing == "aturan6") {
 
                 foreach ($dataprosesnlpall as $p) {
-                    foreach ($dataorder_users_id as $pp) {
-                        if ($p->kata == $pp->nomerpesanan) {
+                    foreach ($orders as $pp) {
+                        if ($p->kata == $pp->id) {
                             $id = $pp->id;
-                            $nomer = $pp->nomerpesanan;
+                            $nomor = $pp->id;
                         }
                     }
                 }
 
                 $getddorder = Order::where('id', '=', $id)->get();
-                $pesan = $pesan . " pesanan bernomor pesanan " . $nomer . "<br>terjadi pada ";
+                $pesan = $pesan . " pesanan bernomor pesanan " . $nomor . "<br>terjadi pada ";
                 foreach ($getddorder as $p) {
                     $pesan = $pesan . $p->created_at;
                 }
