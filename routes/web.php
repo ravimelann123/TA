@@ -84,5 +84,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/superadmin_datasetchatbot/{id}/delete', 'ChatbotController@delete');
 
     Route::get('admin/proses_nlp', 'KalimatController@indexProsessNLP');
+    Route::get('admin/proses_nlp/detail/{id}', 'KalimatController@prosesnlpdetail');
     Route::get('admin/similarity', 'SimilarityController@index');
 });

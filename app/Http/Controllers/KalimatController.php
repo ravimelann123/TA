@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kalimat;
 use App\Prosesnlp;
+use App\Prosesnlp_detail;
 use Illuminate\Http\Request;
 
 class KalimatController extends Controller
@@ -11,14 +12,22 @@ class KalimatController extends Controller
     public function indexProsessNLP(Request $request)
     {
         if ($request->has('cari')) {
-
-            $data = Kalimat::where('kalimat', 'LIKE', '%' . $request->cari . '%')->get();
+            $data = Prosesnlp::where('kalimat', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
-
-            $data = Kalimat::all();
+            $data = Prosesnlp::paginate(5);
         }
 
-        $data1 = Prosesnlp::all();
-        return view('admin.proses_nlp', ['data' => $data, 'data1' => $data1]);
+        return view('admin.proses_nlp', ['data' => $data]);
+    }
+    public function prosesnlpdetail(Request $request, $id)
+    {
+        if ($request->has('cari')) {
+            $data = Prosesnlp_detail::where('kata', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $ids = $id;
+        } else {
+            $data = Prosesnlp_detail::where('prosesnlp_id', '=', $id)->paginate(5);
+            $ids = $id;
+        }
+        return view('admin.proses_nlp_detail', ['data' => $data, 'ids' => $ids]);
     }
 }

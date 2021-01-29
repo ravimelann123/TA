@@ -7,22 +7,24 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
-                            <li class="breadcrumb-item active"><a href="/admin/proses_nlp" style="color: #212529">
-                                    <b>Table Data Proses NLP</b>
-                                </a>
+                            <li class="breadcrumb-item active"><a href="/admin/proses_nlp/detail/{{$ids}}"
+                                    style="color: #212529">
+                                    <b>Table Detail Proses NLP</b>
+
                             </li>
                         </ol>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Proses NLP</li>
+                            <li class="breadcrumb-item "><a href="/admin/proses_nlp">Proses NLP</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail</li>
                         </ol>
 
                     </div>
                 </div>
 
-                <form method="GET" action="/admin/proses_nlp">
+                <form method="GET" action="/admin/proses_nlp/detail/{{$ids}}/">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="input-group">
@@ -35,6 +37,7 @@
                         </div>
                     </div>
                 </form>
+
                 <div class="row">
                     <div class="col table-responsive">
                         <table class="table table-hover table-striped">
@@ -42,12 +45,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Prosesnlp id</th>
-                                    <th>Users</th>
-                                    <th>kalimat</th>
-                                    <th>Parsing</th>
-                                    <th>Detail</th>
-
-
+                                    <th>Kata</th>
+                                    <th>Token</th>
 
                                 </tr>
                             </thead>
@@ -55,19 +54,11 @@
                                 @foreach( $data as $no =>$p)
                                 <tr>
                                     <td>{{$data->firstItem()+$no}}</td>
-                                    <td>{{ $p->id}}</td>
-                                    <td>{{ $p->kalimat->users->nama}}</td>
-                                    <td>{{ $p->kalimat->kalimat}}</td>
-                                    @if($p->parsing == null)
-                                    @php $value= "Tidak Termasuk Aturan Produksi";
-                                    @endphp
-                                    @else
-                                    @php $value = $d->parsing; @endphp
-                                    @endif
-                                    <td>{{ $value }}</td>
-                                    <td><a href="/admin/proses_nlp/detail/{{$p->id}}" class="btn btn-secondary"><i
-                                                class="fas fa-info"></i> Info
-                                        </a></td>
+                                    <td>{{ $p->prosesnlp_id}}</td>
+                                    <td>{{ $p->kata}}</td>
+                                    <td>{{ $p->token}}</td>
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
