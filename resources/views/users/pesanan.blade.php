@@ -66,11 +66,11 @@
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        @foreach($data as $no=>$p)
+                                        @foreach($data as $p)
                                         <tr>
 
-                                            <td>{{$data->firstItem()+$no}}</td>
-                                            <td>{{$p->nomerpesanan}}</td>
+                                            <td>{{$number++}}</td>
+                                            <td>{{$p->id}}</td>
                                             <td>{{$p->status}}</td>
                                             <td>Rp. {{$p->total}}</td>
                                             <td>

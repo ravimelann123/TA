@@ -8,6 +8,7 @@ use App\Produk;
 use App\Cart;
 use Illuminate\Http\Request;
 use \Sastrawi\Stemmer\StemmerFactory;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class OrderController extends Controller
@@ -98,16 +99,30 @@ class OrderController extends Controller
         if ($request->has('cari')) {
             $data = Order::where('status', '=',  $request->cari)->where('users_id', '=', auth()->user()->id)->paginate(4);
         } else {
-            $data = Order::where('users_id', '=', auth()->user()->id)->paginate(4);
+            $data = Auth::user()->kalimat()->with('order')->get();
+            $orders = $data->pluck('order');
+            $orders = $orders->filter();
+            $data = Order::whereIn('id', $orders->pluck('id'))->paginate(4);
+            // $data = Auth::user()->kalimat()->with('order')->get();
+            // $orders = $data->pluck('order');
+            // $orders = $orders->filter();
+            // $data = Order::whereIn('id', $orders->pluck('id'))->latest()->first();
         }
-
-        return view('users.pesanan', ['data' => $data]);
+        $params = [
+            'data' => $data,
+            'number' => $data->firstItem(),
+        ];
+        return view('users.pesanan', $params);
     }
 
     public function Dpesanan($id)
     {
         $data = Order::find($id);
         $orderdetail = OrderDetail::where('order_id', '=', $id)->get();
-        return view('users.Dpesanan', ['orderdetail' => $orderdetail, 'data' => $data]);
+        $params = [
+            'orderdetail' => $orderdetail,
+            'data' => $data
+        ];
+        return view('users.Dpesanan', $params);
     }
 }

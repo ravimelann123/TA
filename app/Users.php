@@ -26,8 +26,10 @@ class Users extends Authenticatable
 
     public function kalimat()
     {
-        return $this->hasOne(Kalimat::class);
+        return $this->hasMany(Kalimat::class);
     }
+
+
 
     public function order()
     {

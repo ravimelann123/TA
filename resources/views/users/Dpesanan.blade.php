@@ -33,9 +33,9 @@
                     <b>Nama </b>
                 </div>
                 <div class="col-10">
-                    <b>:</b> {{$data->nomerpesanan}}<br>
+                    <b>:</b> {{$data->id}}<br>
                     <b>:</b> {{$data->created_at}}<br>
-                    <b>:</b> {{$data->users->nama}}
+                    <b>:</b> {{$data->prosesnlp->kalimat->users->nama}}
                 </div>
 
             </div>

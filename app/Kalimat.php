@@ -16,9 +16,12 @@ class Kalimat extends Model
 
     public function prosesnlp()
     {
-        return $this->hasMany(Prosesnlp::class);
+        return $this->hasOne(Prosesnlp::class, 'kalimat_id', 'id');
     }
-
+    public function order()
+    {
+        return $this->hasOneThrough(Order::class, Prosesnlp::class, 'kalimat_id', 'prosesnlp_id', 'id', 'id');
+    }
     public function similarity()
     {
         return $this->hasMany(Similarity::class);

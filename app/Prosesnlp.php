@@ -17,4 +17,8 @@ class Prosesnlp extends Model
     {
         return $this->hasMany(Similarity::class);
     }
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'prosesnlp_id', 'id');
+    }
 }
