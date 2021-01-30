@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Order;
 use App\OrderDetail;
 use App\Produk;
@@ -101,15 +102,16 @@ class OrderController extends Controller
         } else {
             $data = Auth::user()->kalimat()->with('order')->get();
             $orders = $data->pluck('order');
-
             $orders = $orders->filter();
 
-            $data = Order::whereIn('id', $orders->pluck('id'))->paginate(4);
 
-            // $data = Auth::user()->kalimat()->with('order')->get();
-            // $orders = $data->pluck('order');
-            // $orders = $orders->filter();
-            // $data = Order::whereIn('id', $orders->pluck('id'))->latest()->first();
+            // foreach ($getddorder as $order) {
+            //     if ('b10' == $order->produk->kode) {
+            //         DB::update('update orderdetail set jumlah = ? where order_id = ? and produk_id =?', [110, 'inv020137', 4]);
+            //     }
+            // }
+
+            $data = Order::whereIn('id', $orders->pluck('id'))->paginate(4);
         }
         $params = [
             'data' => $data,
