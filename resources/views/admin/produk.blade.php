@@ -68,8 +68,8 @@
                                     </a></td>--}}
                                     <td>
                                         <a href="javascript:void(0)" onclick="editProduk({{$d->id}})"
-                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                        <a href="#" produk-id="{{$d->id}}" class="delete" style="color: red;"><i
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="#" produk-id="{{$d->id}}" class="delete btn btn-danger btn-sm"><i
                                                 class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

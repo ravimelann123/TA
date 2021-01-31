@@ -62,11 +62,11 @@
                                     @php $value= "Tidak Termasuk Aturan Produksi";
                                     @endphp
                                     @else
-                                    @php $value = $d->parsing; @endphp
+                                    @php $value = $p->parsing; @endphp
                                     @endif
                                     <td>{{ $value }}</td>
-                                    <td><a href="/admin/proses_nlp/detail/{{$p->id}}" class="btn btn-secondary"><i
-                                                class="fas fa-info"></i> Info
+                                    <td><a href="/admin/proses_nlp/detail/{{$p->id}}" class="btn btn-secondary btn-sm">
+                                            Info
                                         </a></td>
                                 </tr>
                                 @endforeach

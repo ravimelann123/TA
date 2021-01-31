@@ -33,7 +33,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = "Sedang Diproses";
         $order->save();
-        return redirect('/admin/pesanan')->with('sukses', 'Data Berhasil Dirubah');
+        return redirect('/admin/pesananmasuk')->with('sukses', 'Data Berhasil Dirubah');
     }
 
     public function updatetops($id)
@@ -43,16 +43,22 @@ class OrderController extends Controller
         $order->save();
         return redirect('/admin/pesanan')->with('sukses', 'Data Berhasil Dirubah');
     }
-
+    public function orderin()
+    {
+        $data = Order::where('status', '=',  'Menunggu Diproses')->paginate(5);
+        return view('admin.orderin', ['data' => $data]);
+    }
     public function indexorder(Request $request)
     {
 
         if ($request->has('cari')) {
             $data = Order::where('status', '=',  $request->cari)->paginate(4);
+            $orderin = Order::where('status', '=', 'Menunggu Diproses')->get()->count();
         } else {
-            $data = Order::paginate(4);
+            $orderin = Order::where('status', '=', 'Menunggu Diproses')->get()->count();
+            $data = Order::where('status', '!=',  'Menunggu Diproses')->paginate(4);
         }
-        return view('admin.indexorder', ['data' => $data]);
+        return view('admin.indexorder', ['data' => $data, 'orderin' => $orderin]);
     }
 
 
@@ -83,16 +89,16 @@ class OrderController extends Controller
     }
 
 
-    public function indextransaksi(Request $request)
-    {
-        $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
-        $orderd = OrderDetail::where('order_id', '=', $order->id)->get();
-        $produk = Produk::all();
-        $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
+    // public function indextransaksi(Request $request)
+    // {
+    //     $order = Order::where('users_id', '=', auth()->user()->id)->latest()->first();
+    //     $orderd = OrderDetail::where('order_id', '=', $order->id)->get();
+    //     $produk = Produk::all();
+    //     $cart = Cart::where('users_id', '=', auth()->user()->id)->get();
 
-        $totalcart = count($cart);
-        return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd, 'totalcart' => $totalcart]);
-    }
+    //     $totalcart = count($cart);
+    //     return view('users.transaksi', ['order' => $order, 'produk' => $produk, 'orderd' => $orderd, 'totalcart' => $totalcart]);
+    // }
 
 
     public function indexpesanan(Request $request)

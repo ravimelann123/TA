@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <form method="GET" action="/superadmin_datasetchatbot">
+                <form method="GET" action="/admin/dataset">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="input-group">
@@ -65,8 +65,8 @@
                                     <td>{{$p->chat}}</td>
                                     <td>{{ $p->balas}}</td>
                                     <td> <a href="javascript:void(0)" onclick="editAturan({{$p->id}})"
-                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                        <a href="#" dataset-id="{{$p->id}}" class="delete" style="color: red;"><i
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="#" dataset-id="{{$p->id}}" class="delete btn btn-danger btn-sm"><i
                                                 class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

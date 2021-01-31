@@ -60,7 +60,7 @@
                                     <td>{{ $p->role }}</td>
                                     {{-- <td>{{ $p->role }}</td> --}}
                                     <td>@if($p->role == "admin") - @else <a href="/users/biodata/{{$p->id}}" name="id"
-                                            value="" class="btn btn-secondary">
+                                            value="" class="btn btn-secondary btn-sm">
                                             <i class="fas fa-info"></i> Info
                                         </a></td>
                                     @endif
@@ -71,8 +71,8 @@
                                         <a href="#" style="color: grey;"><i class="fas fa-trash-alt"></i></a>
                                         @else
                                         <a href="javascript:void(0)" onclick="editAkun({{$p->id}})"
-                                            style=" color: orange;"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class=" delete" users-id="{{$p->id}}" style="color: red;"><i
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="#" class="btn btn-danger btn-sm delete" users-id="{{$p->id}}"><i
                                                 class="fas fa-trash-alt"></i></a>
                                         @endif
                                     </td>

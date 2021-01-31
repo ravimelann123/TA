@@ -28,8 +28,6 @@
                                 <select class="custom-select" name="cari">
                                     <option>
                                         Pilih Status Pesanan</option>
-                                    <option value="Menunggu Diproses">
-                                        Menunggu Diproses</option>
                                     <option value="Sedang Diproses">Sedang Diproses</option>
                                     <option value="Pesanan Selesai">Pesanan Selesai</option>
                                 </select>
@@ -42,6 +40,15 @@
                     </div>
 
                 </form>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="alert alert-success">
+                            <strong>{{$orderin}}</strong> Pesanan Baru, <a href="/admin/pesananmasuk"
+                                style="color: #155724">Lihat.</a>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="row mb-3">
                     <div class="col">
                         <div class="table-responsive">
@@ -59,27 +66,25 @@
                                     @foreach($data as $no=>$p)
                                     <tr>
                                         <td>{{$data->firstItem()+$no}}</td>
-                                        <td>{{$p->nomerpesanan}}</td>
+                                        <td>{{$p->id}}</td>
                                         <td>{{$p->status}}</td>
                                         <td>Rp. {{$p->total}}</td>
                                         <td class="text-center">
-                                            <a href="/admin/pesanan/detail/{{$p->id}}" style="color: red"> <i
-                                                    class="fas fa-file-pdf"></i></a>
-                                            @if($p->status == "Menunggu Diproses")
+
+                                            <a href="/admin/pesanan/detail/{{$p->id}}" class="btn btn-danger btn-sm"
+                                                style="width: 30px"> <i class="fas fa-file-pdf"></i></a>
+                                            {{-- @if($p->status == "Menunggu Diproses")
                                             <a href="/updatetosd/{{$p->id}}" style="color: orange"><i
-                                                    class="fas fa-edit"></i></a>
-                                            @elseif($p->status == "Sedang Diproses")
-                                            <a href="/updatetops/{{$p->id}}" style="color: orange"><i
-                                                    class="fas fa-edit"></i></a>
+                                                class="fas fa-edit"></i></a> --}}
+                                            @if($p->status == "Sedang Diproses")
+                                            <a href="/updatetops/{{$p->id}}" class="btn btn-warning btn-sm">Update
+                                                Status
+                                            </a>
                                             @else
-                                            <a href="/indexorder" style="color: gray"><i class="fas fa-edit"></i></a>
-                                            @endif
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
+                                            <button type="button" class="btn btn-success btn-sm">Pesanan
+                                                Selesai</button>
+                                            @endif</td>
+                                    </tr> @endforeach </tbody>
                             </table>
                         </div>
                     </div>

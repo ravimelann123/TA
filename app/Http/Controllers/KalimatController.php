@@ -12,7 +12,7 @@ class KalimatController extends Controller
     public function indexProsessNLP(Request $request)
     {
         if ($request->has('cari')) {
-            $data = Prosesnlp::where('kalimat', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Prosesnlp::where('id', 'LIKE', '%' . $request->cari . '%')->paginate(5);
         } else {
             $data = Prosesnlp::paginate(5);
         }

@@ -33,7 +33,18 @@
                                     <div class="text-uppercase mb-1">
                                         Pesanan
                                     </div>
-                                    {{-- {{$order}} --}}
+                                    @php
+                                    $count=0;
+                                    @endphp
+                                    @foreach($order as $p)
+                                    @if($p->prosesnlp->kalimat->users->id == auth()->user()->id)
+                                    @php
+                                    $count = $count + 1;
+                                    @endphp
+                                    @endif
+                                    @endforeach
+
+                                    {{$count}}
                                 </div>
                             </div>
                         </div>

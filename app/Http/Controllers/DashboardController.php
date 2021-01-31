@@ -21,7 +21,8 @@ class DashboardController extends Controller
             $order = count($order);
             $produk = Produk::all();
             $produk = count($produk);
-            return view('admin.dashboard', ['akun' => $akun, 'order' => $order, 'produk' => $produk]);
+            $orderin = Order::where('status', '=', 'Menunggu Diproses')->get()->count();
+            return view('admin.dashboard', ['akun' => $akun, 'order' => $order, 'produk' => $produk, 'orderin' => $orderin]);
         } elseif (auth()->user()->role == "superadmin") {
             return view('superadmin.dashboard');
         } else {
@@ -29,10 +30,8 @@ class DashboardController extends Controller
             // $order = Order::where('users_id', '=', auth()->user()->id)->get();
             // $order = count($order);
             // return view('users.dashboard', ['order' => $order]);
-
-            // $order = Order::where('users_id', '=', auth()->user()->id)->get();
-            // $order = count($order);['order' => $order]
-            return view('users.dashboard');
+            $order = Order::all();
+            return view('users.dashboard', ['order' => $order]);
         }
     }
 }

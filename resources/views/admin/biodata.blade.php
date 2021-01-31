@@ -53,7 +53,7 @@
                                             </td>
                                             <td>
                                                 <a href="javascript:void(0)" onclick="editbiodata({{$d->id}})"
-                                                    style=" color: orange;"><i class="fas fa-edit"></i></a>
+                                                    class="btn btn-warning btn-sm">Edit</a>
                                             </td>
                                         </tr>
                                         @endforeach

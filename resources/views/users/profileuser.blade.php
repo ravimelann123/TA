@@ -17,8 +17,8 @@
                 <div class="col-md-6 text-center">
                     <img width="150" height="150" src="{{auth()->user()->getAvatar()}}">
                     <h5 style="text-transform: capitalize">{{auth()->user()->username}}</h5>
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#passwordModal"
-                        style="border-radius: 5px">Ubah Kata Sandi
+                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                        data-target="#passwordModal" style="border-radius: 5px">Ubah Kata Sandi
                     </button>
                 </div>
 
@@ -66,8 +66,8 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                data-target="#biodataModal" style="border-radius: 5px;"><i class="fas fa-edit"></i>
+                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                data-target="#biodataModal">Edit
                             </button>
 
                         </div>

@@ -26,6 +26,15 @@
                         {{auth()->user()->username}}
                     </div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="alert alert-success">
+                            <strong>{{$orderin}}</strong> Pesanan Baru, <a href="/admin/pesananmasuk"
+                                style="color: #155724">Lihat.</a>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="row">
                     <div class="col-md mb-3">
                         <div class="card " style="border-left: 5px solid #075e54; box-shadow: 3px 4px 5px #b6b6b6;">

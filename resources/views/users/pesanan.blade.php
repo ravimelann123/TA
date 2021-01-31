@@ -74,7 +74,7 @@
                                             <td>{{$p->status}}</td>
                                             <td>Rp. {{$p->total}}</td>
                                             <td>
-                                                <a href="/plgn/pesanan/detail/{{$p->id}}" style="color: red">
+                                                <a href="/plgn/pesanan/detail/{{$p->id}}" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-file-pdf"></i></a>
 
 

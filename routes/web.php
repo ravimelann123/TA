@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/admin/pesanan/detail/{id}', 'OrderController@orderdetailpesanan');
 
     Route::get('/admin/pesanan', 'OrderController@indexorder');
+    Route::get('/admin/pesananmasuk', 'OrderController@orderin');
     Route::get('/admin/pesanan/detail/print/{id}', 'OrderController@pdf');
     Route::get('/updatetosd/{id}', 'OrderController@updatetosd');
     Route::get('/updatetops/{id}', 'OrderController@updatetops');
