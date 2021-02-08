@@ -68,6 +68,8 @@
                                             class="btn btn-warning btn-sm">Edit</a>
                                         <a href="#" dataset-id="{{$p->id}}" class="delete btn btn-danger btn-sm"><i
                                                 class="fas fa-trash-alt"></i></a>
+
+
                                     </td>
                                 </tr>
                                 @endforeach

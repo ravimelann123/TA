@@ -54,7 +54,7 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">1. tampilkan seluruh produk 2. tampilkan seluruh pesanan, tampilkan nama
+                    <li class="list-group-item">Tampilkan seluruh produk, tampilkan seluruh pesanan, tampilkan nama
                         produk,tampilkan harga produk, tampilkan nama harga produk, tampilkan status pesanan</li>
                     <li class="list-group-item">Saya mau pesan kue <b>nama kue</b> : <b>jumlah</b> ...</li>
                     <li class="list-group-item">batal pesanan nomor <b>nomor pesanan</b>

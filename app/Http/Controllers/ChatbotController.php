@@ -298,7 +298,7 @@ class ChatbotController extends Controller
 
             //aturan 3
             // batal
-            // - batalkan\\\ pesanan bernomor NMT13929
+            // - batal\\\ pesanan bernomor NMT13929
             elseif ($dataparsing->parsing == "aturan3") {
                 $z = 0;
                 for ($i = 0; $i < $arr_pesandipecah; $i++) {

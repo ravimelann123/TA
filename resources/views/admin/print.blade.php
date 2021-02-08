@@ -22,9 +22,9 @@
     }
 </style>
 <h1>KUE BOLU RM</h1>
-<b>:</b> {{$data->id}}<br>
-<b>:</b> {{$data->created_at}}<br>
-<b>:</b> {{$data->prosesnlp->kalimat->users->nama}}
+<b>Nomer Pesanan</b><b>:</b> {{$data->id}}<br>
+<b>Tanggal </b><b>:</b> {{$data->created_at}}<br>
+<b>Nama </b><b>:</b> {{$data->prosesnlp->kalimat->users->nama}}
 
 @php
 $total45 = 0;
