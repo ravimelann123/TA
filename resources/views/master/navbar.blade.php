@@ -57,6 +57,7 @@
                     <a class="dropdown-item" href="/admin/produk"><i class="fas fa-clipboard-list"></i> Produk</a>
                     <a class="dropdown-item" href="/admin/pesanan"><i class="fas fa-book"></i> Pesanan</a>
                     <a class="dropdown-item" href="/admin/biodata"><i class="fas fa-user"></i> Biodata</a>
+
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -69,6 +70,7 @@
                     <a class="dropdown-item" href="/admin/proses_nlp"><i class="fas fa-laptop-code"></i> Proses Nlp</a>
                     <a class="dropdown-item" href="/admin/similarity"><i class="fas fa-balance-scale"></i>
                         Similarity</a>
+                    <a class="dropdown-item" href="/admin/slangword"><i class="fas fa-database"></i> SlangWord</a>
                 </div>
             </li>
             <a class="nav-item nav-link" href="/indexorder"></a>

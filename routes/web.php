@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'checkRole:user']], function () {
     Route::get('/allproduk', 'ProdukController@indexproduk');
     Route::get('/plgn/pesanan', 'OrderController@indexpesanan');
     Route::get('/plgn/chatbot', 'ChatbotController@index');
+    Route::get('/plgn/test', 'ChatbotController@test');
     Route::post('/chatbot/chat', 'ChatbotController@chatbotchat');
     Route::get('/plgn/pesanan/detail/{id}', 'OrderController@Dpesanan');
     Route::get('/plgn/pesanan/detail/print/{id}', 'OrderController@pdf');
@@ -78,11 +79,18 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/updatetosd/{id}', 'OrderController@updatetosd');
     Route::get('/updatetops/{id}', 'OrderController@updatetops');
 
+
     Route::get('/admin/dataset', 'ChatbotController@indexdataset');
     Route::post('/admin/dataset/create', 'ChatbotController@create');
     Route::get('/superadmin_datasetchatbot/{id}', 'ChatbotController@getdatabyid');
     Route::put('/superadmin_datasetchatbot/update', 'ChatbotController@update');
     Route::get('/superadmin_datasetchatbot/{id}/delete', 'ChatbotController@delete');
+
+    Route::get('/admin/slangword', 'SlangwordController@index');
+    Route::post('/admin/slangword/create', 'SlangwordController@create');
+    Route::get('/admin/slangword/{id}', 'SlangwordController@getdatabyid');
+    Route::put('/admin/slangword/update', 'SlangwordController@update');
+    Route::get('/admin/slangword/{id}/delete', 'SlangwordController@delete');
 
     Route::get('admin/proses_nlp', 'KalimatController@indexProsessNLP');
     Route::get('admin/proses_nlp/detail/{id}', 'KalimatController@prosesnlpdetail');

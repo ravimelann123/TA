@@ -15,10 +15,12 @@ use App\Produk;
 use App\Prosesnlp;
 use App\Prosesnlp_detail;
 use App\Similarity;
+use App\slangword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Swift_LoadBalancedTransport;
 use Illuminate\Support\Facades\Auth;
+use Sastrawi\Stemmer\StemmerFactory;
 
 class ChatbotController extends Controller
 {
@@ -28,7 +30,34 @@ class ChatbotController extends Controller
         return view('users.chatbot');
     }
 
+    public function test()
+    {
+        $slangword = slangword::all();
+        $sentence = "tampilkan seluruh";
+        $pesandipecah = explode(" ", $sentence);
+        $count = count($pesandipecah);
+        foreach ($slangword as $a) {
+            for ($i = 0; $i < $count; $i++) {
+                if ($a->slangword == $pesandipecah[$i]) {
+                    $pesandipecah[$i] = $a->formal;
+                }
+            }
+        }
+        echo $pesandipecah[0];
+        // $slangword = slangword::all();
 
+        // echo "slang word : " . $sentence . "<br>";
+        // $stemmerFactory = new \Sastrawi\Stemmer\StemmerFactory();
+        // $stemmer = $stemmerFactory->createStemmer();
+        // // stem
+
+        // $output = $stemmer->stem($sentence);
+        // echo "menjadi kata dasar : " . $output . "\n";
+        // ekonomi indonesia sedang dalam tumbuh yang bangga
+
+        // echo $stemmer->stem('Mereka meniru-nirukannya') . "\n";
+        // mereka tiru
+    }
     public function chatbotchat(Request $request)
     {
 
@@ -45,14 +74,16 @@ class ChatbotController extends Controller
         //pecah string berdasarkan string " "
         $pesandipecah = explode(" ", $pesan2spasi);
 
+
         // input kalimat ke tabel kalimat
         $kalimat = new Kalimat;
         $kalimat->users_id = auth()->user()->id;
         $kalimat->kalimat = $pesan2spasi;
         $kalimat->save();
 
+
         $listkata = array(
-            array("kata perintah", "tampilkan"),
+            array("kata perintah", "tampil"),
             array("kata perintah", "pesan"),
             array("kata perintah", "batal"),
             array("kata perintah", "ubah"),
@@ -64,7 +95,7 @@ class ChatbotController extends Controller
             array("kata", "jumlah"),
             array("kata", "kode"),
             array("kata", "biaya"),
-            array("kata", "pesanan"),
+            //array("kata", "pesan"),
             array("kata", "produk"),
             array("kata", "ditawarkan"),
             array("kata tanya", "kapan"),
@@ -73,36 +104,35 @@ class ChatbotController extends Controller
         );
 
         $listaturan = array(
-            array("aturan1", "tampilkan seluruh produk"),
-            array("aturan1", "tampilkan seluruh pesanan"),
-            array("aturan1", "tampilkan kode produk"),
-            array("aturan1", "tampilkan nama produk"),
-            array("aturan1", "tampilkan harga produk"),
-            array("aturan1", "tampilkan status pesanan"),
+            array("aturan1", "tampil seluruh produk"),
+            array("aturan1", "tampil seluruh pesan"),
+            array("aturan1", "tampil kode produk"),
+            array("aturan1", "tampil nama produk"),
+            array("aturan1", "tampil harga produk"),
+            array("aturan1", "tampil status pesan"),
             array("aturan2", "pesan"),
-            array("aturan3", "batal pesanan nomor"),
-            array("aturan4", "ubah pesanan"),
-            array("aturan5", "berapa jumlah pesanan"),
-            array("aturan5", "berapa jumlah biaya pesanan"),
-            array("aturan6", "kapan pesanan nomor"),
-            array("aturan7", "apa pesanan nomor"),
-            array("aturan7", "apa produk ditawarkan"),
+            array("aturan3", "batal pesan nomor"),
+            array("aturan4", "ubah pesan"),
+            array("aturan5", "berapa jumlah pesan"),
+            array("aturan5", "berapa jumlah biaya pesan"),
+            array("aturan6", "kapan pesan nomor"),
+            array("aturan7", "apa pesan nomor"),
         );
 
-        // PROSES NLP
-        // $data = Prosesnlp::latest()->first();
-        // $prosesid = 0;
-        // if ($data == null) {
-        //     $prosesid = 1;
-        // } else {
-        //     $prosesid = $data->proses_id + 1;
-        // }
-
+        $slangword = slangword::all();
         // menggambil id data kalimat terbaru yang di inputkan
         $idkalimat = 0;
         $datakalimat = Kalimat::where('users_id', '=', auth()->user()->id)->latest()->first();
         $idkalimat = $datakalimat->id;
         $arr_pesandipecah = count($pesandipecah);
+
+        foreach ($slangword as $a) {
+            for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                if ($a->slangword == $pesandipecah[$i]) {
+                    $pesandipecah[$i] = $a->formal;
+                }
+            }
+        }
 
         $tblprosesnlp = new Prosesnlp;
         // $tblprosesnlp->proses_id = $prosesid;
@@ -110,7 +140,6 @@ class ChatbotController extends Controller
         $tblprosesnlp->save();
         $token = 0;
         for ($i = 0; $i < $arr_pesandipecah; $i++) {
-
             $prosesnlp_detail = new Prosesnlp_detail;
             $prosesnlp_detail->kata = $pesandipecah[$i];
             $prosesnlp_detail->prosesnlp_id = $tblprosesnlp->id;
@@ -164,7 +193,8 @@ class ChatbotController extends Controller
         //get data tabel
         $dataprodukall = Produk::all();
         // $dataorder_satu_terbaru = Order::Where('users_id', '=', auth()->user()->id)->latest()->first();
-        $dataprosesnlpall = Prosesnlp_detail::where('prosesnlp_id', '=', $tblprosesnlp->id)->get();
+        $dataprosesnlpid = Prosesnlp_detail::where('prosesnlp_id', '=', $tblprosesnlp->id)->get();
+        $dataprosesnlpall = Prosesnlp_detail::all();
 
         $data = Auth::user()->kalimat()->with('order')->get();
         $orders = $data->pluck('order');
@@ -175,293 +205,294 @@ class ChatbotController extends Controller
         $orders1 = $orders1->filter()->first();
         //aturan 1
         //         tampilkan
-        // - tampilkan seluruh daftar pesanan saya
+        // - tampilkan seluruh daftar pesan saya
         // - tampilkan seluruh daftar produk yang ada
         // - tampilakn nama produk, harga
-        // - tampilkan status pesanan nomer NMT13929
-        if ($dataparsing->parsing != null) {
-            if ($dataparsing->parsing == "aturan1") {
+        // - tampilkan status pesan nomer NMT13929
 
-                foreach ($dataprosesnlp_token as $p) {
-                    if ($p->kata == "tampilkan") {
-                        $flag = 1;
-                    }
-                    if ($p->kata == "nama") {
-                        $nama = 1;
-                    }
-                    if ($p->kata == "harga") {
-                        $harga = 1;
-                    }
-                    if ($p->kata == "kode") {
-                        $kode = 1;
-                    }
-                    if ($p->kata == "status") {
-                        $status = 1;
-                    }
-                    if ($p->kata == "seluruh") {
-                        $seluruh = 1;
-                    }
+        if ($dataparsing->parsing == "aturan1") {
+
+            foreach ($dataprosesnlp_token as $p) {
+                if ($p->kata == "tampil") {
+                    $flag = 1;
                 }
+                if ($p->kata == "nama") {
+                    $nama = 1;
+                }
+                if ($p->kata == "harga") {
+                    $harga = 1;
+                }
+                if ($p->kata == "kode") {
+                    $kode = 1;
+                }
+                if ($p->kata == "status") {
+                    $status = 1;
+                }
+                if ($p->kata == "seluruh") {
+                    $seluruh = 1;
+                }
+            }
 
-                if ($flag == 1) {
-                    if ($kalimat == "tampilkan seluruh produk"  || $kalimat == "tampilkan nama produk" || $kalimat == "tampilkan harga produk" || $kalimat == "tampilkan kode produk") {
+            if ($flag == 1) {
+                if ($kalimat == "tampil seluruh produk"  || $kalimat == "tampil nama produk" || $kalimat == "tampil harga produk" || $kalimat == "tampil kode produk") {
 
+                    $pesan = $pesan . "<b>-List Data-</b><br>";
+                    foreach ($dataprodukall as $p) {
+                        if ($seluruh == 1) {
+                            $pesan = $pesan . $number . ". Kode: " . $p->kode . " Nama: " . $p->nama . " Harga:  " . $p->harga . " <br>Deskripsi: " . $p->deskripsi . "<br>";
+                            $number++;
+                        } elseif ($nama == 1 && $seluruh != 1) {
+                            $pesan = $pesan . $number . ". " . $p->nama .  "<br>";
+                            $number++;
+                        } elseif ($harga == 1 && $seluruh != 1) {
+                            $pesan = $pesan .  $number . ". " . "Nama:  " . $p->nama . "<br>Harga: " . $p->harga .  "<br>";
+                            $number++;
+                        } elseif ($kode == 1 && $seluruh != 1) {
+                            $pesan = $pesan . $number . ". " . "Kode: <b>[" . $p->kode . "]</b> <br>Nama: " . $p->nama .  "<br>";
+                            $number++;
+                        }
+                    }
+                    $number = 0;
+                    return response()->json(['pesan' => $pesan], 200);
+                } elseif ($kalimat == "tampil seluruh pesan" || $kalimat == "tampil status pesan") {
+
+                    if (count($orders) == 0) {
+                        $pesan = "Silahkan lakukan pemesanan terlebih dahulu<br>dengan format sebagai berikut.
+                            <br>Pesan kue [<b>Kode kue 1</b>]: [<b>Jumlah</b>], [<b>Kode kue 2</b>]: [<b>Jumlah</b>], Dll..";
+                        return response()->json(['pesan' => $pesan], 200);
+                    } else {
                         $pesan = $pesan . "<b>-List Data-</b><br>";
-                        foreach ($dataprodukall as $p) {
+                        foreach ($orders as $p) {
                             if ($seluruh == 1) {
-                                $pesan = $pesan . $number . ". Kode: " . $p->kode . "<br> Nama: " . $p->nama . "<br>Harga:  " . $p->harga . "<br>Deskripsi: <br>" . $p->deskripsi . "<br>";
+                                $pesan = $pesan . $number . ". " . "Nomer pesan:  " . $p->id . "<br>Total Biaya: Rp. " . $p->total . "<br>Status:  " . $p->status . "<br>";
                                 $number++;
-                            } elseif ($nama == 1 && $seluruh != 1) {
-                                $pesan = $pesan . $number . ". " . $p->nama .  "<br>";
-                                $number++;
-                            } elseif ($harga == 1 && $seluruh != 1) {
-                                $pesan = $pesan .  $number . ". " . "Nama:  " . $p->nama . "<br>Harga: " . $p->harga .  "<br>";
-                                $number++;
-                            } elseif ($kode == 1 && $seluruh != 1) {
-                                $pesan = $pesan . $number . ". " . "Kode: <b>[" . $p->kode . "]</b> <br>Nama: " . $p->nama .  "<br>";
+                            } elseif ($status == 1 && $seluruh != 1) {
+                                $pesan = $pesan . $number . ". " . "Nomer pesan: " . $p->id . "<br>Status: " . $p->status . "<br>";
                                 $number++;
                             }
                         }
                         $number = 0;
                         return response()->json(['pesan' => $pesan], 200);
-                    } elseif ($kalimat == "tampilkan seluruh pesanan" || $kalimat == "tampilkan status pesanan") {
+                    }
+                } else {
+                    $pesan = "Mohon Maaf, Saya tidak mengerti maksud anda.";
+                    return response()->json(['pesan' => $pesan], 200);
+                }
+            }
+        }
 
-                        if (count($orders) == 0) {
-                            $pesan = "Silahkan lakukan pemesanan terlebih dahulu<br>dengan format sebagai berikut.
-                            <br>Pesan kue [<b>Kode kue 1</b>]: [<b>Jumlah</b>], [<b>Kode kue 2</b>]: [<b>Jumlah</b>], Dll..";
-                            return response()->json(['pesan' => $pesan], 200);
-                        } else {
-                            $pesan = $pesan . "<b>-List Data-</b><br>";
-                            foreach ($orders as $p) {
-                                if ($seluruh == 1) {
-                                    $pesan = $pesan . $number . ". " . "Nomer Pesanan:  " . $p->id . "<br>Total Biaya: Rp. " . $p->total . "<br>Status:  " . $p->status . "<br>";
-                                    $number++;
-                                } elseif ($status == 1 && $seluruh != 1) {
-                                    $pesan = $pesan . $number . ". " . "Nomer Pesanan: " . $p->id . "<br>Status: " . $p->status . "<br>";
-                                    $number++;
-                                }
-                            }
-                            $number = 0;
-                            return response()->json(['pesan' => $pesan], 200);
-                        }
-                    } else {
-                        $pesan = "Mohon Maaf, Saya tidak mengerti maksud anda.";
-                        return response()->json(['pesan' => $pesan], 200);
+        //aturan 2
+        // pesan
+        // - saya mau pesan kue b10 :10, b5 : 5...
+        elseif ($dataparsing->parsing == "aturan2") {
+
+            $order = new Order;
+            $order->id = "inv" . date("ms") . auth()->user()->id;
+            // $order->users_id = auth()->user()->id;
+            $order->prosesnlp_id = $tblprosesnlp->id;
+            $order->status = "Menunggu Diproses";
+            $order->save();
+            $pesan = "Nomor pesan : " . $order->id;
+            $totalharga = 0;
+            for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                foreach ($dataprodukall as $produk) {
+                    if ($pesandipecah[$i] == $produk->kode) {
+                        $pesan = $pesan . "<br>" . $number . ". Kode<b>[" . $produk->kode . "]</b>";
+                        $pesan = $pesan . " jumlah " . $pesandipecah[$i + 1];
+                        $jumlahharga = $pesandipecah[$i + 1] * $produk->harga;
+                        $totalharga = $totalharga + $jumlahharga;
+                        $orderdetail = new OrderDetail;
+                        $orderdetail->order_id = $order->id;
+                        $orderdetail->produk_id = $produk->id;
+                        $orderdetail->jumlah = $pesandipecah[$i + 1];
+                        $orderdetail->save();
+                        $flag = 1;
+                        $number++;
                     }
                 }
             }
 
-            //aturan 2
-            // pesan
-            // - saya mau pesan kue b10 :10, b5 : 5...
-            elseif ($dataparsing->parsing == "aturan2") {
-
-                $order = new Order;
-                $order->id = "inv" . date("ms") . auth()->user()->id;
-                // $order->users_id = auth()->user()->id;
-                $order->prosesnlp_id = $tblprosesnlp->id;
-                $order->status = "Menunggu Diproses";
+            if ($flag != 1) {
+                $orderbatal = Order::find($order->id);
+                $orderbatal->delete();
+                $pesan = "Kami Tidak Menemukan Produk Yang mau anda pesan";
+                return response()->json(['pesan' => $pesan], 200);
+            } else {
+                $order->total = $totalharga;
                 $order->save();
-                $pesan = "Nomor Pesanan : " . $order->id;
-                $totalharga = 0;
-                for ($i = 0; $i < $arr_pesandipecah; $i++) {
-                    foreach ($dataprodukall as $produk) {
-                        if ($pesandipecah[$i] == $produk->kode) {
-                            $pesan = $pesan . "<br>" . $number . ". Kode<b>[" . $produk->kode . "]</b>";
-                            $pesan = $pesan . " jumlah " . $pesandipecah[$i + 1];
-                            $jumlahharga = $pesandipecah[$i + 1] * $produk->harga;
-                            $totalharga = $totalharga + $jumlahharga;
-                            $orderdetail = new OrderDetail;
-                            $orderdetail->order_id = $order->id;
-                            $orderdetail->produk_id = $produk->id;
-                            $orderdetail->jumlah = $pesandipecah[$i + 1];
-                            $orderdetail->save();
-                            $flag = 1;
-                            $number++;
-                        }
-                    }
-                }
-
-                if ($flag != 1) {
-                    $orderbatal = Order::find($order->id);
-                    $orderbatal->delete();
-                    $pesan = "Kami Tidak Menemukan Produk Yang mau anda pesan";
-                    return response()->json(['pesan' => $pesan], 200);
-                } else {
-                    $order->total = $totalharga;
-                    $order->save();
-                    $number = 0;
-                    $pesan = $pesan . "<br>Terima kasih telah melakukan pemesanan.";
-                    return response()->json(['pesan' => $pesan], 200);
-                }
+                $number = 0;
+                $pesan = $pesan . "<br>Terima kasih telah melakukan pemesanan.";
+                return response()->json(['pesan' => $pesan], 200);
             }
+        }
 
-            //aturan 3
-            // batal
-            // - batal\\\ pesanan bernomor NMT13929
-            elseif ($dataparsing->parsing == "aturan3") {
-                $z = 0;
-                for ($i = 0; $i < $arr_pesandipecah; $i++) {
-                    foreach ($orders as $order) {
-                        if ($pesandipecah[$i] == $order->id) {
-                            $nomer =  $order->id;
-                            $findorder = Order::find($order->id);
-                            if ($findorder->status == "Menunggu Diproses") {
-                                OrderDetail::where('order_id', '=', $order->id)->delete();
-                                $findorder->delete();
-                                $pesan = "Nomer Pesanan: <b>" . $nomer . "</b><br>Berhasil Dibatalkan, Terima kasih.";
-                                return response()->json(['pesan' => $pesan], 200);
-                            } else {
-                                $flag = 1;
-                            }
+        //aturan 3
+        // batal
+        // - batal\\\ pesan bernomor NMT13929
+        elseif ($dataparsing->parsing == "aturan3") {
+            $z = 0;
+            for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                foreach ($orders as $order) {
+                    if ($pesandipecah[$i] == $order->id) {
+                        $nomer =  $order->id;
+                        $findorder = Order::find($order->id);
+                        if ($findorder->status == "Menunggu Diproses") {
+                            OrderDetail::where('order_id', '=', $order->id)->delete();
+                            $findorder->delete();
+                            $pesan = "Nomer pesan: <b>" . $nomer . "</b><br>Berhasil Dibatalkan, Terima kasih.";
+                            return response()->json(['pesan' => $pesan], 200);
                         } else {
-                            $z = $z + 1;
+                            $flag = 1;
                         }
+                    } else {
+                        $z = $z + 1;
                     }
                 }
-                if ($flag == 1) {
-                    $pesan = "Nomor Pesanan: <b>" . $nomer . "</b> <br>Tidak dapat dibatalkan,<br>
-                    Karena pesanan sudah diproses.<br>sihlahkan lakukan perubahan jika ingin merubah pemesanan.<br>
-                    <br>Ubah pesanan [<b>Kode kue 1</b>]: [<b>Jumlah</b>], [<b>Kode kue 2</b>]: [<b>Jumlah</b>], Dll..";
-                    return response()->json(['pesan' => $pesan], 200);
-                }
-                if ($z < 1) {
-                    $pesan = "Pesanan tidak ditemukan";
-                    return response()->json(['pesan' => $pesan], 200);
-                }
             }
+            if ($flag == 1) {
+                $pesan = "Nomor pesan: <b>" . $nomer . "</b> <br>Tidak dapat dibatalkan,<br>
+                    Karena pesan sudah diproses.<br>sihlahkan lakukan perubahan jika ingin merubah pemesanan.<br>
+                    <br>Ubah pesan [<b>Kode kue 1</b>]: [<b>Jumlah</b>], [<b>Kode kue 2</b>]: [<b>Jumlah</b>], Dll..";
+                return response()->json(['pesan' => $pesan], 200);
+            }
+            if ($z < 1) {
+                $pesan = "pesan tidak ditemukan";
+                return response()->json(['pesan' => $pesan], 200);
+            }
+        }
 
-            //aturan 4
-            // ubah
-            // - ubah pesanan hari ini kue b10:5,b5:10...
-            elseif ($dataparsing->parsing == "aturan4") {
+        //aturan 4
+        // ubah
+        // - ubah pesan hari ini kue b10:5,b5:10...
+        elseif ($dataparsing->parsing == "aturan4") {
 
-                //return response()->json(['pesan' => 'test'], 200);
-                if ($orders1 == null) {
-                    $pesan = "Anda belum pernah melakukan pemesanan,<br>Silahkan Lakukan Pemesanan dengan format.
+            //return response()->json(['pesan' => 'test'], 200);
+            if ($orders1 == null) {
+                $pesan = "Anda belum pernah melakukan pemesanan,<br>Silahkan Lakukan Pemesanan dengan format.
                     <br>Pesan kue [<b>Kode kue 1</b>]: [<b>Jumlah</b>], [<b>Kode kue 2</b>]: [<b>Jumlah</b>], Dll..";
+                return response()->json(['pesan' => $pesan], 200);
+            } else {
+
+                $getddorder = OrderDetail::Where('order_id', '=', $orders1->id)->get();
+                for ($i = 0; $i < $arr_pesandipecah; $i++) {
+                    foreach ($getddorder as $order) {
+                        if ($pesandipecah[$i] == $order->produk->kode) {
+                            $idproduk = Produk::where('kode', '=', $pesandipecah[$i])->get();
+                            foreach ($idproduk as $a) {
+                                $asd = $a->id;
+                            }
+
+                            // $pesan = $pesandipecah[$i + 1];
+                            DB::update('update orderdetail set jumlah = ? where order_id = ? and produk_id =?', [$pesandipecah[$i + 1], $orders1->id, $asd]);
+                            // $update = OrderDetail::whete('order_id', '=', $orders1->id)->where('produk_id', '=', $pesandipecah[$i])->get();
+                            // $update->jumlah = $pesandipecah[$i + 1];
+                            // $update->save();
+                            $flag = 1;
+                        }
+                    }
+                }
+                if ($flag != 1) {
+                    $pesan = "Kami Tidak Menemukan Produk Yang mau dirubah";
                     return response()->json(['pesan' => $pesan], 200);
                 } else {
-
-                    $getddorder = OrderDetail::Where('order_id', '=', $orders1->id)->get();
-                    for ($i = 0; $i < $arr_pesandipecah; $i++) {
-                        foreach ($getddorder as $order) {
-                            if ($pesandipecah[$i] == $order->produk->kode) {
-                                $idproduk = Produk::where('kode', '=', $pesandipecah[$i])->get();
-                                foreach ($idproduk as $a) {
-                                    $asd = $a->id;
-                                }
-
-                                // $pesan = $pesandipecah[$i + 1];
-                                DB::update('update orderdetail set jumlah = ? where order_id = ? and produk_id =?', [$pesandipecah[$i + 1], $orders1->id, $asd]);
-                                // $update = OrderDetail::whete('order_id', '=', $orders1->id)->where('produk_id', '=', $pesandipecah[$i])->get();
-                                // $update->jumlah = $pesandipecah[$i + 1];
-                                // $update->save();
-                                $flag = 1;
-                            }
-                        }
-                    }
-                    if ($flag != 1) {
-                        $pesan = "Kami Tidak Menemukan Produk Yang mau dirubah";
-                        return response()->json(['pesan' => $pesan], 200);
-                    } else {
-                        $pesan = "Pesanan Berhasil Diubah";
-                        return response()->json(['pesan' => $pesan], 200);
-                    }
+                    $pesan = "pesan Berhasil Diubah";
+                    return response()->json(['pesan' => $pesan], 200);
                 }
             }
+        }
 
-            //aturan 5
-            // berapa
-            // - berapa jumlah pesanan hari ini
-            // - berapa jumlah biaya pesanan hari ini
-            elseif ($dataparsing->parsing == "aturan5") {
+        //aturan 5
+        // berapa
+        // - berapa jumlah pesan hari ini
+        // - berapa jumlah biaya pesan hari ini
+        elseif ($dataparsing->parsing == "aturan5") {
 
-                if ($kalimat == "berapa jumlah pesanan") {
-                    if ($orders1 == null) {
-                        $pesan = "Anda Belum Pernah Melakukan Pemesanan";
-                        return response()->json(['pesan' => $pesan], 200);
-                    } else {
-                        $id = $orders1->id;
-                        $datadetailorder = OrderDetail::where('order_id', '=', $id)->get();
-                        foreach ($datadetailorder as $gddo) {
-                            $jumlah = $jumlah + $gddo->jumlah;
-                        }
-                        $pesan = $pesan . "Jumlah Pesanan Terbaru adalah " . $jumlah;
-                        return response()->json(['pesan' => $pesan], 200);
-                    }
+            if ($kalimat == "berapa jumlah pesan") {
+                if ($orders1 == null) {
+                    $pesan = "Anda Belum Pernah Melakukan Pemesanan";
+                    return response()->json(['pesan' => $pesan], 200);
                 } else {
-                    if ($orders1 == null) {
-                        $pesan = "Anda Belum Pernah Melakukan Pemesanan";
-                        return response()->json(['pesan' => $pesan], 200);
-                    } else {
-                        $pesan = $pesan . "Jumlah Biaya pesanan Terbaru adalah Rp." . $orders1->total;
-                        return response()->json(['pesan' => $pesan], 200);
+                    $id = $orders1->id;
+                    $datadetailorder = OrderDetail::where('order_id', '=', $id)->get();
+                    foreach ($datadetailorder as $gddo) {
+                        $jumlah = $jumlah + $gddo->jumlah;
+                    }
+                    $pesan = $pesan . "Jumlah pesan Terbaru adalah " . $jumlah;
+                    return response()->json(['pesan' => $pesan], 200);
+                }
+            } else {
+                if ($orders1 == null) {
+                    $pesan = "Anda Belum Pernah Melakukan Pemesanan";
+                    return response()->json(['pesan' => $pesan], 200);
+                } else {
+                    $pesan = $pesan . "Jumlah Biaya pesan Terbaru adalah Rp." . $orders1->total;
+                    return response()->json(['pesan' => $pesan], 200);
+                }
+            }
+        }
+
+        //aturan 6
+        // kapan
+        // - kapan pesan nomer NMT13929 terjadi
+        elseif ($dataparsing->parsing == "aturan6") {
+
+            foreach ($dataprosesnlpid as $p) {
+                foreach ($orders as $pp) {
+                    if ($p->kata == $pp->id) {
+                        $id = $pp->id;
+                        $flag = 1;
                     }
                 }
             }
-
-            //aturan 6
-            // kapan
-            // - kapan pesanan nomer NMT13929 terjadi
-            elseif ($dataparsing->parsing == "aturan6") {
-
-                foreach ($dataprosesnlpall as $p) {
-                    foreach ($orders as $pp) {
-                        if ($p->kata == $pp->id) {
-                            $id = $pp->id;
-                        }
-                    }
-                }
-
+            $pesan = "";
+            if ($flag == 1) {
                 $getddorder = Order::where('id', '=', $id)->get();
-                $pesan = $pesan . " pesanan nomor: " . $id . "<br>terjadi pada: ";
+                $pesan = $pesan . " pesan nomor: " . $id . "<br>terjadi pada: ";
                 foreach ($getddorder as $p) {
                     $pesan = $pesan . $p->created_at;
                 }
                 return response()->json(['pesan' => $pesan], 200);
             }
+            $pesan = $pesan . "nomor tidak ada";
+            return response()->json(['pesan' => $pesan], 200);
+        }
 
-            //aturan 7
-            //         apa
-            // - apa saja isi pesanan nomer NMT13929
-            // - apa saja produk yang di tawarkan
-            elseif ($dataparsing->parsing == "aturan7") {
 
-                foreach ($dataprosesnlpall as $p) {
-                    foreach ($orders as $pp) {
-                        if ($p->kata == $pp->id) {
-                            $id = $pp->id;
-                        }
-                    }
-                }
+        //aturan 7
+        //         apa
+        // - apa saja isi pesan nomer NMT13929
 
-                $pesan = "";
-                if ($kalimat == "apa pesanan nomor") {
-                    $getddorder = OrderDetail::where('order_id', '=', $id)->get();
-                    $pesan = $pesan . "pesanan nomor : " . $id . " <br> Berikut daftar produk : <br>";
-                    foreach ($getddorder as $p) {
-                        $pesan = $pesan . $number . ". <b>[" . $p->produk->kode . "]</b> " . $p->produk->nama . "<br>jumlah: " . $p->jumlah . "<br>";
-                        $number++;
+        elseif ($dataparsing->parsing == "aturan7") {
+
+            foreach ($dataprosesnlpid as $p) {
+                foreach ($orders as $pp) {
+                    if ($p->kata == $pp->id) {
+                        $id = $pp->id;
+                        $flag = 1;
                     }
-                    $number = 0;
-                    return response()->json(['pesan' => $pesan], 200);
-                } else {
-                    $pesan = $pesan . "<b>-List data Produk-</b><br>";
-                    foreach ($dataprodukall as $p) {
-                        $pesan = $pesan . $number . ". <b>[" . $p->kode . "]</b> " . $p->nama . " <br>Harga: " . $p->harga . "<br>";
-                        $number++;
-                    }
-                    $number = 0;
-                    return response()->json(['pesan' => $pesan], 200);
                 }
             }
-            //jika tidak ada kondisi dari 7 aturan produksi
-            else {
-                $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
+            $pesan = "";
+            if ($flag == 1) {
+                $getddorder = OrderDetail::where('order_id', '=', $id)->get();
+                $pesan = $pesan . "pesan nomor : " . $id . " <br> Berikut daftar produk : <br>";
+                foreach ($getddorder as $p) {
+                    $pesan = $pesan . $number . ". <b>[" . $p->produk->kode . "]</b> " . $p->produk->nama . "<br>jumlah: " . $p->jumlah . "<br>";
+                    $number++;
+                }
+                $number = 0;
+                return response()->json(['pesan' => $pesan], 200);
+            } else {
+                $pesan = $pesan . "nomor tidak ada";
                 return response()->json(['pesan' => $pesan], 200);
             }
-        } else {
+        }
+        //jika tidak ada kondisi dari 7 aturan produksi
+        // else {
+        //     $pesan = "Maaf, Kami tidak mengerti pesan yang anda masukkan";
+        //     return response()->json(['pesan' => $pesan], 200);
+        // }
+        elseif ($dataparsing->parsing == null) {
             //PROSES JACCARD SIMILARITY
             // $data = Similarity::latest()->first();
             // if ($data == null) {
@@ -470,14 +501,16 @@ class ChatbotController extends Controller
             //     $idtraining = $data->training_id + 1;
             // }
             //pecah string berdasarkan string " "
-            $chat = explode(" ", $pesan2spasi);
+
+            //$chat = explode(" ", $pesan2spasi);
+
             $datachat = Dataset::all();
             foreach ($datachat as $p) {
                 $ss = $p->chat;
                 $ss = explode(" ", $ss);
-                $result = array_intersect($chat, $ss);
+                $result = array_intersect($pesandipecah, $ss);
                 $result = count($result);
-                $totalsimilarity = $result / (count($chat) + count($ss) - $result);
+                $totalsimilarity = $result / (count($pesandipecah) + count($ss) - $result);
                 $tablesimilarity = new Similarity;
                 // $tablesimilarity->kalimat_id = $idkalimat;
                 $tablesimilarity->prosesnlp_id = $tblprosesnlp->id;
@@ -517,9 +550,9 @@ class ChatbotController extends Controller
     public function indexdataset(Request $request)
     {
         if ($request->has('cari')) {
-            $data = Dataset::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(5);
+            $data = Dataset::where('chat', 'LIKE', '%' . $request->cari . '%')->paginate(4);
         } else {
-            $data = Dataset::paginate(5);
+            $data = Dataset::paginate(4);
         }
         return view('admin.dataset', ['data' => $data]);
     }
@@ -558,12 +591,12 @@ class ChatbotController extends Controller
             'chat' => 'required',
             'balas' => 'required'
         ]);
-        $dataset = Dataset::all();
-        foreach ($dataset as $p) {
-            if ($p->chat == $request->chat) {
-                return Redirect::back()->with('delete', 'Dataset sudah ada');
-            }
-        }
+        // $dataset = Dataset::all();
+        // foreach ($dataset as $p) {
+        //     if ($p->chat == $request->chat) {
+        //         return Redirect::back()->with('delete', 'Dataset sudah ada');
+        //     }
+        // }
         $data = Dataset::find($request->id);
         $data->chat = $request->chat;
         $data->balas = $request->balas;

@@ -62,7 +62,7 @@
                     <li class="list-group-item">ubah pesanan <b>nama kue</b> : <b>jumlah</b> ...</li>
                     <li class="list-group-item">berapa jumlah pesanan, berapa jumlah biaya pesanan </li>
                     <li class="list-group-item"> kapan pesanan nomor <b>nomor pesanan</b> terjadi</li>
-                    <li class="list-group-item"> apa pesanan nomor <br>apa produk ditawarkan</li>
+                    <li class="list-group-item"> apa isi pesanan nomor<b>nomer pesanan</b></li>
                 </ul>
 
             </div>
