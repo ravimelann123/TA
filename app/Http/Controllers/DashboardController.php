@@ -26,11 +26,11 @@ class DashboardController extends Controller
         } elseif (auth()->user()->role == "superadmin") {
             return view('superadmin.dashboard');
         } else {
-
             // $order = Order::where('users_id', '=', auth()->user()->id)->get();
             // $order = count($order);
             // return view('users.dashboard', ['order' => $order]);
             $order = Order::all();
+            // dd($order);
             return view('users.dashboard', ['order' => $order]);
         }
     }

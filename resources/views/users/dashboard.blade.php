@@ -37,6 +37,7 @@
                                     $count=0;
                                     @endphp
                                     @foreach($order as $p)
+
                                     @if($p->prosesnlp->kalimat->users->id == auth()->user()->id)
                                     @php
                                     $count = $count + 1;

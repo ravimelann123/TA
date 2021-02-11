@@ -95,12 +95,13 @@ class ChatbotController extends Controller
             array("kata", "jumlah"),
             array("kata", "kode"),
             array("kata", "biaya"),
-            //array("kata", "pesan"),
+            array("kata", "mau"),
             array("kata", "produk"),
             array("kata", "ditawarkan"),
             array("kata tanya", "kapan"),
             array("kata tanya", "apa"),
             array("kata tanya", "berapa"),
+
         );
 
         $listaturan = array(
@@ -110,11 +111,11 @@ class ChatbotController extends Controller
             array("aturan1", "tampil nama produk"),
             array("aturan1", "tampil harga produk"),
             array("aturan1", "tampil status pesan"),
-            array("aturan2", "pesan"),
+            array("aturan2", "mau pesan"),
             array("aturan3", "batal pesan nomor"),
             array("aturan4", "ubah pesan"),
             array("aturan5", "berapa jumlah pesan"),
-            array("aturan5", "berapa jumlah biaya pesan"),
+            array("aturan5", "berapa biaya pesan"),
             array("aturan6", "kapan pesan nomor"),
             array("aturan7", "apa pesan nomor"),
         );
@@ -285,7 +286,10 @@ class ChatbotController extends Controller
         // pesan
         // - saya mau pesan kue b10 :10, b5 : 5...
         elseif ($dataparsing->parsing == "aturan2") {
-
+            if (count($pesandipecah) < 4) {
+                $pesan = "mau pesan apa? <br>Silahkan lakukan pemesanan menggunakan format sebagai berikut. <br>Pesan kue [Kode kue 1]: [Jumlah], [Kode kue 2]: [Jumlah], Dll..";
+                return response()->json(['pesan' => $pesan], 200);
+            }
             $order = new Order;
             $order->id = "inv" . date("ms") . auth()->user()->id;
             // $order->users_id = auth()->user()->id;
@@ -315,7 +319,8 @@ class ChatbotController extends Controller
             if ($flag != 1) {
                 $orderbatal = Order::find($order->id);
                 $orderbatal->delete();
-                $pesan = "Kami Tidak Menemukan Produk Yang mau anda pesan";
+                $pesan = "Kami Tidak Menemukan Produk Yang mau anda pesan<br>cobalah ketikan [tampilkan semua produk] <br>untuk menampilkan daftar produk<br>lalu silahkan lakukan pemesanan menggunakan format sebagai berikut.
+                Pesan kue [Kode kue 1]: [Jumlah], [Kode kue 2]: [Jumlah], Dll..";
                 return response()->json(['pesan' => $pesan], 200);
             } else {
                 $order->total = $totalharga;
